@@ -1,0 +1,40 @@
+package mobility;
+
+public class Point {
+    private static final int X_MIN = 0;
+    private static final int X_MAX = 800;
+    private static final int Y_MIN = 0;
+    private static final int Y_MAX = 600;
+    //private final int X_DEFAULT = 0;
+    //private final int Y_DEFAULT = 0;
+    private int x;
+    private int y;
+
+    public Point(int x, int y){
+        if((x > X_MIN) && (x < X_MAX))
+            this.x = x;
+        //else
+            //this.x = X_DEFAULT;
+
+        if((y > Y_MIN) && (y < Y_MAX))
+            this.y = y;
+        //else
+            //this.y = Y_DEFAULT;
+    }
+
+    public static boolean cheackBounderies(Point newLocation) {
+        return ((newLocation.getX() > X_MIN) && (newLocation.getX() < X_MAX)) && ((newLocation.getY() > Y_MIN) && (newLocation.getY() < Y_MAX));
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean equals(Object o){
+        return ((o instanceof Point) && ((x == ((Point) o).getX()) && (y == ((Point) o).getY())));
+    }
+}
