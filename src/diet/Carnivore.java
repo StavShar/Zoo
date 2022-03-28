@@ -6,6 +6,8 @@ import animals.Animal;
 
 public class Carnivore implements IDiet{
 
+    private final double WEIGHT_GROW = 1.1; //10%
+
     @Override
     public boolean canEat(EFoodType food) {
         return food.equals(EFoodType.MEAT);
@@ -13,9 +15,10 @@ public class Carnivore implements IDiet{
 
     @Override
     public double eat(Animal animal, IEdible food) {
+        double weight = animal.getWeight();
         if (canEat(food.getFoodtype()))
-            animal.setWeight(animal.getWeight() * 1.1);
-        return animal.getWeight(); // if food is illegal - returning original weight
+            animal.setWeight(animal.getWeight() * WEIGHT_GROW);
+        return animal.getWeight() - weight; // returning how much weight added
     }
 }
 

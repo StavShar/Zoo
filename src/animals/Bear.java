@@ -1,5 +1,6 @@
 package animals;
 
+import diet.Carnivore;
 import diet.Omnivore;
 import mobility.Point;
 
@@ -10,19 +11,36 @@ public class Bear extends Animal{
     private static final String DEFAULT_FUR_COLOR = "GRAY";
     private String furColor;
 
-    public Bear(String name, String furColor){
+    public Bear(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        setWeight(STARTING_WEIGHT);
-        setDiet(new Omnivore());
-        this.furColor = DEFAULT_FUR_COLOR;
-        setFurColor(furColor);
+        boolean flag;
+        furColor = DEFAULT_FUR_COLOR;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Bear.setWeight - error");
+        flag = setDiet(new Omnivore());
+        if(!flag)
+            System.out.println("Bear.setDiet - error");
     }
 
-    public void setFurColor(String furColor) {
+    public Bear(String name, Point p){
+        super(name, p);
+        boolean flag;
+        furColor = DEFAULT_FUR_COLOR;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Bear.setWeight - error");
+        flag = setDiet(new Omnivore());
+        if(!flag)
+            System.out.println("Bear.setDiet - error");
+    }
+
+    /*mine*/public boolean setFurColor(String furColor) {
         if(validFurColor(furColor))
             this.furColor = furColor;
+        return this.furColor.equals(furColor);
     }
-    private boolean validFurColor(String furColor){
+    /*mine*/private boolean validFurColor(String furColor){
         return (furColor.equals("BLACK") || furColor.equals("WHITE") || furColor.equals("GRAY"));
     }
 

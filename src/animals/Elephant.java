@@ -12,24 +12,38 @@ public class Elephant extends Animal{
     private static final double DEFAULT_TRUNK_LENGTH = 1;
     private double trunkLength;
 
-    public Elephant(String name, double trunkLength){
+    public Elephant(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        setWeight(STARTING_WEIGHT);
-        setDiet(new Herbivore());
-        if(validTrunkLength(trunkLength))
-            this.trunkLength = trunkLength;
-        else
-            this.trunkLength = DEFAULT_TRUNK_LENGTH;
-
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Elephant.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Elephant.setDiet - error");
+        this.trunkLength = DEFAULT_TRUNK_LENGTH;
     }
 
-    private boolean validTrunkLength(double trunkLength){
+    public Elephant(String name, Point p){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Elephant.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Elephant.setDiet - error");
+        this.trunkLength = DEFAULT_TRUNK_LENGTH;
+    }
+
+    /*mine*/private boolean validTrunkLength(double trunkLength){
         return (trunkLength > MIN_TRUNK_LENGTH && trunkLength < MAX_TRUNK_LENGTH);
     }
 
-    public void settrunkLength(double trunkLength) {
+    /*mine*/public boolean settrunkLength(double trunkLength) {
         if(validTrunkLength(trunkLength))
             this.trunkLength = trunkLength;
+        return this.trunkLength == trunkLength;
     }
 
     @Override

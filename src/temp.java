@@ -11,5 +11,13 @@ public class temp {
 
     # (?) chew/roar methods (?)
 
+    # Ilocatable - getLocation and setLocation "never used"
+
+    # Point - cheackBounderies
+
+    # returning values from all type "eat" methods
+
+    #
+
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   */

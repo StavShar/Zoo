@@ -12,24 +12,38 @@ public class Giraffe extends Animal{
     private static final double DEFAULT_NECK_LENGTH = 1.5;
     private double neckLength;
 
-    public Giraffe(String name, double neckLength){
+    public Giraffe(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        setWeight(STARTING_WEIGHT);
-        setDiet(new Herbivore());
-        if(validNeckLength(neckLength))
-            this.neckLength = neckLength;
-        else
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
             this.neckLength = DEFAULT_NECK_LENGTH;
-
     }
 
-    private boolean validNeckLength(double neckLength){
+    public Giraffe(String name, Point p){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
+        this.neckLength = DEFAULT_NECK_LENGTH;
+    }
+
+    /*mine*/private boolean validNeckLength(double neckLength){
         return (neckLength > MIN_NECK_LENGTH && neckLength < MAX_NECK_LENGTH);
     }
 
-    public void setNeckLength(double neckLength) {
+    /*mine*/public boolean setNeckLength(double neckLength) {
         if(validNeckLength(neckLength))
             this.neckLength = neckLength;
+        return this.neckLength == neckLength;
     }
 
     @Override

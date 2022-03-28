@@ -15,8 +15,25 @@ public class Lion extends Animal{
 
     public Lion(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        setWeight(STARTING_WEIGHT);
-        setDiet(new Carnivore());
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Lion.setWeight - error");
+        flag = setDiet(new Carnivore());
+        if(!flag)
+            System.out.println("Lion.setDiet - error");
+        scarCount = 0;
+    }
+
+    public Lion(String name, Point p){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Lion.setWeight - error");
+        flag = setDiet(new Carnivore());
+        if(!flag)
+            System.out.println("Lion.setDiet - error");
         scarCount = 0;
     }
 

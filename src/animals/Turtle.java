@@ -12,24 +12,38 @@ public class Turtle extends Animal{
     private static final int DEFAULT_AGE = 1;
     private int age;
 
-    public Turtle(String name, int age){
+    public Turtle(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        setWeight(STARTING_WEIGHT);
-        setDiet(new Herbivore());
-        if(validAge(age))
-            this.age = age;
-        else
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
             this.age = DEFAULT_AGE;
-
     }
 
-    private boolean validAge(int age){
+    public Turtle(String name, Point p){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
+        this.age = DEFAULT_AGE;
+    }
+
+    /*mine*/private boolean validAge(int age){
         return (age > MIN_AGE && age < MAX_AGE);
     }
 
-    public void setAge(int age) {
+    /*mine*/public boolean setAge(int age) {
         if(validAge(age))
             this.age = age;
+        return this.age == age;
     }
 
     @Override

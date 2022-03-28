@@ -22,7 +22,10 @@ public abstract class Mobile implements Ilocatable{
 
     public double move(Point p){
         double distance = calcDistance(p);
-        location = p;
+        if(distance != 0){
+            location = p;
+            addTotalDistance(distance);
+        }
         return distance;
     }
 

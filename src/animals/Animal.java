@@ -18,30 +18,38 @@ public abstract class Animal extends Mobile implements IEdible {
         this.name = name;
     }
 
-    public void setName(String name) {
+    /*mine*/public String getName() {
+        return name;
+    }
+
+    /*mine*/public boolean setName(String name) {
         this.name = name;
+        return this.name.equals(name);
     }
 
-    public IDiet getDiet() {
-        return diet;
-    }
-
-    public void setDiet(IDiet diet) {
-        this.diet = diet;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getWeight(){
+    /*mine*/public double getWeight(){
         return weight;
     }
 
-    public boolean eat(IEdible food){
-        double w = getWeight();
-        w -= diet.eat(this,food);
-        return (!(w == 0));
+    /*mine*/public boolean setWeight(double weight) {
+        this.weight = weight;
+        return this.weight == weight;
+    }
+
+    /*mine*/public IDiet getDiet() {
+        return diet;
+    }
+
+    /*mine*/public boolean setDiet(IDiet diet) {
+        this.diet = diet;
+        return this.diet == diet;
+    }
+
+
+    public boolean eat(IEdible food) {
+        double weight_change = diet.eat(this, food);
+        makeSound();
+        return weight_change != 0; //return false if weight_change = 0
     }
 
     @Override
