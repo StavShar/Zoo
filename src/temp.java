@@ -1,10 +1,3 @@
-import animals.Animal;
-import diet.Carnivore;
-import diet.Herbivore;
-import diet.Omnivore;
-import food.EFoodType;
-import food.IEdible;
-
 public class temp {
     public static void main(String[] args) {
 
