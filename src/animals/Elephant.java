@@ -36,6 +36,23 @@ public class Elephant extends Animal{
         this.trunkLength = DEFAULT_TRUNK_LENGTH;
     }
 
+    public Elephant(String name, Point p, double trunkLength){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Elephant.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Elephant.setDiet - error");
+        if(validTrunkLength(trunkLength))
+            this.trunkLength = trunkLength;
+        else {
+            System.out.println("Illegal trunk length, default trunk length are set.");
+            this.trunkLength = DEFAULT_TRUNK_LENGTH;
+        }
+    }
+
     /*mine*/private boolean validTrunkLength(double trunkLength){
         return (trunkLength > MIN_TRUNK_LENGTH && trunkLength < MAX_TRUNK_LENGTH);
     }

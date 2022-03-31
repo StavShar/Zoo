@@ -100,7 +100,7 @@ public abstract class Plant implements IEdible, Ilocatable {
      */
     @Override
     public boolean setLocation(Point newLocation) {
-        boolean isSuccess = Point.cheackBounderies(newLocation);
+        boolean isSuccess = Point.checkBounderies(newLocation);
         if (isSuccess) {
             this.location = newLocation;
         }

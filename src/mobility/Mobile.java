@@ -1,7 +1,7 @@
 package mobility;
 
 import java.lang.Math;
-import static mobility.Point.cheackBounderies;
+import static mobility.Point.checkBounderies;
 
 public abstract class Mobile implements Ilocatable{
     private Point location;
@@ -34,9 +34,9 @@ public abstract class Mobile implements Ilocatable{
     }
 
     public boolean setLocation(Point p){
-        if(cheackBounderies(p))
+        if(checkBounderies(p))
             location = p;
-        return cheackBounderies(p);
+        return checkBounderies(p);
 
     }
 }

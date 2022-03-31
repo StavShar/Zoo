@@ -35,12 +35,29 @@ public class Bear extends Animal{
             System.out.println("Bear.setDiet - error");
     }
 
+    public Bear(String name, Point p, String furColor){
+        super(name, p);
+        boolean flag;
+        if(validFurColor(furColor))
+            this.furColor = furColor;
+        else {
+            System.out.println("Illegal fur color, default fur color are set.");
+            this.furColor = DEFAULT_FUR_COLOR;
+        }
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Bear.setWeight - error");
+        flag = setDiet(new Omnivore());
+        if(!flag)
+            System.out.println("Bear.setDiet - error");
+    }
+
     /*mine*/public boolean setFurColor(String furColor) {
         if(validFurColor(furColor))
             this.furColor = furColor;
         return this.furColor.equals(furColor);
     }
-    /*mine*/private boolean validFurColor(String furColor){
+    /*mine*/public static boolean validFurColor(String furColor){
         return (furColor.equals("BLACK") || furColor.equals("WHITE") || furColor.equals("GRAY"));
     }
 

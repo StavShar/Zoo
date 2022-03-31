@@ -36,6 +36,23 @@ public class Giraffe extends Animal{
         this.neckLength = DEFAULT_NECK_LENGTH;
     }
 
+    public Giraffe(String name, Point p, double neckLength){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
+        if(validNeckLength(neckLength))
+            this.neckLength = neckLength;
+        else {
+            System.out.println("Illegal neck length, default neck length are set.");
+            this.neckLength = DEFAULT_NECK_LENGTH;
+        }
+    }
+
     /*mine*/private boolean validNeckLength(double neckLength){
         return (neckLength > MIN_NECK_LENGTH && neckLength < MAX_NECK_LENGTH);
     }

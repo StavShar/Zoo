@@ -1,8 +1,4 @@
-public class temp {
-    public static void main(String[] args) {
 
-    }
-}
  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # added to fur color to the bear constructor (because program.java)
@@ -13,11 +9,10 @@ public class temp {
 
     # Ilocatable - getLocation and setLocation "never used"
 
-    # Point - cheackBounderies
-
     # returning values from all type "eat" methods
 
-    #
+    # ceateAction (maybe better send to constructors all parameters and the constructor will check validation
+
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   */

@@ -11,18 +11,11 @@ public class Point {
     private int y;
 
     public Point(int x, int y){
-        if((x > X_MIN) && (x < X_MAX))
             this.x = x;
-        //else
-            //this.x = X_DEFAULT;
-
-        if((y > Y_MIN) && (y < Y_MAX))
             this.y = y;
-        //else
-            //this.y = Y_DEFAULT;
     }
 
-    public static boolean cheackBounderies(Point newLocation) {
+    public static boolean checkBounderies(Point newLocation) {
         return ((newLocation.getX() > X_MIN) && (newLocation.getX() < X_MAX)) && ((newLocation.getY() > Y_MIN) && (newLocation.getY() < Y_MAX));
     }
 

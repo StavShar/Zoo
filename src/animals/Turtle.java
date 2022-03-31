@@ -36,6 +36,23 @@ public class Turtle extends Animal{
         this.age = DEFAULT_AGE;
     }
 
+    public Turtle(String name, Point p, int age){
+        super(name, p);
+        boolean flag;
+        flag = setWeight(STARTING_WEIGHT);
+        if(!flag)
+            System.out.println("Giraffe.setWeight - error");
+        flag = setDiet(new Herbivore());
+        if(!flag)
+            System.out.println("Giraffe.setDiet - error");
+        if(validAge(age))
+            this.age = age;
+        else {
+            System.out.println("Illegal age, default age are set.");
+            this.age = DEFAULT_AGE;
+        }
+    }
+
     /*mine*/private boolean validAge(int age){
         return (age > MIN_AGE && age < MAX_AGE);
     }
