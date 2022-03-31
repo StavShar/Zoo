@@ -1,5 +1,7 @@
 package mobility;
 
+import utilities.MessageUtility;
+
 import java.lang.Math;
 import static mobility.Point.checkBounderies;
 
@@ -8,7 +10,7 @@ public abstract class Mobile implements Ilocatable{
     private double totalDistance; //>0
 
     public Mobile(Point p){
-        location = p;
+        setLocation(p);
         totalDistance = 0;
     }
 
@@ -21,11 +23,13 @@ public abstract class Mobile implements Ilocatable{
     }
 
     public double move(Point p){
-        double distance = calcDistance(p);
-        if(distance != 0){
-            location = p;
-            addTotalDistance(distance);
-        }
+        double distance;
+        if(!checkBounderies(p))//point out of range
+            return 0;
+        distance = calcDistance(p);
+        addTotalDistance(distance);
+        setLocation(p);
+
         return distance;
     }
 

@@ -2,8 +2,9 @@ package animals;
 
 import diet.Herbivore;
 import mobility.Point;
+import utilities.MessageUtility;
 
-public class Giraffe extends Animal{
+public class Giraffe extends Chewing{
     private static final int STARTING_X = 50;
     private static final int STARTING_Y = 0;
     private static final double STARTING_WEIGHT = 450;
@@ -14,6 +15,7 @@ public class Giraffe extends Animal{
 
     public Giraffe(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
+        MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -21,11 +23,14 @@ public class Giraffe extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-            this.neckLength = DEFAULT_NECK_LENGTH;
+        flag = setNeckLength(DEFAULT_NECK_LENGTH);
+        if(!flag)
+            System.out.println("Giraffe.setNeckLength - error");
     }
 
     public Giraffe(String name, Point p){
         super(name, p);
+        MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -33,11 +38,14 @@ public class Giraffe extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-        this.neckLength = DEFAULT_NECK_LENGTH;
+        flag = setNeckLength(DEFAULT_NECK_LENGTH);
+        if(!flag)
+            System.out.println("Giraffe.setNeckLength - error");
     }
 
     public Giraffe(String name, Point p, double neckLength){
         super(name, p);
+        MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -45,26 +53,33 @@ public class Giraffe extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-        if(validNeckLength(neckLength))
-            this.neckLength = neckLength;
+        if(validNeckLength(neckLength)) {
+            flag = setNeckLength(neckLength);
+            if(!flag)
+                System.out.println("Giraffe.setNeckLength - error");
+        }
         else {
             System.out.println("Illegal neck length, default neck length are set.");
-            this.neckLength = DEFAULT_NECK_LENGTH;
+            flag = setNeckLength(DEFAULT_NECK_LENGTH);
+            if(!flag)
+                System.out.println("Giraffe.setNeckLength - error");
         }
     }
 
-    /*mine*/private boolean validNeckLength(double neckLength){
+    private boolean validNeckLength(double neckLength){
         return (neckLength > MIN_NECK_LENGTH && neckLength < MAX_NECK_LENGTH);
     }
 
-    /*mine*/public boolean setNeckLength(double neckLength) {
+    public boolean setNeckLength(double neckLength) {
         if(validNeckLength(neckLength))
             this.neckLength = neckLength;
-        return this.neckLength == neckLength;
+        boolean flag = this.neckLength == neckLength;
+        MessageUtility.logSetter(getName(),"setNeckLength",neckLength,flag);
+        return flag;
     }
 
     @Override
-    public void makeSound() {
-
+    public void chew() {
+        MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
     }
 }

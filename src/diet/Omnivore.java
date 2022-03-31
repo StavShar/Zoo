@@ -15,7 +15,6 @@ public class Omnivore implements IDiet{
 
     @Override
     public double eat(Animal animal, IEdible food) {
-        double weight = animal.getWeight();
         if(canEat(food.getFoodtype())){
             IDiet diet = null;
             if(food.getFoodtype().equals(EFoodType.MEAT))

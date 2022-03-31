@@ -2,8 +2,9 @@ package animals;
 
 import diet.Herbivore;
 import mobility.Point;
+import utilities.MessageUtility;
 
-public class Turtle extends Animal{
+public class Turtle extends Chewing{
     private static final int STARTING_X = 80;
     private static final int STARTING_Y = 0;
     private static final double STARTING_WEIGHT = 1;
@@ -14,6 +15,7 @@ public class Turtle extends Animal{
 
     public Turtle(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
+        MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -21,11 +23,14 @@ public class Turtle extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-            this.age = DEFAULT_AGE;
+        flag = setAge(DEFAULT_AGE);
+        if(!flag)
+            System.out.println("Turtle.setAge - error");
     }
 
     public Turtle(String name, Point p){
         super(name, p);
+        MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -33,11 +38,14 @@ public class Turtle extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-        this.age = DEFAULT_AGE;
+        flag = setAge(DEFAULT_AGE);
+        if(!flag)
+            System.out.println("Turtle.setAge - error");
     }
 
     public Turtle(String name, Point p, int age){
         super(name, p);
+        MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -45,26 +53,33 @@ public class Turtle extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Giraffe.setDiet - error");
-        if(validAge(age))
-            this.age = age;
+        if(validAge(age)) {
+            flag = setAge(age);
+            if(!flag)
+                System.out.println("Turtle.setAge - error");
+        }
         else {
             System.out.println("Illegal age, default age are set.");
-            this.age = DEFAULT_AGE;
+            flag = setAge(DEFAULT_AGE);
+            if(!flag)
+                System.out.println("Turtle.setAge - error");
         }
     }
 
-    /*mine*/private boolean validAge(int age){
+    private boolean validAge(int age){
         return (age > MIN_AGE && age < MAX_AGE);
     }
 
-    /*mine*/public boolean setAge(int age) {
+    public boolean setAge(int age) {
         if(validAge(age))
             this.age = age;
-        return this.age == age;
+        boolean flag = this.age == age;
+        MessageUtility.logSetter(getName(),"setAge",age,flag);
+        return flag;
     }
 
     @Override
-    public void makeSound() {
-
+    public void chew() {
+        MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
     }
 }

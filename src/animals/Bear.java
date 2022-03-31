@@ -3,8 +3,9 @@ package animals;
 import diet.Carnivore;
 import diet.Omnivore;
 import mobility.Point;
+import utilities.MessageUtility;
 
-public class Bear extends Animal{
+public class Bear extends Roaring{
     private static final int STARTING_X = 100;
     private static final int STARTING_Y = 5;
     private static final double STARTING_WEIGHT = 308.2;
@@ -13,8 +14,11 @@ public class Bear extends Animal{
 
     public Bear(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
+        MessageUtility.logConstractor("Bear", name);
         boolean flag;
-        furColor = DEFAULT_FUR_COLOR;
+        flag = setFurColor(DEFAULT_FUR_COLOR);
+        if(!flag)
+            System.out.println("Bear.setFurColor - error");
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
             System.out.println("Bear.setWeight - error");
@@ -25,8 +29,11 @@ public class Bear extends Animal{
 
     public Bear(String name, Point p){
         super(name, p);
+        MessageUtility.logConstractor("Bear", name);
         boolean flag;
-        furColor = DEFAULT_FUR_COLOR;
+        flag = setFurColor(DEFAULT_FUR_COLOR);
+        if(!flag)
+            System.out.println("Bear.setFurColor - error");
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
             System.out.println("Bear.setWeight - error");
@@ -37,12 +44,18 @@ public class Bear extends Animal{
 
     public Bear(String name, Point p, String furColor){
         super(name, p);
+        MessageUtility.logConstractor("Bear", name);
         boolean flag;
-        if(validFurColor(furColor))
-            this.furColor = furColor;
+        if(validFurColor(furColor)){
+            flag = setFurColor(furColor);
+        if(!flag)
+            System.out.println("Bear.setFurColor - error");
+        }
         else {
             System.out.println("Illegal fur color, default fur color are set.");
-            this.furColor = DEFAULT_FUR_COLOR;
+            flag = setFurColor(DEFAULT_FUR_COLOR);
+            if(!flag)
+                System.out.println("Bear.setFurColor - error");
         }
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -52,17 +65,20 @@ public class Bear extends Animal{
             System.out.println("Bear.setDiet - error");
     }
 
-    /*mine*/public boolean setFurColor(String furColor) {
+    public boolean setFurColor(String furColor) {
         if(validFurColor(furColor))
             this.furColor = furColor;
-        return this.furColor.equals(furColor);
+        boolean flag = this.furColor.equals(furColor);
+        MessageUtility.logSetter(getName(),"setFurColor",furColor,flag);
+        return flag;
     }
-    /*mine*/public static boolean validFurColor(String furColor){
+
+    public static boolean validFurColor(String furColor){
         return (furColor.equals("BLACK") || furColor.equals("WHITE") || furColor.equals("GRAY"));
     }
 
     @Override
-    public void makeSound() {
-
+    public void roar() {
+        MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");
     }
 }

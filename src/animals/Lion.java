@@ -4,9 +4,11 @@ import diet.Carnivore;
 import food.EFoodType;
 import food.IEdible;
 import mobility.Point;
+import utilities.MessageUtility;
+
 import java.util.Random;
 
-public class Lion extends Animal{
+public class Lion extends Roaring{
     private static final int STARTING_X = 20;
     private static final int STARTING_Y = 0;
     private static final double STARTING_WEIGHT = 408.2;
@@ -15,6 +17,7 @@ public class Lion extends Animal{
 
     public Lion(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
+        MessageUtility.logConstractor("Lion", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -27,6 +30,7 @@ public class Lion extends Animal{
 
     public Lion(String name, Point p){
         super(name, p);
+        MessageUtility.logConstractor("Lion", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -51,11 +55,12 @@ public class Lion extends Animal{
 
     @Override
     public EFoodType getFoodtype() {
+        MessageUtility.logGetter(getName(),"getFoodtype",EFoodType.NOTFOOD);
         return EFoodType.NOTFOOD;
     }
 
     @Override
-    public void makeSound() {
-
+    public void roar() {
+        MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }
 }

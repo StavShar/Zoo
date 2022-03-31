@@ -3,6 +3,7 @@ package zoo;
 import animals.*;
 import food.IEdible;
 import mobility.Point;
+import utilities.MessageUtility;
 
 import java.util.Random;
 import java.util.random.*;
@@ -16,47 +17,45 @@ public class ZooActions {
         int x, y, size = 0;
         boolean flag;
         Scanner sc = new Scanner(System.in);
-        while(size<3) {
+        while (size < 3) {
             System.out.println("Enter number of animals: ");
             size = sc.nextInt();
-            if(size<3)
+            if (size < 3)
                 System.out.println("It must be higher than 3, try again.");
         }
         Animal[] list = new Animal[size];
-        for(int i = 0 ; i < size ; i++)//create animals
+        for (int i = 0; i < size; i++)//create animals
             list[i] = createAnimal();
 
-        for(int i = 0 ; i < size ; i++) {//move animals
-            while(true){
+        for (int i = 0; i < size; i++) {//move animals
+            while (true) {
                 System.out.println("Where do you want to move?\nEnter x coordinate:");
                 x = sc.nextInt();
                 System.out.println("Enter y coordinate:");
                 y = sc.nextInt();
-                if (checkBounderies(new Point(x, y))){
+                if (checkBounderies(new Point(x, y))) {
                     flag = move(list[i], new Point(x, y));
-                    if(flag)
+                    if (flag)
                         System.out.println("animal moved successfully.");
                     else
                         System.out.println("animal move failed.");
                     break;
-                }
-                else
+                } else
                     System.out.println("Illegal point, please try again");
-        }
+            }
         }
 
-        for(int i = 0 ; i < size/2 ; i++) {//random eat
+        for (int i = 0; i < size / 2; i++) {//random eat
             Random random = new Random();
             int animal1 = random.nextInt(size), animal2 = random.nextInt(size);
-            while(animal1 == animal2)
+            while (animal1 == animal2)
                 animal2 = random.nextInt(size);
-            if(eat(list[animal1], list[animal2]))
+            if (eat(list[animal1], list[animal2]))
                 System.out.println("animal eat successfully.");
             else
                 System.out.println("animal eat failed.");
         }
     }
-
     private static Animal createAnimal() {
         int option = 0;
         Animal animal = null;
@@ -130,10 +129,14 @@ public class ZooActions {
     }
 
     public static boolean move(Object animal, Point point){
-        double distance;
+        double distance, weight;
         if(checkBounderies(point)){
             if(animal instanceof Animal) {
+                weight = ((Animal) animal).getWeight();
                 distance = ((Animal) animal).move(point);
+                weight = weight-(distance*weight*0.00025);
+                ((Animal) animal).setWeight(weight);
+                MessageUtility.logBooleanFunction(((Animal) animal).getName(), "move", point, distance != 0);
                 return distance != 0; //return false if distance = 0
             }
         }

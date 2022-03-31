@@ -5,8 +5,6 @@ public class Point {
     private static final int X_MAX = 800;
     private static final int Y_MIN = 0;
     private static final int Y_MAX = 600;
-    //private final int X_DEFAULT = 0;
-    //private final int Y_DEFAULT = 0;
     private int x;
     private int y;
 
@@ -29,5 +27,10 @@ public class Point {
 
     public boolean equals(Object o){
         return ((o instanceof Point) && ((x == ((Point) o).getX()) && (y == ((Point) o).getY())));
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ')';
     }
 }

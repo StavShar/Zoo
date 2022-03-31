@@ -2,8 +2,9 @@ package animals;
 
 import diet.Herbivore;
 import mobility.Point;
+import utilities.MessageUtility;
 
-public class Elephant extends Animal{
+public class Elephant extends Chewing{
     private static final int STARTING_X = 50;
     private static final int STARTING_Y = 90;
     private static final double STARTING_WEIGHT = 500;
@@ -14,6 +15,7 @@ public class Elephant extends Animal{
 
     public Elephant(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
+        MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -21,11 +23,14 @@ public class Elephant extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Elephant.setDiet - error");
-        this.trunkLength = DEFAULT_TRUNK_LENGTH;
+        flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);
+        if(!flag)
+            System.out.println("Elephant.setTrunkLength - error");
     }
 
     public Elephant(String name, Point p){
         super(name, p);
+        MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -33,11 +38,14 @@ public class Elephant extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Elephant.setDiet - error");
-        this.trunkLength = DEFAULT_TRUNK_LENGTH;
+        flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);
+        if(!flag)
+            System.out.println("Elephant.setTrunkLength - error");
     }
 
     public Elephant(String name, Point p, double trunkLength){
         super(name, p);
+        MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -45,26 +53,33 @@ public class Elephant extends Animal{
         flag = setDiet(new Herbivore());
         if(!flag)
             System.out.println("Elephant.setDiet - error");
-        if(validTrunkLength(trunkLength))
-            this.trunkLength = trunkLength;
+        if(validTrunkLength(trunkLength)){
+            flag = setTrunkLength(trunkLength);
+            if(!flag)
+                System.out.println("Elephant.setTrunkLength - error");
+        }
         else {
-            System.out.println("Illegal trunk length, default trunk length are set.");
-            this.trunkLength = DEFAULT_TRUNK_LENGTH;
+            flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);
+            if(!flag)
+                System.out.println("Elephant.setTrunkLength - error");
         }
     }
 
-    /*mine*/private boolean validTrunkLength(double trunkLength){
+    private boolean validTrunkLength(double trunkLength){
         return (trunkLength > MIN_TRUNK_LENGTH && trunkLength < MAX_TRUNK_LENGTH);
     }
 
-    /*mine*/public boolean settrunkLength(double trunkLength) {
+    public boolean setTrunkLength(double trunkLength) {
         if(validTrunkLength(trunkLength))
             this.trunkLength = trunkLength;
-        return this.trunkLength == trunkLength;
+        boolean flag = this.trunkLength == trunkLength;
+        MessageUtility.logSetter(getName(),"setTrunkLength",trunkLength,flag);
+        return flag;
     }
 
     @Override
-    public void makeSound() {
+    public void chew() {
+        MessageUtility.logSound(getName(),"Trumpets with joy while flapping its ears, then chews");
 
     }
 }
