@@ -13,6 +13,12 @@ import java.math.RoundingMode;
 
 import static java.lang.Math.round;
 
+/**
+ * Abstract class who representing an Animal
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public abstract class Animal extends Mobile implements IEdible {
     private String name;
     private double weight;
@@ -26,6 +32,7 @@ public abstract class Animal extends Mobile implements IEdible {
         if(!flag)
             System.out.println("setName failed");
     }
+
 
     public boolean setName(String name) {
         this.name = name;
@@ -45,7 +52,9 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     public boolean setWeight(double weight) {
-        this.weight = weight;
+        if(weight > 0) {
+            this.weight = weight;
+        }
         boolean flag = this.weight == weight;
         MessageUtility.logSetter(name, "setWeight", weight, flag);
         return flag;

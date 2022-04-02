@@ -4,6 +4,12 @@ import diet.Herbivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
+/**
+ *Specific class who representing Giraffe
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Giraffe extends Chewing{
     private static final int STARTING_X = 50;
     private static final int STARTING_Y = 0;
@@ -66,7 +72,7 @@ public class Giraffe extends Chewing{
         }
     }
 
-    private boolean validNeckLength(double neckLength){
+    public static boolean validNeckLength(double neckLength){
         return (neckLength > MIN_NECK_LENGTH && neckLength < MAX_NECK_LENGTH);
     }
 

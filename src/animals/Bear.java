@@ -5,6 +5,12 @@ import diet.Omnivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
+/**
+ *Specific class who representing bear
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Bear extends Roaring{
     private static final int STARTING_X = 100;
     private static final int STARTING_Y = 5;

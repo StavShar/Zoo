@@ -4,6 +4,12 @@ import diet.Herbivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
+/**
+ *Specific class who representing Turtle
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Turtle extends Chewing{
     private static final int STARTING_X = 80;
     private static final int STARTING_Y = 0;
@@ -66,7 +72,7 @@ public class Turtle extends Chewing{
         }
     }
 
-    private boolean validAge(int age){
+    public static boolean validAge(int age){
         return (age > MIN_AGE && age < MAX_AGE);
     }
 

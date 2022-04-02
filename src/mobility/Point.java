@@ -1,5 +1,11 @@
 package mobility;
 
+/**
+ *Representing location with (x,y) coordinates
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Point {
     private static final int X_MIN = 0;
     private static final int X_MAX = 800;

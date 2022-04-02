@@ -5,6 +5,12 @@ import utilities.MessageUtility;
 import java.lang.Math;
 import static mobility.Point.checkBounderies;
 
+/**
+ * Abstract class, representing movement in my zoo
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public abstract class Mobile implements Ilocatable{
     private Point location;
     private double totalDistance; //>0
@@ -19,17 +25,16 @@ public abstract class Mobile implements Ilocatable{
     }
 
     public double calcDistance(Point p){
-        return Math.sqrt(Math.pow(p.getX()-location.getX(), 2) + Math.pow(p.getY()-location.getY(), 2));
+        return Math.sqrt(Math.pow(p.getX()-this.getLocation().getX(), 2) + Math.pow(p.getY()-this.getLocation().getY(), 2));
     }
 
     public double move(Point p){
         double distance;
         if(!checkBounderies(p))//point out of range
             return 0;
-        distance = calcDistance(p);
+        distance = this.calcDistance(p);
         addTotalDistance(distance);
         setLocation(p);
-
         return distance;
     }
 
@@ -38,9 +43,7 @@ public abstract class Mobile implements Ilocatable{
     }
 
     public boolean setLocation(Point p){
-        if(checkBounderies(p))
-            location = p;
-        return checkBounderies(p);
-
+            location = new Point(p.getX(), p.getY());
+        return location.equals(p);
     }
 }

@@ -4,6 +4,12 @@ import food.EFoodType;
 import food.IEdible;
 import animals.Animal;
 
+/**
+ *Representing Omnivore diet
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Omnivore implements IDiet{
 
     @Override

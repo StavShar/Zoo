@@ -4,6 +4,13 @@ import food.EFoodType;
 import food.IEdible;
 import animals.Animal;
 
+
+/**
+ *Representing Herbivore diet
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Herbivore implements IDiet{
 
     private final double WEIGHT_GROW = 1.07; //7%

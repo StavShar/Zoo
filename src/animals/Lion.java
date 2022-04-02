@@ -8,6 +8,12 @@ import utilities.MessageUtility;
 
 import java.util.Random;
 
+/**
+ *Specific class who representing Lion
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Lion extends Roaring{
     private static final int STARTING_X = 20;
     private static final int STARTING_Y = 0;

@@ -4,6 +4,12 @@ import diet.Herbivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
+/**
+ *Specific class who representing Elephant
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Elephant extends Chewing{
     private static final int STARTING_X = 50;
     private static final int STARTING_Y = 90;
@@ -65,7 +71,7 @@ public class Elephant extends Chewing{
         }
     }
 
-    private boolean validTrunkLength(double trunkLength){
+    public static boolean validTrunkLength(double trunkLength){
         return (trunkLength > MIN_TRUNK_LENGTH && trunkLength < MAX_TRUNK_LENGTH);
     }
 

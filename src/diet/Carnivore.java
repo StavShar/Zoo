@@ -4,6 +4,12 @@ import food.EFoodType;
 import food.IEdible;
 import animals.Animal;
 
+/**
+ *Representing Carnivore diet
+ *
+ * @version 1.0 1 apr 2022
+ * @author Stav Sharabi
+ * */
 public class Carnivore implements IDiet{
 
     private final double WEIGHT_GROW = 1.1; //10%
