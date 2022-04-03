@@ -14,28 +14,57 @@ public class Point {
     private int x;
     private int y;
 
+    /**
+     * constructor of Point class
+     * @param x - x coordinate
+     * @param y - y coordinate
+     */
     public Point(int x, int y){
             this.x = x;
             this.y = y;
     }
 
+    /**
+     * checking if the (x,y) coordinates of the new location are legal
+     * @param newLocation - the new location
+     * @return true if they are legal
+     */
     public static boolean checkBounderies(Point newLocation) {
         return ((newLocation.getX() > X_MIN) && (newLocation.getX() < X_MAX)) && ((newLocation.getY() > Y_MIN) && (newLocation.getY() < Y_MAX));
     }
 
+    /**
+     * returning the x
+     * @return x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * returning the y
+     * @return y
+     */
     public int getY() {
         return y;
     }
 
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals()
+     */
     public boolean equals(Object o){
         return ((o instanceof Point) && ((x == ((Point) o).getX()) && (y == ((Point) o).getY())));
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
         return "(" + x + "," + y + ')';
     }

@@ -18,6 +18,10 @@ public class Bear extends Roaring{
     private static final String DEFAULT_FUR_COLOR = "GRAY";
     private String furColor;
 
+    /**
+     * constructor of Bear with name only
+     * @param name - name of the Bear
+     */
     public Bear(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
         MessageUtility.logConstractor("Bear", name);
@@ -33,6 +37,11 @@ public class Bear extends Roaring{
             System.out.println("Bear.setDiet - error");
     }
 
+    /**
+     * constructor of Bear with 2 parameters
+     * @param name - name of the Bear
+     * @param p - the point where the Bear
+     */
     public Bear(String name, Point p){
         super(name, p);
         MessageUtility.logConstractor("Bear", name);
@@ -48,6 +57,12 @@ public class Bear extends Roaring{
             System.out.println("Bear.setDiet - error");
     }
 
+    /**
+     * constructor of Bear with 3 parameters
+     * @param name - name of the Bear
+     * @param p - the point where the Bear
+     * @param furColor - the fur color of the Bear
+     */
     public Bear(String name, Point p, String furColor){
         super(name, p);
         MessageUtility.logConstractor("Bear", name);
@@ -71,6 +86,11 @@ public class Bear extends Roaring{
             System.out.println("Bear.setDiet - error");
     }
 
+    /**
+     * fur color setter
+     * @param furColor - the fur color you want to set
+     * @return true if it succeeds
+     */
     public boolean setFurColor(String furColor) {
         if(validFurColor(furColor))
             this.furColor = furColor;
@@ -79,11 +99,21 @@ public class Bear extends Roaring{
         return flag;
     }
 
+    /**
+     * checking validation of the fur color
+     * @param furColor - the fur color we are checking
+     * @return true if the fur color is legal
+     */
     public static boolean validFurColor(String furColor){
         return (furColor.equals("BLACK") || furColor.equals("WHITE") || furColor.equals("GRAY"));
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Roaring.roar()
+     */
     public void roar() {
         MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");
     }

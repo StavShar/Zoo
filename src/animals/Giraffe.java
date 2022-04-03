@@ -19,6 +19,10 @@ public class Giraffe extends Chewing{
     private static final double DEFAULT_NECK_LENGTH = 1.5;
     private double neckLength;
 
+    /**
+     * constructor of Giraffe with name only
+     * @param name - name of the Giraffe
+     */
     public Giraffe(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
         MessageUtility.logConstractor("Giraffe", name);
@@ -34,6 +38,11 @@ public class Giraffe extends Chewing{
             System.out.println("Giraffe.setNeckLength - error");
     }
 
+    /**
+     * constructor of Giraffe with 2 parameters
+     * @param name - name of the Giraffe
+     * @param p - the point where the Giraffe
+     */
     public Giraffe(String name, Point p){
         super(name, p);
         MessageUtility.logConstractor("Giraffe", name);
@@ -49,6 +58,12 @@ public class Giraffe extends Chewing{
             System.out.println("Giraffe.setNeckLength - error");
     }
 
+    /**
+     * constructor of Giraffe with 3 parameters
+     * @param name - name of the Giraffe
+     * @param p - the point where the Giraffe
+     * @param neckLength - the neck length of the Giraffe
+     */
     public Giraffe(String name, Point p, double neckLength){
         super(name, p);
         MessageUtility.logConstractor("Giraffe", name);
@@ -72,10 +87,20 @@ public class Giraffe extends Chewing{
         }
     }
 
+    /**
+     * checking validation of the neck length
+     * @param neckLength - the neck length we are checking
+     * @return true if the neck length is legal
+     */
     public static boolean validNeckLength(double neckLength){
         return (neckLength > MIN_NECK_LENGTH && neckLength < MAX_NECK_LENGTH);
     }
 
+    /**
+     * neck length setter
+     * @param neckLength - the neck length you want to set
+     * @return true if it succeeds
+     */
     public boolean setNeckLength(double neckLength) {
         if(validNeckLength(neckLength))
             this.neckLength = neckLength;
@@ -85,6 +110,11 @@ public class Giraffe extends Chewing{
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Chewing.chew()
+     */
     public void chew() {
         MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
     }

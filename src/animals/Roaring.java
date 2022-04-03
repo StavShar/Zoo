@@ -10,14 +10,28 @@ import mobility.Point;
  * */
 public abstract class Roaring extends Animal{
 
+    /**
+     * constructor of roaring animal
+     * @param name - name of the animal
+     * @param p - the point where the animal
+     */
     Roaring(String name, Point p){
         super(name, p);
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Animal.makeSound()
+     */
     public void makeSound() {
         roar();
     }
+
+    /**
+     * the sound of the animal while he eats
+     */
     public abstract void roar();
 
 }

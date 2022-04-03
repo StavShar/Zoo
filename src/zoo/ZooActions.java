@@ -24,6 +24,10 @@ import static mobility.Point.checkBounderies;
  * */
 public class ZooActions {
 
+    /**
+     * main function
+     * @param args
+     */
     public static void main(String[] args) {
         int x, y, size = 0;
         boolean flag;
@@ -67,6 +71,11 @@ public class ZooActions {
                 System.out.println("animal eat failed.");
         }
     }
+
+    /**
+     * creating one of the animals from the zoo
+     * @return the new animal
+     */
     private static Animal createAnimal() {
         int option = 0;
         Animal animal = null;
@@ -143,6 +152,12 @@ public class ZooActions {
         return animal;
     }
 
+    /**
+     * static function of eatting
+     * @param animal - the animal who eats
+     * @param food - the food
+     * @return true if eating succeed
+     */
     public static boolean eat(Object animal, IEdible food){
         boolean flag = false;
 
@@ -159,9 +174,16 @@ public class ZooActions {
             flag = ((Elephant) animal).eat(food);
         else if( animal instanceof Turtle)
             flag = ((Turtle) animal).eat(food);
+
         return flag;
     }
 
+    /**
+     * static function of moving in the zoo
+     * @param animal - the animal who moves
+     * @param point - the new location the animal moves to
+     * @return true if moving succeed
+     */
     public static boolean move(Object animal, Point point){
         double distance = 0, weight;
         String name;

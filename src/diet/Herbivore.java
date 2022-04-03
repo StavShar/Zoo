@@ -16,11 +16,21 @@ public class Herbivore implements IDiet{
     private final double WEIGHT_GROW = 1.07; //7%
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see diet.IDiet.canEat()
+     */
     public boolean canEat(EFoodType food) {
         return food.equals(EFoodType.VEGETABLE);
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see diet.IDiet.eat()
+     */
     public double eat(Animal animal, IEdible food) {
         double weight = animal.getWeight();
         if (canEat(food.getFoodtype()))

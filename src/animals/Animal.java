@@ -24,6 +24,11 @@ public abstract class Animal extends Mobile implements IEdible {
     private double weight;
     private IDiet diet;
 
+    /**
+     * constructor of Animal with 2 parameters
+     * @param name - name of the Animal
+     * @param p - the point where the Animal
+     */
     public Animal(String name, Point p){
         super(p);
         MessageUtility.logConstractor("Animal", name);
@@ -33,7 +38,11 @@ public abstract class Animal extends Mobile implements IEdible {
             System.out.println("setName failed");
     }
 
-
+    /**
+     * name setter
+     * @param name - the name you want to set
+     * @return true if it succeeds
+     */
     public boolean setName(String name) {
         this.name = name;
         boolean flag = this.name.equals(name);
@@ -41,16 +50,29 @@ public abstract class Animal extends Mobile implements IEdible {
         return flag;
     }
 
+    /**
+     * returning the name
+     * @return name
+     */
     public String getName() {
         MessageUtility.logGetter(name,"getName",name);
         return name;
     }
 
+    /**
+     * returning the weight
+     * @return weight
+     */
     public double getWeight(){
         MessageUtility.logGetter(name,"getWeight", weight);
         return weight;
     }
 
+    /**
+     * weight setter
+     * @param weight - the weight you want to set
+     * @return true if it succeeds
+     */
     public boolean setWeight(double weight) {
         if(weight > 0) {
             this.weight = weight;
@@ -60,6 +82,11 @@ public abstract class Animal extends Mobile implements IEdible {
         return flag;
     }
 
+    /**
+     * diet setter
+     * @param diet - the diet you want to set
+     * @return true if it succeeds
+     */
     public boolean setDiet(IDiet diet) {
         this.diet = diet;
         boolean flag =  this.diet == diet;
@@ -67,7 +94,11 @@ public abstract class Animal extends Mobile implements IEdible {
         return flag;
     }
 
-
+    /**
+     * this method makes "this" eats the food, and update his weight
+     * @param food - the food
+     * @return true if eat succeed
+     */
     public boolean eat(IEdible food) {
         double weight_change = diet.eat(this, food);
         if(weight_change!=0)
@@ -76,12 +107,22 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see food.IEdible.getFoodType()
+     */
     public EFoodType getFoodtype() {
         MessageUtility.logGetter(name,"getFoodtype",EFoodType.MEAT);
         return EFoodType.MEAT;
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
         return "[" + this.getClass().getSimpleName() + "]: " + this.name;
     }

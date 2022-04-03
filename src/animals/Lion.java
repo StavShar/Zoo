@@ -21,6 +21,10 @@ public class Lion extends Roaring{
     private static final int SCAR_CHANCE = 50; // percentage
     private int scarCount;
 
+    /**
+     * constructor of Lion with name only
+     * @param name - name of the Lion
+     */
     public Lion(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
         MessageUtility.logConstractor("Lion", name);
@@ -34,6 +38,11 @@ public class Lion extends Roaring{
         scarCount = 0;
     }
 
+    /**
+     * constructor of Lion with 2 parameters
+     * @param name - name of the Lion
+     * @param p - the point where the Lion
+     */
     public Lion(String name, Point p){
         super(name, p);
         MessageUtility.logConstractor("Lion", name);
@@ -47,7 +56,21 @@ public class Lion extends Roaring{
         scarCount = 0;
     }
 
+    /**
+     * returning the scar count
+     * @return scarCount
+     */
+    public int getScarCount() {
+        MessageUtility.logGetter(this.getName(),"getScarCount",scarCount);
+        return scarCount;
+    }
+
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Animal.eat()
+     */
     public boolean eat(IEdible food) {
         if(super.eat(food)){
             Random rand = new Random();
@@ -60,12 +83,22 @@ public class Lion extends Roaring{
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Animal.getFoodType()
+     */
     public EFoodType getFoodtype() {
         MessageUtility.logGetter(getName(),"getFoodtype",EFoodType.NOTFOOD);
         return EFoodType.NOTFOOD;
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Roaring.roar()
+     */
     public void roar() {
         MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }

@@ -13,6 +13,11 @@ import animals.Animal;
 public class Omnivore implements IDiet{
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see diet.IDiet.canEat()
+     */
     public boolean canEat(EFoodType food) {
         IDiet car = new Carnivore();
         IDiet herb = new Herbivore();
@@ -20,6 +25,11 @@ public class Omnivore implements IDiet{
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see diet.IDiet.eat()
+     */
     public double eat(Animal animal, IEdible food) {
         if(canEat(food.getFoodtype())){
             IDiet diet = null;

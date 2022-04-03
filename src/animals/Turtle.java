@@ -19,6 +19,10 @@ public class Turtle extends Chewing{
     private static final int DEFAULT_AGE = 1;
     private int age;
 
+    /**
+     * constructor of turtle with name only
+     * @param name - name of the turtle
+     */
     public Turtle(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
         MessageUtility.logConstractor("Turtle", name);
@@ -34,6 +38,11 @@ public class Turtle extends Chewing{
             System.out.println("Turtle.setAge - error");
     }
 
+    /**
+     * constructor of turtle with 2 parameters
+     * @param name - name of the turtle
+     * @param p - the point where the turtle
+     */
     public Turtle(String name, Point p){
         super(name, p);
         MessageUtility.logConstractor("Turtle", name);
@@ -49,6 +58,12 @@ public class Turtle extends Chewing{
             System.out.println("Turtle.setAge - error");
     }
 
+    /**
+     * constructor of turtle with 3 parameters
+     * @param name - name of the turtle
+     * @param p - the point where the turtle
+     * @param age - the age of the turtle
+     */
     public Turtle(String name, Point p, int age){
         super(name, p);
         MessageUtility.logConstractor("Turtle", name);
@@ -72,10 +87,20 @@ public class Turtle extends Chewing{
         }
     }
 
+    /**
+     * checking validation of an age
+     * @param age - the age we are checking
+     * @return true if the age is legal
+     */
     public static boolean validAge(int age){
         return (age > MIN_AGE && age < MAX_AGE);
     }
 
+    /**
+     * age setter
+     * @param age - the age you want to set
+     * @return true if it succeeds
+     */
     public boolean setAge(int age) {
         if(validAge(age))
             this.age = age;
@@ -85,6 +110,11 @@ public class Turtle extends Chewing{
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Chewing.chew()
+     */
     public void chew() {
         MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
     }
