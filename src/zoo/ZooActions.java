@@ -59,14 +59,18 @@ public class ZooActions {
                     System.out.println("Illegal point, please try again");
             }
         }
-
-        for (int i = 0; i < size / 2; i++) {//random eat
+        int times = size;
+        for (int i = 0; i < times / 2; i++) {//random eat
             Random random = new Random();
             int animal1 = random.nextInt(size), animal2 = random.nextInt(size);
             while (animal1 == animal2)
                 animal2 = random.nextInt(size);
-            if (eat(list[animal1], list[animal2]))
+            if (eat(list[animal1], list[animal2])) {
+                list[animal2] = list[size-1];
+                list[size-1] = null;
+                size--;
                 System.out.println("animal eat successfully.");
+            }
             else
                 System.out.println("animal eat failed.");
         }
@@ -140,7 +144,7 @@ public class ZooActions {
         }
         else if (option == 5) {//Turtle
             int age;
-            System.out.println("Enter trunk length: ");
+            System.out.println("Enter age: ");
             age = sc.nextInt();
             if (p != null && validAge(age))
                 animal = new Turtle(name, p, age);
@@ -233,8 +237,8 @@ public class ZooActions {
                     weight = weight-(distance*weight*0.00025);
                     turtle.setWeight(weight);
                 }
-            MessageUtility.logBooleanFunction(name, "move", point, distance != 0);
-            return distance != 0; //return false if distance = 0
+                MessageUtility.logBooleanFunction(name, "move", point, distance != 0);
+                return distance != 0; //return false if distance = 0
             }
         }
         return false;
