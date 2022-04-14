@@ -96,7 +96,7 @@ public class Giraffe extends Chewing{
      * @param verSpeed - vertical speed of the animal
      * @param col - color of the animal
      */
-    public Giraffe(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+    public Giraffe(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*2.2, new Herbivore());
         MessageUtility.logConstractor("Giraffe", name);
         boolean flag = setNeckLength(DEFAULT_NECK_LENGTH);

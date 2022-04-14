@@ -65,7 +65,7 @@ public class Lion extends Roaring{
      * @param verSpeed - vertical speed of the animal
      * @param col - color of the animal
      */
-    public Lion(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+    public Lion(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.8, new Carnivore());
         MessageUtility.logConstractor("Lion", name);
         scarCount = 0;

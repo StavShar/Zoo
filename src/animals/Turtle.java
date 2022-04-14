@@ -96,7 +96,7 @@ public class Turtle extends Chewing{
      * @param verSpeed - vertical speed of the animal
      * @param col - color of the animal
      */
-    public Turtle(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+    public Turtle(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.5, new Herbivore());
         MessageUtility.logConstractor("Turtle", name);
         boolean flag = setAge(DEFAULT_AGE);

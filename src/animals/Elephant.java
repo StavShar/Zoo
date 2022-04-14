@@ -95,7 +95,7 @@ public class Elephant extends Chewing{
      * @param verSpeed - vertical speed of the animal
      * @param col - color of the animal
      */
-    public Elephant(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+    public Elephant(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*10, new Herbivore());
         MessageUtility.logConstractor("Elephant", name);
         boolean flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);

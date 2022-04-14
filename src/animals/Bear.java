@@ -95,7 +95,7 @@ public class Bear extends Roaring{
      * @param verSpeed - vertical speed of the animal
      * @param col - color of the animal
      */
-    public Bear(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+    public Bear(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*1.5, new Omnivore());
         MessageUtility.logConstractor("Bear", name);
         boolean flag = setFurColor(DEFAULT_FUR_COLOR);

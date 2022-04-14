@@ -1,20 +1,14 @@
 package animals;
 
-import diet.Carnivore;
 import diet.IDiet;
-import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
-import graphics.IDrawable;
-import graphics.IAnimalBehavior;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
 import utilities.MessageUtility;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.math.RoundingMode;
 
 import static java.lang.Math.round;
 
@@ -25,6 +19,13 @@ import static java.lang.Math.round;
  * @author Stav Sharabi
  * */
 public abstract class Animal extends Mobile implements IEdible {
+    private static final String[] ValidColors = {"RED", "NATURAL", "BLUE"};
+    private static final int MIN_SIZE = 50;
+    private static final int MAX_SIZE = 300;
+    private static final int MIN_VER_SPEED = 1;
+    private static final int MAX_VER_SPEED = 10;
+    private static final int MIN_HOR_SPEED = 1;
+    private static final int MAX_HOR_SPEED = 10;
     private String name;
     private double weight;
     private IDiet diet;
@@ -133,6 +134,17 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
+     * checking if size is legal
+     * @param size - size
+     * @return true if size is legal
+     */
+    public static boolean validSize(int size){
+        if(size>=MIN_SIZE && size<=MAX_SIZE)
+            return true;
+        return false;
+    }
+
+    /**
      * color setter
      * @param col - the color you want to set
      * @return true if it succeeds
@@ -151,6 +163,18 @@ public abstract class Animal extends Mobile implements IEdible {
     public String getColor(){
         MessageUtility.logGetter(name,"getColor", col);
         return this.col;
+    }
+
+    /**
+     * checking if color is legal
+     * @param col - color
+     * @return true if color is legal
+     */
+    public static boolean validColor(String col){
+        for(int i=0 ; i<ValidColors.length ; i++)
+            if(col.equals(ValidColors[i]))
+                return true;
+        return false;
     }
 
     /**
@@ -175,6 +199,17 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
+     * checking if vertical speed is legal
+     * @param verSpeed - vertical speed
+     * @return true if vertical speed is legal
+     */
+    public static boolean validVerSpeed(int verSpeed){
+        if(verSpeed>=MIN_VER_SPEED && verSpeed<=MAX_VER_SPEED)
+            return true;
+        return false;
+    }
+
+    /**
      * horizontal speed setter
      * @param horSpeed - the horizontal speed you want to set
      * @return true if it succeeds
@@ -193,6 +228,17 @@ public abstract class Animal extends Mobile implements IEdible {
     public int gethorSpeed(){
         MessageUtility.logGetter(name,"setHorSpeed", horSpeed);
         return horSpeed;
+    }
+
+    /**
+     * checking if horizontal speed is legal
+     * @param horSpeed - horizontal speed
+     * @return true if horizontal speed is legal
+     */
+    public static boolean validHorSpeed(int horSpeed){
+        if(horSpeed>=MIN_HOR_SPEED && horSpeed<=MAX_HOR_SPEED)
+            return true;
+        return false;
     }
 
     /**
