@@ -80,7 +80,7 @@ public class ZooActions {
      * creating one of the animals from the zoo
      * @return the new animal
      */
-    private static Animal createAnimal() {
+    public static Animal createAnimal() {
         int option = 0;
         Animal animal = null;
         Point p = null;

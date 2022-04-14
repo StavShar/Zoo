@@ -1,9 +1,11 @@
 package plants;
 
+import java.awt.*;
 import java.util.Random;
 
 import food.EFoodType;
 import food.IEdible;
+import graphics.IDrawable;
 import mobility.Ilocatable;
 import mobility.Point;
 import utilities.MessageUtility;
@@ -12,7 +14,7 @@ import utilities.MessageUtility;
  * @author baroh
  *
  */
-public abstract class Plant implements IEdible, Ilocatable {
+public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     /**
      *
      */
@@ -122,6 +124,36 @@ public abstract class Plant implements IEdible, Ilocatable {
         MessageUtility.logSetter(this.getClass().getSimpleName(), "setWeight", weight, isSuccess);
 
         return isSuccess;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IDrawable.loadImages()
+     */
+    @Override
+    public void loadImages(String nm) {
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IDrawable.drawObject()
+     */
+    @Override
+    public void drawObject(Graphics g) {
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IDrawable.getColor()
+     */
+    @Override
+    public String getColor() {
+        return "Natural";
     }
 
     /*

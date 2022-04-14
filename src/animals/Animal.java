@@ -5,10 +5,15 @@ import diet.IDiet;
 import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
+import graphics.IDrawable;
+import graphics.IAnimalBehavior;
+import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
 import utilities.MessageUtility;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.math.RoundingMode;
 
 import static java.lang.Math.round;
@@ -23,6 +28,18 @@ public abstract class Animal extends Mobile implements IEdible {
     private String name;
     private double weight;
     private IDiet diet;
+    private final int EAT_DISTANCE = 10;
+    private int size;
+    private Color col;
+    private int horSpeed;
+    private int verSpeed;
+    private boolean coordChanged;
+    private Thread thread;
+    private int x_dir;
+    private int y_dir;
+    private int eatCount;
+    private ZooPanel pan;
+    private BufferedImage img1, img2;
 
     /**
      * constructor of Animal with 2 parameters
@@ -127,5 +144,8 @@ public abstract class Animal extends Mobile implements IEdible {
         return "[" + this.getClass().getSimpleName() + "]: " + this.name;
     }
 
+    /**
+     * making the sound of a specific animal
+     */
     public abstract void makeSound();
 }
