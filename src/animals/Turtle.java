@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Herbivore;
+import diet.IDiet;
 import mobility.Point;
 import utilities.MessageUtility;
 
@@ -85,6 +86,22 @@ public class Turtle extends Chewing{
             if(!flag)
                 System.out.println("Turtle.setAge - error");
         }
+    }
+
+    /**
+     * turtle constructor for hw2
+     * @param name - name of the animal
+     * @param size - size of the animal(measured with pixels)
+     * @param horSpeed - horizontal speed of the animal
+     * @param verSpeed - vertical speed of the animal
+     * @param col - color of the animal
+     */
+    public Turtle(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+        super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.5, new Herbivore());
+        MessageUtility.logConstractor("Turtle", name);
+        boolean flag = setAge(DEFAULT_AGE);
+        if(!flag)
+            System.out.println("Turtle.setAge - error");
     }
 
     /**

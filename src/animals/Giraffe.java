@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Herbivore;
+import diet.IDiet;
 import mobility.Point;
 import utilities.MessageUtility;
 
@@ -85,6 +86,22 @@ public class Giraffe extends Chewing{
             if(!flag)
                 System.out.println("Giraffe.setNeckLength - error");
         }
+    }
+
+    /**
+     * giraffe constructor for hw2
+     * @param name - name of the animal
+     * @param size - size of the animal(measured with pixels)
+     * @param horSpeed - horizontal speed of the animal
+     * @param verSpeed - vertical speed of the animal
+     * @param col - color of the animal
+     */
+    public Giraffe(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+        super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*2.2, new Herbivore());
+        MessageUtility.logConstractor("Giraffe", name);
+        boolean flag = setNeckLength(DEFAULT_NECK_LENGTH);
+        if(!flag)
+            System.out.println("Giraffe.setNeckLength - error");
     }
 
     /**

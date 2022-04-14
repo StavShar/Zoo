@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Carnivore;
+import diet.IDiet;
 import diet.Omnivore;
 import mobility.Point;
 import utilities.MessageUtility;
@@ -84,6 +85,22 @@ public class Bear extends Roaring{
         flag = setDiet(new Omnivore());
         if(!flag)
             System.out.println("Bear.setDiet - error");
+    }
+
+    /**
+     * bear constructor for hw2
+     * @param name - name of the animal
+     * @param size - size of the animal(measured with pixels)
+     * @param horSpeed - horizontal speed of the animal
+     * @param verSpeed - vertical speed of the animal
+     * @param col - color of the animal
+     */
+    public Bear(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+        super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*1.5, new Omnivore());
+        MessageUtility.logConstractor("Bear", name);
+        boolean flag = setFurColor(DEFAULT_FUR_COLOR);
+        if(!flag)
+            System.out.println("Bear.setFurColor - error");
     }
 
     /**

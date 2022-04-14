@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Carnivore;
+import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
 import mobility.Point;
@@ -53,6 +54,20 @@ public class Lion extends Roaring{
         flag = setDiet(new Carnivore());
         if(!flag)
             System.out.println("Lion.setDiet - error");
+        scarCount = 0;
+    }
+
+    /**
+     * lion constructor for hw2
+     * @param name - name of the animal
+     * @param size - size of the animal(measured with pixels)
+     * @param horSpeed - horizontal speed of the animal
+     * @param verSpeed - vertical speed of the animal
+     * @param col - color of the animal
+     */
+    public Lion(String name, int size, int horSpeed, int verSpeed, String col, IDiet diet){
+        super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.8, new Carnivore());
+        MessageUtility.logConstractor("Lion", name);
         scarCount = 0;
     }
 

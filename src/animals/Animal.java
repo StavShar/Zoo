@@ -30,7 +30,7 @@ public abstract class Animal extends Mobile implements IEdible {
     private IDiet diet;
     private final int EAT_DISTANCE = 10;
     private int size;
-    private Color col;
+    private String col;
     private int horSpeed;
     private int verSpeed;
     private boolean coordChanged;
@@ -56,6 +56,41 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
+     * Animal constructor for HW2
+     * @param name - name of the animal
+     * @param p - point of the animal location
+     * @param size - size of the animal(measured with pixels)
+     * @param horSpeed - horizontal speed of the animal
+     * @param verSpeed - vertical speed of the animal
+     * @param col - color of the animal
+     */
+    public Animal(String name, Point p, int size, int horSpeed, int verSpeed, String col, double weight, IDiet diet){
+        super(p);
+        MessageUtility.logConstractor("Animal", name);
+        boolean flag = setName(name);
+        if(!flag)
+            System.out.println("setName failed");
+        flag = setSize(size);
+        if(!flag)
+            System.out.println("setSize failed");
+        flag = setHorSpeed(horSpeed);
+        if(!flag)
+            System.out.println("setHorSpeed failed");
+        flag = setVerSpeed(verSpeed);
+        if(!flag)
+            System.out.println("setVerSpeed failed");
+        flag = setColor(col);
+        if(!flag)
+            System.out.println("setColor failed");
+        flag = setWeight(weight);
+        if(!flag)
+            System.out.println("setWeight failed");
+        flag = setDiet(diet);
+        if(!flag)
+            System.out.println("setDiet failed");
+    }
+
+    /**
      * name setter
      * @param name - the name you want to set
      * @return true if it succeeds
@@ -77,7 +112,91 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
-     * returning the weight
+     * size setter
+     * @param size - the size you want to set
+     * @return true if it succeeds
+     */
+    public boolean setSize(int size) {
+        this.size = size;
+        boolean flag = this.size == size;
+        MessageUtility.logSetter(name, "setSize", size, flag);
+        return flag;
+    }
+
+    /**
+     * returning the size of the animal
+     * @return size
+     */
+    public int getSize(){
+        MessageUtility.logGetter(name,"getSize", size);
+        return size;
+    }
+
+    /**
+     * color setter
+     * @param col - the color you want to set
+     * @return true if it succeeds
+     */
+    public boolean setColor(String col) {
+        this.col = col;
+        boolean flag = this.col.equals(col);
+        MessageUtility.logSetter(name, "setColor", col, flag);
+        return flag;
+    }
+
+    /**
+     * returning the color of the animal
+     * @return color
+     */
+    public String getColor(){
+        MessageUtility.logGetter(name,"getColor", col);
+        return this.col;
+    }
+
+    /**
+     * vertical speed setter
+     * @param verSpeed - the vertical speed you want to set
+     * @return true if it succeeds
+     */
+    public boolean setVerSpeed(int verSpeed) {
+        this.verSpeed = verSpeed;
+        boolean flag = this.verSpeed == verSpeed;
+        MessageUtility.logSetter(name, "setVerSpeed", verSpeed, flag);
+        return flag;
+    }
+
+    /**
+     * returning the vertical speed of the animal
+     * @return vertical speed
+     */
+    public int getVerSpeed(){
+        MessageUtility.logGetter(name,"getVerSpeed", verSpeed);
+        return verSpeed;
+    }
+
+    /**
+     * horizontal speed setter
+     * @param horSpeed - the horizontal speed you want to set
+     * @return true if it succeeds
+     */
+    public boolean setHorSpeed(int horSpeed) {
+        this.horSpeed = horSpeed;
+        boolean flag = this.horSpeed == horSpeed;
+        MessageUtility.logSetter(name, "setHorSpeed", horSpeed, flag);
+        return flag;
+    }
+
+    /**
+     * returning the horizontal speed of the animal
+     * @return horizontal speed
+     */
+    public int gethorSpeed(){
+        MessageUtility.logGetter(name,"setHorSpeed", horSpeed);
+        return horSpeed;
+    }
+
+    /**
+     * returning the weight of the animal
      * @return weight
      */
     public double getWeight(){
