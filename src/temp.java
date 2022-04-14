@@ -3,7 +3,9 @@ public class temp {
 
 /*
 
-    #  setChanges not boolean ?
+    #  Is setChanges not boolean ?
+
+    #  ZooPanel.setImg() is not boolean
 
     #  background image not working
 

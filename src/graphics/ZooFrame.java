@@ -4,14 +4,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import static java.lang.System.exit;
 
-
+/**
+ * representing the zoo main frame
+ *
+ * @version 1.0 14 apr 2022
+ * @author Stav Sharabi
+ * */
 public class ZooFrame extends JFrame {
     private final JLabel background = new JLabel(new ImageIcon("C:\\Users\\stav\\IdeaProjects\\temp\\src\\tempp\\savanna.jpg"));
+
     private final ZooPanel panel;
 
+    /**
+     * representing the top menu bar of the frame
+     *
+     * @version 1.0 14 apr 2022
+     * @author Stav Sharabi
+     * */
     private class menuBar extends JMenuBar {
+
+        /**
+         * menu bar constructor, creating the menu bar and his functionality
+         */
         private menuBar() {
             JMenu fileMenu = new JMenu("File");
             JMenuItem exit = new JMenuItem("Exit");
@@ -29,9 +46,8 @@ public class ZooFrame extends JFrame {
             image.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    /**
-                     *
-                     */
+                    panel.setBackgroundImage(true);
+                    panel.repaint();
                 }
             });
             JMenuItem green = new JMenuItem("Green");
@@ -40,6 +56,8 @@ public class ZooFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     panel.setBackground(Color.GREEN);
+                    panel.setBackgroundImage(false);
+                    panel.repaint();
                 }
             });
             JMenuItem none = new JMenuItem("None");
@@ -48,6 +66,8 @@ public class ZooFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     panel.setBackground(new Color(0,0,0, 0));
+                    panel.setBackgroundImage(false);
+                    panel.repaint();
 
                 }
             });
@@ -67,16 +87,20 @@ public class ZooFrame extends JFrame {
         }
     }
 
-    public ZooFrame(){
+    /**
+     * zoo's main frame constructor, creating the main frame of the zoo and adding the menubar and the zoo panel
+     */
+    public ZooFrame() {
         super("Zoo");
         panel = new ZooPanel();
         ZooFrame frame = this;
         setJMenuBar(new menuBar());
         this.add(panel);
-        this.setSize(500, 500);
-        //this.pack();
+        this.setLocation(350,200);
+        this.setSize(1920, 774);
         this.setVisible(true);
     }
+
 
     public static void main(String[] args) {
         ZooFrame window = new ZooFrame();
