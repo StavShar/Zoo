@@ -49,7 +49,7 @@ public class ZooPanel extends JPanel {
     }
     public ZooPanel(){
         plantFood = null;
-        animalList = null; /// ?!?!?!?!?!?
+        animalList = null;
         this.setLayout(new BorderLayout());
         this.add(new ZooPanelButtons(), BorderLayout.SOUTH);
         setVisible(true);
