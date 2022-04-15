@@ -199,6 +199,15 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
+     * returning the eating counter of the animal
+     * @return eatCount
+     */
+    public int getEatCount(){
+        MessageUtility.logGetter(name,"getEatCount", eatCount);
+        return eatCount;
+    }
+
+    /**
      * checking if vertical speed is legal
      * @param verSpeed - vertical speed
      * @return true if vertical speed is legal
