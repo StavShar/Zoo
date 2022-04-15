@@ -19,7 +19,7 @@ import static java.lang.Math.round;
  * @author Stav Sharabi
  * */
 public abstract class Animal extends Mobile implements IEdible {
-    private static final String[] ValidColors = {"RED", "NATURAL", "BLUE"};
+    private static final String[] ValidColors = {"Red", "Natural", "Blue"};
     private static final int MIN_SIZE = 50;
     private static final int MAX_SIZE = 300;
     private static final int MIN_VER_SPEED = 1;

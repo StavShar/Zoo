@@ -1,5 +1,7 @@
 package graphics;
 
+import animals.Animal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ public class ZooFrame extends JFrame {
      * @version 1.0 14 apr 2022
      * @author Stav Sharabi
      * */
-    private class menuBar extends JMenuBar {
+    private class menuBar extends JMenuBar implements ActionListener{
 
         /**
          * menu bar constructor, creating the menu bar and his functionality
@@ -33,57 +35,48 @@ public class ZooFrame extends JFrame {
             JMenu fileMenu = new JMenu("File");
             JMenuItem exit = new JMenuItem("Exit");
             fileMenu.add(exit);
-            exit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    exit(1);
-                }
-            });
-
+            exit.addActionListener(this);
             JMenu backgroundMenu = new JMenu("Background");
             JMenuItem image = new JMenuItem("Image");
             backgroundMenu.add(image);
-            image.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    panel.setBackgroundImage(true);
-                    panel.repaint();
-                }
-            });
+            image.addActionListener(this);
             JMenuItem green = new JMenuItem("Green");
             backgroundMenu.add(green);
-            green.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    panel.setBackground(Color.GREEN);
-                    panel.setBackgroundImage(false);
-                    panel.repaint();
-                }
-            });
+            green.addActionListener(this);
             JMenuItem none = new JMenuItem("None");
             backgroundMenu.add(none);
-            none.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    panel.setBackground(new Color(0,0,0, 0));
-                    panel.setBackgroundImage(false);
-                    panel.repaint();
-
-                }
-            });
-
+            none.addActionListener(this);
             JMenu helpMenu = new JMenu("Help");
             JMenuItem help = new JMenuItem("Help");
-            help.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null, "Home Work 2\nGUI");
-                }
-            });
+            help.addActionListener(this);
             helpMenu.add(help);
             this.add(fileMenu);
             this.add(backgroundMenu);
             this.add(helpMenu);
+        }
+
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equals("Exit"))
+                exit(1);
+            if((e.getActionCommand().equals("Image")) || (e.getActionCommand().equals("Green")) || (e.getActionCommand().equals("None"))) {
+                if (e.getActionCommand().equals("Image")) {
+                    panel.setBackgroundImage(true);
+                }
+                else if (e.getActionCommand().equals("Green")) {
+                    panel.setBackground(Color.GREEN);
+                }
+                else if (e.getActionCommand().equals("None")) {
+                    panel.setBackground(new Color(0, 0, 0, 0));
+                }
+                if (!e.getActionCommand().equals("Image"))
+                    panel.setBackgroundImage(false);
+                panel.repaint();
+            }
+            if(e.getActionCommand().equals("Help")){
+                JOptionPane.showMessageDialog(null, "Home Work 2\nGUI");
+            }
         }
     }
 

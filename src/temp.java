@@ -8,6 +8,8 @@ public class temp {
 
     #  ZooPanel.setImg() is not boolean
 
+    # ZooPanelButtons.actionPerformed - has a big comment /\/\/\/\/\/\/\/\
+
     #  background image not working
 
     #  ZooPanel - ArrayList<Aninmal> = null
