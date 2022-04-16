@@ -1,14 +1,20 @@
 package plants;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 import food.EFoodType;
 import food.IEdible;
 import graphics.IDrawable;
+import graphics.ZooPanel;
 import mobility.Ilocatable;
 import mobility.Point;
 import utilities.MessageUtility;
+
+import javax.imageio.ImageIO;
 
 /**
  * @author baroh
@@ -27,10 +33,13 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      *
      */
     private double weight;
-
     /**
      *
      */
+    private BufferedImage img;
+    private ZooPanel pan;
+    private int size = 70;
+
     public Plant() {
         Random rand = new Random();
         int x = rand.nextInt(30);
@@ -133,6 +142,8 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public void loadImages(String nm) {
+        try {img = ImageIO.read(new File(PICTURE_PATH + nm + ".png")); }
+        catch (IOException e) {System.out.println("Cannot load image");}
 
     }
 
@@ -143,7 +154,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public void drawObject(Graphics g) {
-
+        g.drawImage(img, pan.getWidth()/2, pan.getHeight()/2, size, size, pan);
     }
 
     /*

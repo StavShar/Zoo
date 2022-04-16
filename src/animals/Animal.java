@@ -306,8 +306,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @see graphics.IDrawable.loadImages()
      */
     public void loadImages(String nm){
-        String path = PICTURE_PATH + nm + "1.png";
-        try {img1 = ImageIO.read(new File(path)); }
+        try {img1 = ImageIO.read(new File(PICTURE_PATH + nm + "1.png")); }
         catch (IOException e) {System.out.println("Cannot load image1");}
 
         try {img2 = ImageIO.read(new File(PICTURE_PATH + nm + "2.png"));}
