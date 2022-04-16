@@ -69,6 +69,12 @@ public class Lion extends Roaring{
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.8, new Carnivore());
         MessageUtility.logConstractor("Lion", name);
         scarCount = 0;
+        if(col.equals("Natural"))
+            loadImages("lio_n_");
+        else if(col.equals("Red"))
+            loadImages("lio_r_");
+        else if(col.equals("Blue"))
+            loadImages("lio_b_");
     }
 
     /**

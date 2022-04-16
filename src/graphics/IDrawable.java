@@ -13,13 +13,13 @@ public interface IDrawable {
     public final static String PICTURE_PATH = "C:\\Git Project\\Zoo\\src\\graphics\\pictures\\";
 
     /**
-     * loading images in the correct color
-     * @param nm - image color
+     * loading images for both directions in the correct color and animal type
+     * @param nm - image name including type and color of the animal
      */
     public void loadImages(String nm);
 
     /**
-     * drawing an object
+     * drawing the animal in his location
      * @param g
      */
     public void drawObject (Graphics g);

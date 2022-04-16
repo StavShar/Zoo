@@ -30,7 +30,7 @@ public class Point {
      * @return true if they are legal
      */
     public static boolean checkBounderies(Point newLocation) {
-        return ((newLocation.getX() > X_MIN) && (newLocation.getX() < X_MAX)) && ((newLocation.getY() > Y_MIN) && (newLocation.getY() < Y_MAX));
+        return ((newLocation.getX() >= X_MIN) && (newLocation.getX() <= X_MAX)) && ((newLocation.getY() >= Y_MIN) && (newLocation.getY() <= Y_MAX));
     }
 
     /**

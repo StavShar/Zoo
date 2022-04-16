@@ -4,12 +4,17 @@ import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
 import graphics.IAnimalBehavior;
+import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
 import utilities.MessageUtility;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import static java.lang.Math.round;
 
@@ -19,7 +24,7 @@ import static java.lang.Math.round;
  * @version 1.0 1 apr 2022
  * @author Stav Sharabi
  * */
-public abstract class Animal extends Mobile implements IEdible, IAnimalBehavior {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior {
     private static final String[] ValidColors = {"Red", "Natural", "Blue"};
     private static final int MIN_SIZE = 50;
     private static final int MAX_SIZE = 300;
@@ -37,8 +42,8 @@ public abstract class Animal extends Mobile implements IEdible, IAnimalBehavior 
     private int verSpeed;
     private boolean coordChanged;
     private Thread thread;
-    private int x_dir;
-    private int y_dir;
+    private int x_dir = 1;
+    private int y_dir = 1;
     private int eatCount;
     private ZooPanel pan;
     private BufferedImage img1, img2;
@@ -70,6 +75,7 @@ public abstract class Animal extends Mobile implements IEdible, IAnimalBehavior 
         super(p);
         MessageUtility.logConstractor("Animal", name);
         boolean flag = setName(name);
+        setChanges(true);
         if(!flag)
             System.out.println("setName failed");
         flag = setSize(size);
@@ -278,6 +284,34 @@ public abstract class Animal extends Mobile implements IEdible, IAnimalBehavior 
         if(weight_change!=0)
             makeSound();
         return weight_change != 0; //return false if weight_change = 0
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IDrawable.drawObject()
+     */
+    public void drawObject(Graphics g) {
+        if(x_dir==1)
+            g.drawImage(img1, getLocation().getX()-size/2, getLocation().getY()-size/10, size, size, pan);
+        else
+            g.drawImage(img2, getLocation().getX(), getLocation().getY()-size/10, size, size, pan);
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IDrawable.loadImages()
+     */
+    public void loadImages(String nm){
+        String path = PICTURE_PATH + nm + "1.png";
+        try {img1 = ImageIO.read(new File(path)); }
+        catch (IOException e) {System.out.println("Cannot load image1");}
+
+        try {img2 = ImageIO.read(new File(PICTURE_PATH + nm + "2.png"));}
+        catch (IOException e) {System.out.println("Cannot load image2");}
     }
 
     @Override

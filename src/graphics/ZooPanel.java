@@ -68,6 +68,7 @@ public class ZooPanel extends JPanel {
                 animalList = null;
                 animalList = new ArrayList<>();
                 listSize = 0;
+                manageZoo();
                 JOptionPane.showMessageDialog(null, "All animals has been deleted");
             }
             else if(e.getActionCommand().equals("Food")){
@@ -126,10 +127,31 @@ public class ZooPanel extends JPanel {
 
     public static void moveAnimal(Animal a, mobility.Point p){
         boolean flag = zoo.ZooActions.move(a, p);
-        if(flag)
+        if(flag) {
+            a.setChanges(true);
             System.out.println("Move successfully");
+        }
         else
             System.out.println("Move ignored");
+    }
+
+    public boolean isChange(){
+        boolean flag = listSize == 0;
+        for(int i=0; i<listSize; i++)
+            if(animalList.get(i).getChanges()){
+                animalList.get(i).setChanges(false);
+                flag = true;
+            }
+        return flag;
+    }
+
+    public void manageZoo() {
+        //while (true) {
+            if (isChange())
+                repaint();
+
+            // need to check if some animal can eat another animal according to their locations
+        //}
     }
 
     public void setBackgroundImage(boolean b) {
@@ -141,5 +163,7 @@ public class ZooPanel extends JPanel {
         super.paintComponent(g);
         if (BackgroundImage)
             g.drawImage(image,0,0,getWidth(),getHeight(),this);
+        for(int i=0; i<listSize; i++)
+            animalList.get(i).drawObject(g);
     }
 }

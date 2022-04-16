@@ -101,6 +101,12 @@ public class Bear extends Roaring{
         boolean flag = setFurColor(DEFAULT_FUR_COLOR);
         if(!flag)
             System.out.println("Bear.setFurColor - error");
+        if(col.equals("Natural"))
+            loadImages("bea_n_");
+        else if(col.equals("Red"))
+            loadImages("bea_r_");
+        else if(col.equals("Blue"))
+            loadImages("bea_b_");
     }
 
     /**

@@ -46,8 +46,9 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
                 x = Integer.parseInt(jtX.getText());
                 y = Integer.parseInt(jtY.getText());
                 if (mobility.Point.checkBounderies(new Point(x, y))) {
-                            ZooPanel.moveAnimal(list.get(comboAnimals.getSelectedIndex()), new Point(x, y));
-                            dispose();
+                    ZooPanel.moveAnimal(list.get(comboAnimals.getSelectedIndex()), new Point(x, y));
+                    list.get(comboAnimals.getSelectedIndex()).setChanges(true);
+                    dispose();
                 }
                 else {
                     if(x >= Point.getXMin() && x <= Point.getXMax())

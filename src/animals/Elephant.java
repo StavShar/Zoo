@@ -101,6 +101,12 @@ public class Elephant extends Chewing{
         boolean flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);
         if(!flag)
             System.out.println("Bear.setTrunkLength - error");
+        if(col.equals("Natural"))
+            loadImages("elf_n_");
+        else if(col.equals("Red"))
+            loadImages("elf_r_");
+        else if(col.equals("Blue"))
+            loadImages("elf_b_");
     }
 
     /**

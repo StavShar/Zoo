@@ -102,6 +102,12 @@ public class Turtle extends Chewing{
         boolean flag = setAge(DEFAULT_AGE);
         if(!flag)
             System.out.println("Turtle.setAge - error");
+        if(col.equals("Natural"))
+            loadImages("trt_n_");
+        else if(col.equals("Red"))
+            loadImages("trt_r_");
+        else if(col.equals("Blue"))
+            loadImages("trt_b_");
     }
 
     /**

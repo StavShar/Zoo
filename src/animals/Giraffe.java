@@ -102,6 +102,12 @@ public class Giraffe extends Chewing{
         boolean flag = setNeckLength(DEFAULT_NECK_LENGTH);
         if(!flag)
             System.out.println("Giraffe.setNeckLength - error");
+        if(col.equals("Natural"))
+            loadImages("grf_n_");
+        else if(col.equals("Red"))
+            loadImages("grf_r_");
+        else if(col.equals("Blue"))
+            loadImages("grf_b_");
     }
 
     /**

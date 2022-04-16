@@ -10,6 +10,8 @@ public class temp {
 
     # ZooPanelButtons.actionPerformed - has a big comment /\/\/\/\/\/\/\/\
 
+    # how to use manageZoo ? am i need to send "this" from ZooPanel to dialogs so i can apply manageZoo from the dialogs ?
+
     #  background image not working
 
     #  ZooPanel - ArrayList<Aninmal> = null
