@@ -42,6 +42,38 @@ public class Point {
     }
 
     /**
+     * returning the minimum of x coordinate
+     * @return x minimum
+     */
+    public static int getXMin(){
+        return X_MIN;
+    }
+
+    /**
+     * returning the maximum of x coordinate
+     * @return x maximum
+     */
+    public static int getXMax(){
+        return X_MAX;
+    }
+
+    /**
+     * returning the minimum of y coordinate
+     * @return y minimum
+     */
+    public static int getYMin(){
+        return Y_MIN;
+    }
+
+    /**
+     * returning the maximum of y coordinate
+     * @return y maximum
+     */
+    public static int getYMax(){
+        return Y_MAX;
+    }
+
+    /**
      * returning the y
      * @return y
      */

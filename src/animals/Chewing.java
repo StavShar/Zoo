@@ -33,6 +33,14 @@ public abstract class Chewing extends Animal{
         super(name, p, size, horSpeed, verSpeed, col, weight, diet);
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public abstract String getAnimalName();
+
     @Override
     /*
      * (non-Javadoc)

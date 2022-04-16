@@ -125,6 +125,16 @@ public class Bear extends Roaring{
         return (furColor.equals("BLACK") || furColor.equals("WHITE") || furColor.equals("GRAY"));
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public String getAnimalName(){
+     return "Bear";
+    }
+
     @Override
     /*
      * (non-Javadoc)

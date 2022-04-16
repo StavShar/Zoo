@@ -16,8 +16,6 @@ import static java.lang.System.exit;
  * @author Stav Sharabi
  * */
 public class ZooFrame extends JFrame {
-    private final JLabel background = new JLabel(new ImageIcon("C:\\Users\\stav\\IdeaProjects\\temp\\src\\tempp\\savanna.jpg"));
-
     private final ZooPanel panel;
 
     /**

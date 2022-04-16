@@ -126,6 +126,16 @@ public class Giraffe extends Chewing{
         return flag;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public String getAnimalName(){
+        return "Giraffe";
+    }
+
     @Override
     /*
      * (non-Javadoc)

@@ -125,6 +125,16 @@ public class Elephant extends Chewing{
         return flag;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public String getAnimalName(){
+        return "Elephant";
+    }
+
     @Override
     /*
      * (non-Javadoc)

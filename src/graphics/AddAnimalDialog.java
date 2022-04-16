@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import static animals.Animal.*;
 
 public class AddAnimalDialog extends JDialog implements ActionListener {
-    private static int count = 0;
+    private static int count = 1;
     private final String[] animals = {"Lion", "Bear", "Elephant", "Giraffe", "Turtle"};
     private final String colors[] = {"Natural", "Blue", "Red"};
     private JPanel inputP;
@@ -20,10 +20,10 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
 
     public Animal createAnimal(String col, String type, int size, int verSpeed, int horSpeed){
         Animal animal = null;
-        String name = "Animal"+Integer.toString(count);
+        String name = type + Integer.toString(count);
         count++;
         boolean flag = false;
-        if(count<10)
+        if(ZooPanel.getListSize()<10)
             flag = true;
         if(flag) {
             for (int i = 0; i < animals.length; i++)

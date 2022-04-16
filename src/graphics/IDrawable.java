@@ -6,10 +6,11 @@ import java.awt.*;
  * interface of objects who can be able to be drawn
  */
 public interface IDrawable {
+
     /**
      * path of the image
      */
-    public final static String PICTURE_PATH = "…";
+    public final static String PICTURE_PATH = "C:\\Git Project\\Zoo\\src\\graphics\\pictures\\";
 
     /**
      * loading images in the correct color

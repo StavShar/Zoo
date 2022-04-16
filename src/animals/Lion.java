@@ -80,6 +80,16 @@ public class Lion extends Roaring{
         return scarCount;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public String getAnimalName(){
+        return "Lion";
+    }
+
     @Override
     /*
      * (non-Javadoc)

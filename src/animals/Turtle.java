@@ -126,6 +126,16 @@ public class Turtle extends Chewing{
         return flag;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.getAnimalName()
+     */
+    @Override
+    public String getAnimalName(){
+        return "Turtle";
+    }
+
     @Override
     /*
      * (non-Javadoc)

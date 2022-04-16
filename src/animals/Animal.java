@@ -3,6 +3,7 @@ package animals;
 import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
+import graphics.IAnimalBehavior;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
@@ -18,7 +19,7 @@ import static java.lang.Math.round;
  * @version 1.0 1 apr 2022
  * @author Stav Sharabi
  * */
-public abstract class Animal extends Mobile implements IEdible {
+public abstract class Animal extends Mobile implements IEdible, IAnimalBehavior {
     private static final String[] ValidColors = {"Red", "Natural", "Blue"};
     private static final int MIN_SIZE = 50;
     private static final int MAX_SIZE = 300;
@@ -125,15 +126,6 @@ public abstract class Animal extends Mobile implements IEdible {
     }
 
     /**
-     * returning the size of the animal
-     * @return size
-     */
-    public int getSize(){
-        MessageUtility.logGetter(name,"getSize", size);
-        return size;
-    }
-
-    /**
      * checking if size is legal
      * @param size - size
      * @return true if size is legal
@@ -196,15 +188,6 @@ public abstract class Animal extends Mobile implements IEdible {
     public int getVerSpeed(){
         MessageUtility.logGetter(name,"getVerSpeed", verSpeed);
         return verSpeed;
-    }
-
-    /**
-     * returning the eating counter of the animal
-     * @return eatCount
-     */
-    public int getEatCount(){
-        MessageUtility.logGetter(name,"getEatCount", eatCount);
-        return eatCount;
     }
 
     /**
@@ -295,6 +278,66 @@ public abstract class Animal extends Mobile implements IEdible {
         if(weight_change!=0)
             makeSound();
         return weight_change != 0; //return false if weight_change = 0
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.getAnimalName()
+     */
+    public abstract String getAnimalName();
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.getSize()
+     */
+    public int getSize(){
+        MessageUtility.logGetter(name,"getSize", size);
+        return size;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.getEatCount()
+     */
+    public int getEatCount(){
+        MessageUtility.logGetter(name,"getEatCount", eatCount);
+        return eatCount;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.setChanges()
+     */
+    public void setChanges(boolean state){
+        coordChanged = state;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.getChanges()
+     */
+    public boolean getChanges(){
+        return coordChanged;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.eatInc()
+     */
+    public void eatInc() {
+        eatCount++;
     }
 
     @Override
