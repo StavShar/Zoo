@@ -21,6 +21,7 @@ public class InfoDialog extends JDialog{
 
     public InfoDialog(){
         this.setTitle("Info table");
+        setModal(true);
         this.setLayout(new FlowLayout());
         data = ZooPanel.getData();
         this.add(new JScrollPane(new Table()));

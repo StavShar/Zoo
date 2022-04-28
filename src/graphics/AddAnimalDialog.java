@@ -58,6 +58,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
 
     public AddAnimalDialog(){
         this.setTitle("Creating new animal");
+        setModal(true);
         animal = null;
         this.setLayout(new GridLayout(6, 2));
         this.add(new JLabel(" Animal: "));

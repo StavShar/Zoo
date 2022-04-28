@@ -40,6 +40,7 @@ public class FoodDialog extends JDialog {
 
     public FoodDialog(){
         this.setTitle("Food for animals");
+        setModal(true);
         this.setLayout(new BorderLayout());
         JLabel msg = new JLabel("Please choose food", SwingConstants.CENTER);
         msg.setFont(new Font("Arial",Font.TYPE1_FONT, 16));

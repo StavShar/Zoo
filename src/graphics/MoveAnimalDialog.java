@@ -15,6 +15,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
     private final int listSize = ZooPanel.getListSize();
     private JTextField jtX, jtY;
     public MoveAnimalDialog(){
+        setModal(true);
         this.setTitle("Creating new animal");
         this.setLayout(new GridLayout(4, 2));
         this.add(new JLabel("    Animal: "));

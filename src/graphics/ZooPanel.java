@@ -68,7 +68,6 @@ public class ZooPanel extends JPanel {
                 animalList = null;
                 animalList = new ArrayList<>();
                 listSize = 0;
-                manageZoo();
                 JOptionPane.showMessageDialog(null, "All animals has been deleted");
             }
             else if(e.getActionCommand().equals("Food")){
@@ -79,6 +78,7 @@ public class ZooPanel extends JPanel {
             }
             else if(e.getActionCommand().equals("Exit"))
                 exit(1);
+            manageZoo();
         }
     }
 
