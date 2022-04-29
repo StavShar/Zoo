@@ -26,7 +26,7 @@ public class Giraffe extends Chewing{
      */
     public Giraffe(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        MessageUtility.logConstractor("Giraffe", name);
+        //MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -46,7 +46,7 @@ public class Giraffe extends Chewing{
      */
     public Giraffe(String name, Point p){
         super(name, p);
-        MessageUtility.logConstractor("Giraffe", name);
+        //MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -67,7 +67,7 @@ public class Giraffe extends Chewing{
      */
     public Giraffe(String name, Point p, double neckLength){
         super(name, p);
-        MessageUtility.logConstractor("Giraffe", name);
+        //MessageUtility.logConstractor("Giraffe", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -98,7 +98,7 @@ public class Giraffe extends Chewing{
      */
     public Giraffe(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*2.2, new Herbivore());
-        MessageUtility.logConstractor("Giraffe", name);
+        //MessageUtility.logConstractor("Giraffe", name);
         boolean flag = setNeckLength(DEFAULT_NECK_LENGTH);
         if(!flag)
             System.out.println("Giraffe.setNeckLength - error");
@@ -128,7 +128,7 @@ public class Giraffe extends Chewing{
         if(validNeckLength(neckLength))
             this.neckLength = neckLength;
         boolean flag = this.neckLength == neckLength;
-        MessageUtility.logSetter(getName(),"setNeckLength",neckLength,flag);
+        //MessageUtility.logSetter(getName(),"setNeckLength",neckLength,flag);
         return flag;
     }
 
@@ -149,6 +149,6 @@ public class Giraffe extends Chewing{
      * @see animals.Chewing.chew()
      */
     public void chew() {
-        MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
+        //MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
     }
 }

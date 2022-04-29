@@ -47,7 +47,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         this.location = new Point(x, y);
         this.height = rand.nextInt(30);
         this.weight = rand.nextInt(12);
-        MessageUtility.logConstractor("Plant", "Plant");
+        //MessageUtility.logConstractor("Plant", "Plant");
     }
 
     /*
@@ -57,7 +57,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public EFoodType getFoodtype() {
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.VEGETABLE);
+        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.VEGETABLE);
         return EFoodType.VEGETABLE;
     }
 
@@ -65,7 +65,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      * @return
      */
     public double getHeight() {
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getHeight", this.height);
+        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getHeight", this.height);
         return this.height;
     }
 
@@ -76,7 +76,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public Point getLocation() {
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getLocation", this.location);
+        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getLocation", this.location);
         return this.location;
     }
 
@@ -84,7 +84,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      * @return
      */
     public double getWeight() {
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getWeight", this.weight);
+        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getWeight", this.weight);
         return weight;
     }
 
@@ -100,7 +100,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         } else {
             this.height = 0;
         }
-        MessageUtility.logSetter(this.getClass().getSimpleName(), "setHeight", height, isSuccess);
+        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setHeight", height, isSuccess);
         return isSuccess;
     }
 
@@ -115,7 +115,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         if (isSuccess) {
             this.location = newLocation;
         }
-        MessageUtility.logSetter(this.getClass().getSimpleName(), "setLocation", newLocation, isSuccess);
+        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setLocation", newLocation, isSuccess);
         return isSuccess;
     }
 
@@ -130,7 +130,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         } else {
             this.weight = 0;
         }
-        MessageUtility.logSetter(this.getClass().getSimpleName(), "setWeight", weight, isSuccess);
+        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setWeight", weight, isSuccess);
 
         return isSuccess;
     }

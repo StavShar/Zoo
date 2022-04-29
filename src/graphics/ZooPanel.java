@@ -71,6 +71,7 @@ public class ZooPanel extends JPanel {
                 animalList = new ArrayList<>();
                 listSize = 0;
                 JOptionPane.showMessageDialog(null, "All animals has been deleted");
+                System.out.println("All animals has been deleted");
             }
             else if(e.getActionCommand().equals("Food")){
                 new FoodDialog();

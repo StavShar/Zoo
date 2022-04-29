@@ -25,7 +25,7 @@ public class Bear extends Roaring{
      */
     public Bear(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        MessageUtility.logConstractor("Bear", name);
+        //MessageUtility.logConstractor("Bear", name);
         boolean flag;
         flag = setFurColor(DEFAULT_FUR_COLOR);
         if(!flag)
@@ -45,7 +45,7 @@ public class Bear extends Roaring{
      */
     public Bear(String name, Point p){
         super(name, p);
-        MessageUtility.logConstractor("Bear", name);
+        //MessageUtility.logConstractor("Bear", name);
         boolean flag;
         flag = setFurColor(DEFAULT_FUR_COLOR);
         if(!flag)
@@ -66,7 +66,7 @@ public class Bear extends Roaring{
      */
     public Bear(String name, Point p, String furColor){
         super(name, p);
-        MessageUtility.logConstractor("Bear", name);
+        //MessageUtility.logConstractor("Bear", name);
         boolean flag;
         if(validFurColor(furColor)){
             flag = setFurColor(furColor);
@@ -97,7 +97,7 @@ public class Bear extends Roaring{
      */
     public Bear(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*1.5, new Omnivore());
-        MessageUtility.logConstractor("Bear", name);
+        //MessageUtility.logConstractor("Bear", name);
         boolean flag = setFurColor(DEFAULT_FUR_COLOR);
         if(!flag)
             System.out.println("Bear.setFurColor - error");
@@ -118,7 +118,7 @@ public class Bear extends Roaring{
         if(validFurColor(furColor))
             this.furColor = furColor;
         boolean flag = this.furColor.equals(furColor);
-        MessageUtility.logSetter(getName(),"setFurColor",furColor,flag);
+        //MessageUtility.logSetter(getName(),"setFurColor",furColor,flag);
         return flag;
     }
 
@@ -148,6 +148,6 @@ public class Bear extends Roaring{
      * @see animals.Roaring.roar()
      */
     public void roar() {
-        MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");
+        //MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");
     }
 }

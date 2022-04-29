@@ -237,7 +237,7 @@ public class ZooActions {
                     weight = weight-(distance*weight*0.00025);
                     turtle.setWeight(weight);
                 }
-                MessageUtility.logBooleanFunction(name, "move", point, distance != 0);
+                //MessageUtility.logBooleanFunction(name, "move", point, distance != 0);
                 return distance != 0; //return false if distance = 0
             }
         }

@@ -75,7 +75,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         this.add(bt);
         this.setSize(250,150);
         this.setLocationRelativeTo(null);
-        //this.setVisible(true);
     }
 
     public Animal showDialog(){

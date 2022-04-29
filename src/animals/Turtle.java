@@ -26,7 +26,7 @@ public class Turtle extends Chewing{
      */
     public Turtle(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        MessageUtility.logConstractor("Turtle", name);
+        //MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -46,7 +46,7 @@ public class Turtle extends Chewing{
      */
     public Turtle(String name, Point p){
         super(name, p);
-        MessageUtility.logConstractor("Turtle", name);
+        //MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -67,7 +67,7 @@ public class Turtle extends Chewing{
      */
     public Turtle(String name, Point p, int age){
         super(name, p);
-        MessageUtility.logConstractor("Turtle", name);
+        //MessageUtility.logConstractor("Turtle", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -98,7 +98,7 @@ public class Turtle extends Chewing{
      */
     public Turtle(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.5, new Herbivore());
-        MessageUtility.logConstractor("Turtle", name);
+        //MessageUtility.logConstractor("Turtle", name);
         boolean flag = setAge(DEFAULT_AGE);
         if(!flag)
             System.out.println("Turtle.setAge - error");
@@ -128,7 +128,7 @@ public class Turtle extends Chewing{
         if(validAge(age))
             this.age = age;
         boolean flag = this.age == age;
-        MessageUtility.logSetter(getName(),"setAge",age,flag);
+        //MessageUtility.logSetter(getName(),"setAge",age,flag);
         return flag;
     }
 
@@ -149,6 +149,6 @@ public class Turtle extends Chewing{
      * @see animals.Chewing.chew()
      */
     public void chew() {
-        MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
+        //MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
     }
 }

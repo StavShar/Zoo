@@ -26,7 +26,7 @@ public class Elephant extends Chewing{
      */
     public Elephant(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        MessageUtility.logConstractor("Elephant", name);
+        //MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -46,7 +46,7 @@ public class Elephant extends Chewing{
      */
     public Elephant(String name, Point p){
         super(name, p);
-        MessageUtility.logConstractor("Elephant", name);
+        //MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -67,7 +67,7 @@ public class Elephant extends Chewing{
      */
     public Elephant(String name, Point p, double trunkLength){
         super(name, p);
-        MessageUtility.logConstractor("Elephant", name);
+        //MessageUtility.logConstractor("Elephant", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -97,7 +97,7 @@ public class Elephant extends Chewing{
      */
     public Elephant(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*10, new Herbivore());
-        MessageUtility.logConstractor("Elephant", name);
+        //MessageUtility.logConstractor("Elephant", name);
         boolean flag = setTrunkLength(DEFAULT_TRUNK_LENGTH);
         if(!flag)
             System.out.println("Bear.setTrunkLength - error");
@@ -127,7 +127,7 @@ public class Elephant extends Chewing{
         if(validTrunkLength(trunkLength))
             this.trunkLength = trunkLength;
         boolean flag = this.trunkLength == trunkLength;
-        MessageUtility.logSetter(getName(),"setTrunkLength",trunkLength,flag);
+        //MessageUtility.logSetter(getName(),"setTrunkLength",trunkLength,flag);
         return flag;
     }
 
@@ -148,7 +148,7 @@ public class Elephant extends Chewing{
      * @see animals.Chewing.chew()
      */
     public void chew() {
-        MessageUtility.logSound(getName(),"Trumpets with joy while flapping its ears, then chews");
+        //MessageUtility.logSound(getName(),"Trumpets with joy while flapping its ears, then chews");
 
     }
 }

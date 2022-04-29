@@ -28,7 +28,7 @@ public class Lion extends Roaring{
      */
     public Lion(String name){
         super(name, new Point(STARTING_X, STARTING_Y));
-        MessageUtility.logConstractor("Lion", name);
+        //MessageUtility.logConstractor("Lion", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -46,7 +46,7 @@ public class Lion extends Roaring{
      */
     public Lion(String name, Point p){
         super(name, p);
-        MessageUtility.logConstractor("Lion", name);
+        //MessageUtility.logConstractor("Lion", name);
         boolean flag;
         flag = setWeight(STARTING_WEIGHT);
         if(!flag)
@@ -67,7 +67,7 @@ public class Lion extends Roaring{
      */
     public Lion(String name, int size, int horSpeed, int verSpeed, String col){
         super(name, new Point(STARTING_X, STARTING_Y), size, horSpeed, verSpeed, col, size*0.8, new Carnivore());
-        MessageUtility.logConstractor("Lion", name);
+        //MessageUtility.logConstractor("Lion", name);
         scarCount = 0;
         if(col.equals("Natural"))
             loadImages("lio_n_");
@@ -82,7 +82,7 @@ public class Lion extends Roaring{
      * @return scarCount
      */
     public int getScarCount() {
-        MessageUtility.logGetter(this.getName(),"getScarCount",scarCount);
+        //MessageUtility.logGetter(this.getName(),"getScarCount",scarCount);
         return scarCount;
     }
 
@@ -120,7 +120,7 @@ public class Lion extends Roaring{
      * @see animals.Animal.getFoodType()
      */
     public EFoodType getFoodtype() {
-        MessageUtility.logGetter(getName(),"getFoodtype",EFoodType.NOTFOOD);
+        //MessageUtility.logGetter(getName(),"getFoodtype",EFoodType.NOTFOOD);
         return EFoodType.NOTFOOD;
     }
 
@@ -131,6 +131,6 @@ public class Lion extends Roaring{
      * @see animals.Roaring.roar()
      */
     public void roar() {
-        MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
+        //MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }
 }
