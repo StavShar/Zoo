@@ -12,26 +12,21 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     private static int count = 1;
     private final String[] animals = {"Lion", "Bear", "Elephant", "Giraffe", "Turtle"};
     private final String colors[] = {"Natural", "Blue", "Red"};
-    private JPanel inputP;
     private Animal animal;
     private JTextField jtSize, jtVerSpeed, jtHorSpeed;
     private final JComboBox<String> comboAnimals;
     private final JComboBox<String> comboColors;
 
     public Animal createAnimal(String col, String type, int size, int verSpeed, int horSpeed){
-        Animal animal = null;
+        Animal a = null;
         String name = type + Integer.toString(count);
         count++;
         boolean flag = false;
-        if(ZooPanel.getListSize()<10)
-            flag = true;
-        if(flag) {
-            for (int i = 0; i < animals.length; i++)
-                if (animals[i].equals(type)) {
-                    flag = true;
-                    break;
-                }
-        }
+        for (int i = 0; i < animals.length; i++)
+            if (animals[i].equals(type)) {
+                flag = true;
+                break;
+            }
         if(!validColor(col))
             flag = false;
         if(!validSize(size))
@@ -42,18 +37,14 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
             flag = false;
         if(flag){
             switch (type){
-                case "Lion": animal = new Lion(name, size, horSpeed, verSpeed, col); break;
-                case "Bear": animal = new Bear(name, size, horSpeed, verSpeed, col); break;
-                case "Elephant": animal = new Elephant(name, size, horSpeed, verSpeed, col); break;
-                case "Giraffe": animal = new Giraffe(name, size, horSpeed, verSpeed, col); break;
-                case "Turtle": animal = new Turtle(name, size, horSpeed, verSpeed, col); break;
+                case "Lion": a = new Lion(name, size, horSpeed, verSpeed, col); break;
+                case "Bear": a = new Bear(name, size, horSpeed, verSpeed, col); break;
+                case "Elephant": a = new Elephant(name, size, horSpeed, verSpeed, col); break;
+                case "Giraffe": a = new Giraffe(name, size, horSpeed, verSpeed, col); break;
+                case "Turtle": a = new Turtle(name, size, horSpeed, verSpeed, col); break;
             }
         }
-        return animal;//returning animal reference only if all the parameters are legal
-    }
-
-    public Animal getAnimal() {
-            return animal;
+        return a;//returning animal reference only if all the parameters are legal
     }
 
     public AddAnimalDialog(){
@@ -84,9 +75,13 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         this.add(bt);
         this.setSize(250,150);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
+    public Animal showDialog(){
+        this.setVisible(true);
+        return animal;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -103,7 +98,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
                     if (Animal.validVerSpeed(vs)) {
                         if (Animal.validHorSpeed(hs)) {
                             animal = createAnimal(col, type, size, hs, vs);
-                            ZooPanel.addAnimal(animal);
                             dispose();
                         }
                         else

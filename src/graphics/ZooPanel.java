@@ -16,8 +16,8 @@ import static java.lang.System.exit;
 
 
 public class ZooPanel extends JPanel {
-    private static ArrayList<Animal> animalList = new ArrayList<>();
-    private static int listSize = 0;
+    private ArrayList<Animal> animalList;
+    private int listSize;
     private Plant plantFood;
     private final String BackgroundPath = IDrawable.PICTURE_PATH + "savanna.png";
     private BufferedImage image = null;
@@ -52,20 +52,22 @@ public class ZooPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Add Animal")){
                 if(listSize<10) {
-                    new AddAnimalDialog();
+                    Dialog d = new AddAnimalDialog();
+                    Animal a = ((AddAnimalDialog) d).showDialog();
+                    if(a != null)
+                        addAnimal(a);
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
             }
             else if(e.getActionCommand().equals("Move Animal")){
                 if(listSize > 0) {
-                    new MoveAnimalDialog();
+                    new MoveAnimalDialog(animalList);
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
             else if(e.getActionCommand().equals("Clear")){
-                animalList = null;
                 animalList = new ArrayList<>();
                 listSize = 0;
                 JOptionPane.showMessageDialog(null, "All animals has been deleted");
@@ -74,7 +76,7 @@ public class ZooPanel extends JPanel {
                 new FoodDialog();
             }
             else if(e.getActionCommand().equals("Info")){
-                new InfoDialog();
+                new InfoDialog(getData());
             }
             else if(e.getActionCommand().equals("Exit"))
                 exit(1);
@@ -84,6 +86,8 @@ public class ZooPanel extends JPanel {
 
     public ZooPanel(){
         plantFood = null;
+        listSize = 0;
+        animalList = new ArrayList<>();
         BackgroundImage = false;
         this.setLayout(new BorderLayout());
         try { image = ImageIO.read(new File(BackgroundPath));}
@@ -92,13 +96,15 @@ public class ZooPanel extends JPanel {
         setVisible(true);
     }
 
-    public static Object[][] getData(){
+    public Object[][] getData(){
         Object data[][] = new String[listSize+1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
         for(int i=0; i<listSize; i++) {
             data[i][0] = animalList.get(i).getAnimalName();
             data[i][1] = animalList.get(i).getColor();
-            data[i][2] = String.valueOf(animalList.get(i).getWeight());
+            double w = animalList.get(i).getWeight();
+            w = (int)(w*100)/100.0;
+            data[i][2] = String.valueOf(w);
             data[i][3] = String.valueOf(animalList.get(i).gethorSpeed());
             data[i][4] = String.valueOf(animalList.get(i).getVerSpeed());
             data[i][5] = String.valueOf(animalList.get(i).getEatCount());
@@ -109,30 +115,12 @@ public class ZooPanel extends JPanel {
         return data;
     }
 
-    public static void addAnimal(Animal a){
+    public void addAnimal(Animal a){
         if(a != null) {
             animalList.add(a);
             listSize++;
             System.out.println(animalList.get(listSize - 1).getName() + " has been added");
         }
-    }
-
-    public static int getListSize(){
-        return listSize;
-    }
-
-    public static ArrayList<Animal> getAnimalList(){
-        return animalList;
-    }
-
-    public static void moveAnimal(Animal a, mobility.Point p){
-        boolean flag = zoo.ZooActions.move(a, p);
-        if(flag) {
-            a.setChanges(true);
-            System.out.println("Move successfully");
-        }
-        else
-            System.out.println("Move ignored");
     }
 
     public boolean isChange(){

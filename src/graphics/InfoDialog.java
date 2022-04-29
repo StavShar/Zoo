@@ -19,11 +19,11 @@ public class InfoDialog extends JDialog{
         return columnNames.length;
     }
 
-    public InfoDialog(){
+    public InfoDialog(Object[][] list){
         this.setTitle("Info table");
         setModal(true);
         this.setLayout(new FlowLayout());
-        data = ZooPanel.getData();
+        data = list;
         this.add(new JScrollPane(new Table()));
         this.pack();
         this.setLocationRelativeTo(null);

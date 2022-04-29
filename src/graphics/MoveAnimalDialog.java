@@ -11,16 +11,16 @@ import java.util.ArrayList;
 
 public class MoveAnimalDialog extends JDialog implements ActionListener {
     private final JComboBox<String> comboAnimals;
-    private final ArrayList<Animal> list = ZooPanel.getAnimalList();
-    private final int listSize = ZooPanel.getListSize();
+    private final ArrayList<Animal> list;
     private JTextField jtX, jtY;
-    public MoveAnimalDialog(){
+    public MoveAnimalDialog(ArrayList<Animal> animalList){
         setModal(true);
         this.setTitle("Creating new animal");
         this.setLayout(new GridLayout(4, 2));
         this.add(new JLabel("    Animal: "));
+        list = animalList;
         this.add(comboAnimals = new JComboBox<>());
-        for(int i=0; i<listSize; i++)
+        for(int i=0; i<list.size(); i++)
             comboAnimals.addItem(list.get(i).getName());
         this.add(new JLabel("    X: "));
         jtX = new JTextField();
@@ -37,6 +37,15 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
         this.setVisible(true);
     }
 
+    public void moveAnimal(Animal a, mobility.Point p){
+        boolean flag = zoo.ZooActions.move(a, p);
+        if(flag) {
+            a.setChanges(true);
+            System.out.println("Move successfully");
+        }
+        else
+            System.out.println("Move ignored");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -47,7 +56,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
                 x = Integer.parseInt(jtX.getText());
                 y = Integer.parseInt(jtY.getText());
                 if (mobility.Point.checkBounderies(new Point(x, y))) {
-                    ZooPanel.moveAnimal(list.get(comboAnimals.getSelectedIndex()), new Point(x, y));
+                    moveAnimal(list.get(comboAnimals.getSelectedIndex()), new Point(x, y));
                     list.get(comboAnimals.getSelectedIndex()).setChanges(true);
                     dispose();
                 }
