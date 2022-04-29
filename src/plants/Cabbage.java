@@ -8,6 +8,7 @@ import utilities.MessageUtility;
  */
 public class Cabbage extends Plant {
     public Cabbage() {
+        super("cabbage");
         //MessageUtility.logConstractor("Cabbage", "Cabbage");
     }
 

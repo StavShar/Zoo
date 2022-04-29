@@ -1,6 +1,8 @@
 package graphics;
 
 import animals.*;
+import plants.Cabbage;
+import plants.Lettuce;
 import plants.Plant;
 
 import javax.imageio.ImageIO;
@@ -70,11 +72,20 @@ public class ZooPanel extends JPanel {
             else if(e.getActionCommand().equals("Clear")){
                 animalList = new ArrayList<>();
                 listSize = 0;
+                plantFood = null;
                 JOptionPane.showMessageDialog(null, "All animals has been deleted");
                 System.out.println("All animals has been deleted");
             }
             else if(e.getActionCommand().equals("Food")){
-                new FoodDialog();
+                Dialog fd = new FoodDialog();
+                String temp = ((FoodDialog) fd).showDialog();
+                switch (temp){
+                    case "Lettuce": plantFood = new Lettuce();break;
+                    case "Cabbage": plantFood = new Cabbage();break;
+                    case "Meat": break;
+
+                }
+
             }
             else if(e.getActionCommand().equals("Info")){
                 new InfoDialog(getData());
@@ -154,5 +165,9 @@ public class ZooPanel extends JPanel {
             g.drawImage(image,0,0,getWidth(),getHeight(),this);
         for(int i=0; i<listSize; i++)
             animalList.get(i).drawObject(g);
+        if(plantFood != null) {
+            plantFood.setPan(this);
+            plantFood.drawObject(g);
+        }
     }
 }

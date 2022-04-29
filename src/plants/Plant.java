@@ -40,8 +40,9 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     private ZooPanel pan;
     private int size = 70;
 
-    public Plant() {
+    public Plant(String nm) {
         Random rand = new Random();
+        loadImages(nm);
         int x = rand.nextInt(30);
         int y = rand.nextInt(12);
         this.location = new Point(x, y);
@@ -155,6 +156,10 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     @Override
     public void drawObject(Graphics g) {
         g.drawImage(img, pan.getWidth()/2, pan.getHeight()/2, size, size, pan);
+    }
+
+    public void setPan(ZooPanel pan) {
+        this.pan = pan;
     }
 
     /*

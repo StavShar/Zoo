@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FoodDialog extends JDialog {
-
+private String food;
 
     private class ButtonsPanel extends JPanel implements ActionListener{
         private ButtonsPanel(){
@@ -26,13 +26,13 @@ public class FoodDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Lettuce")){
-                System.out.println(e.getActionCommand());
+                food = "Lettuce";
             }
             if(e.getActionCommand().equals("Cabbage")){
-                System.out.println(e.getActionCommand());
+                food = "Cabbage";
             }
             if(e.getActionCommand().equals("Meat")){
-                System.out.println(e.getActionCommand());
+                food = "Meat";
             }
             dispose();
         }
@@ -48,7 +48,10 @@ public class FoodDialog extends JDialog {
         this.add(new ButtonsPanel(), BorderLayout.SOUTH);
         this.setSize(300,150);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
     }
 
+    public String showDialog(){
+        this.setVisible(true);
+        return food;
+    }
 }
