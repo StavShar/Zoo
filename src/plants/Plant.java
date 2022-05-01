@@ -45,7 +45,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         loadImages(nm);
         int x = rand.nextInt(30);
         int y = rand.nextInt(12);
-        this.location = new Point(x, y);
+        location = new Point(50,50);
         this.height = rand.nextInt(30);
         this.weight = rand.nextInt(12);
         //MessageUtility.logConstractor("Plant", "Plant");
@@ -155,7 +155,9 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public void drawObject(Graphics g) {
-        g.drawImage(img, pan.getWidth()/2, pan.getHeight()/2, size, size, pan);
+        if(!setLocation(new Point(pan.getWidth()/2, pan.getHeight()/2)))
+            System.out.println("Plant location falied");
+        g.drawImage(img, location.getX(), location.getY(), size, size, pan);
     }
 
     public void setPan(ZooPanel pan) {

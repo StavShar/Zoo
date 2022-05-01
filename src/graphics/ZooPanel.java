@@ -1,6 +1,7 @@
 package graphics;
 
 import animals.*;
+import food.Meat;
 import plants.Cabbage;
 import plants.Lettuce;
 import plants.Plant;
@@ -21,13 +22,14 @@ public class ZooPanel extends JPanel {
     private ArrayList<Animal> animalList;
     private int listSize;
     private Plant plantFood;
+    private Meat meatFood;
     private final String BackgroundPath = IDrawable.PICTURE_PATH + "savanna.png";
     private BufferedImage image = null;
     private boolean BackgroundImage;
 
 
-    private class ZooPanelButtons extends JPanel implements ActionListener{
-        private ZooPanelButtons(){
+    private class ZooPanelButtons extends JPanel implements ActionListener {
+        private ZooPanelButtons() {
             JButton btAddAnimal = new JButton("Add Animal");
             btAddAnimal.addActionListener(this);
             JButton btMoveAnimal = new JButton("Move Animal");
@@ -52,70 +54,75 @@ public class ZooPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals("Add Animal")){
-                if(listSize<10) {
+            if (e.getActionCommand().equals("Add Animal")) {
+                if (listSize < 10) {
                     Dialog d = new AddAnimalDialog();
                     Animal a = ((AddAnimalDialog) d).showDialog();
-                    if(a != null)
+                    if (a != null)
                         addAnimal(a);
-                }
-                else
+                } else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
-            }
-            else if(e.getActionCommand().equals("Move Animal")){
-                if(listSize > 0) {
+            } else if (e.getActionCommand().equals("Move Animal")) {
+                if (listSize > 0) {
                     new MoveAnimalDialog(animalList);
-                }
-                else
+                } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
-            }
-            else if(e.getActionCommand().equals("Clear")){
+            } else if (e.getActionCommand().equals("Clear")) {
                 animalList = new ArrayList<>();
                 listSize = 0;
                 plantFood = null;
-                JOptionPane.showMessageDialog(null, "All animals has been deleted");
-                System.out.println("All animals has been deleted");
-            }
-            else if(e.getActionCommand().equals("Food")){
-                Dialog fd = new FoodDialog();
-                String temp = ((FoodDialog) fd).showDialog();
-                switch (temp){
-                    case "Lettuce": plantFood = new Lettuce();break;
-                    case "Cabbage": plantFood = new Cabbage();break;
-                    case "Meat": break;
+                meatFood = null;
+                JOptionPane.showMessageDialog(null, "All animals and food has been deleted");
+            } else if (e.getActionCommand().equals("Food")) {
+                if((meatFood == null) && (plantFood == null)) {
+                    Dialog fd = new FoodDialog();
+                    String temp = ((FoodDialog) fd).showDialog();
+                    switch (temp) {
+                        case "Lettuce":
+                            plantFood = new Lettuce();
+                            break;
+                        case "Cabbage":
+                            plantFood = new Cabbage();
+                            break;
+                        case "Meat":
+                            meatFood = new Meat();
+                            break;
 
+                    }
                 }
-
-            }
-            else if(e.getActionCommand().equals("Info")){
+                else
+                    JOptionPane.showMessageDialog(null, "You can't add more food until the food will be eaten");
+            } else if (e.getActionCommand().equals("Info")) {
                 new InfoDialog(getData());
-            }
-            else if(e.getActionCommand().equals("Exit"))
+            } else if (e.getActionCommand().equals("Exit"))
                 exit(1);
             manageZoo();
         }
     }
 
-    public ZooPanel(){
+    public ZooPanel() {
         plantFood = null;
         listSize = 0;
         animalList = new ArrayList<>();
         BackgroundImage = false;
         this.setLayout(new BorderLayout());
-        try { image = ImageIO.read(new File(BackgroundPath));}
-        catch (IOException e) { System.out.println("Cannot load image"); }
+        try {
+            image = ImageIO.read(new File(BackgroundPath));
+        } catch (IOException e) {
+            System.out.println("Cannot load image");
+        }
         this.add(new ZooPanelButtons(), BorderLayout.SOUTH);
         setVisible(true);
     }
 
-    public Object[][] getData(){
-        Object data[][] = new String[listSize+1][InfoDialog.getColumnNumber()];
+    public Object[][] getData() {
+        Object data[][] = new String[listSize + 1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
-        for(int i=0; i<listSize; i++) {
+        for (int i = 0; i < listSize; i++) {
             data[i][0] = animalList.get(i).getAnimalName();
             data[i][1] = animalList.get(i).getColor();
             double w = animalList.get(i).getWeight();
-            w = (int)(w*100)/100.0;
+            w = (int) (w * 100) / 100.0;
             data[i][2] = String.valueOf(w);
             data[i][3] = String.valueOf(animalList.get(i).gethorSpeed());
             data[i][4] = String.valueOf(animalList.get(i).getVerSpeed());
@@ -127,18 +134,18 @@ public class ZooPanel extends JPanel {
         return data;
     }
 
-    public void addAnimal(Animal a){
-        if(a != null) {
+    public void addAnimal(Animal a) {
+        if (a != null) {
             animalList.add(a);
             listSize++;
             System.out.println(animalList.get(listSize - 1).getName() + " has been added");
         }
     }
 
-    public boolean isChange(){
+    public boolean isChange() {
         boolean flag = listSize == 0;
-        for(int i=0; i<listSize; i++)
-            if(animalList.get(i).getChanges()){
+        for (int i = 0; i < listSize; i++)
+            if (animalList.get(i).getChanges()) {
                 animalList.get(i).setChanges(false);
                 flag = true;
             }
@@ -147,10 +154,10 @@ public class ZooPanel extends JPanel {
 
     public void manageZoo() {
         //while (true) {
-            if (isChange())
-                repaint();
+        if (isChange())
+            repaint();
 
-            // need to check if some animal can eat another animal according to their locations
+        // need to check if some animal can eat another animal according to their locations
         //}
     }
 
@@ -162,12 +169,16 @@ public class ZooPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (BackgroundImage)
-            g.drawImage(image,0,0,getWidth(),getHeight(),this);
-        for(int i=0; i<listSize; i++)
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        for (int i = 0; i < listSize; i++)
             animalList.get(i).drawObject(g);
-        if(plantFood != null) {
+        if (plantFood != null) {
             plantFood.setPan(this);
             plantFood.drawObject(g);
+        }
+        else if (meatFood != null) {
+            meatFood.setPan(this);
+            meatFood.drawObject(g);
         }
     }
 }

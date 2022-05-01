@@ -88,7 +88,7 @@ public class ZooFrame extends JFrame {
         setJMenuBar(new menuBar());
         this.add(panel);
         this.setLocation(350,200);
-        this.setSize(1920, 774);
+        this.setSize(1000, 800);
         this.setVisible(true);
     }
 
