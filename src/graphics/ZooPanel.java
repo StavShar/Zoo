@@ -26,6 +26,7 @@ public class ZooPanel extends JPanel {
     private final Point midP;
     private ArrayList<Animal> animalList;
     private int listSize;
+    private int totalEatCounter;
     private Plant plantFood;
     private Meat meatFood;
     private boolean foodChange;
@@ -111,9 +112,14 @@ public class ZooPanel extends JPanel {
         }
     }
 
+    public void totalEatCounterInc(){totalEatCounter++;}
+
+    public int getTotalEatCounter(){return totalEatCounter;}
+
     public ZooPanel() {
         plantFood = null;
         listSize = 0;
+        totalEatCounter = 0;
         animalList = new ArrayList<>();
         foodChange = false;
         BackgroundImage = false;
@@ -141,10 +147,9 @@ public class ZooPanel extends JPanel {
             data[i][3] = String.valueOf(animalList.get(i).gethorSpeed());
             data[i][4] = String.valueOf(animalList.get(i).getVerSpeed());
             data[i][5] = String.valueOf(animalList.get(i).getEatCount());
-            totalEatCounter += animalList.get(i).getEatCount();
         }
         data[listSize][0] = "Total";
-        data[listSize][5] = String.valueOf(totalEatCounter);
+        data[listSize][5] = String.valueOf(getTotalEatCounter());
         return data;
     }
 
@@ -179,8 +184,6 @@ public class ZooPanel extends JPanel {
     }
 
     public void manageZoo() {
-        //while (true) {
-
         // checking if animal moved or food has been added
         if (isChange())
             repaint();
@@ -193,6 +196,7 @@ public class ZooPanel extends JPanel {
                     //eat food
                     if(animalList.get(i).eat(plantFood)){
                         animalList.get(i).eatInc();
+                        totalEatCounterInc();
                         plantFood = null;
                         repaint();
                         System.out.println("Food has been eaten successfully by " + animalList.get(i));
@@ -211,6 +215,7 @@ public class ZooPanel extends JPanel {
                     //eat food
                     if(animalList.get(i).eat(meatFood)){
                         animalList.get(i).eatInc();
+                        totalEatCounterInc();
                         meatFood = null;
                         repaint();
                         System.out.println("Food has been eaten successfully by " + animalList.get(i));
@@ -223,7 +228,8 @@ public class ZooPanel extends JPanel {
         }
 
         // need to check if some animal can eat another animal according to their locations
-        //}
+
+
     }
 
     public void setBackgroundImage(boolean b) {
