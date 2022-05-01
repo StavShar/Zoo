@@ -75,6 +75,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         //MessageUtility.logConstractor("Animal", name);
         boolean flag = setName(name);
         setChanges(true);
+        eatCount = 0;
         if(!flag)
             System.out.println("setName failed");
         flag = setSize(size);
@@ -271,6 +272,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         boolean flag =  this.diet == diet;
         //MessageUtility.logSetter(name, "setDiet", "[" + diet.getClass().getSimpleName() + "]", flag);
         return flag;
+    }
+
+    /**
+     * returning the diet of the animal
+     * @return diet
+     */
+    public IDiet getDiet(){
+        return diet;
     }
 
     /**

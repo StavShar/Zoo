@@ -83,12 +83,12 @@ public class ZooFrame extends JFrame {
      */
     public ZooFrame() {
         super("Zoo");
+        this.setLocation(350,200);
+        this.setSize(1000, 800);
         panel = new ZooPanel();
         ZooFrame frame = this;
         setJMenuBar(new menuBar());
         this.add(panel);
-        this.setLocation(350,200);
-        this.setSize(1000, 800);
         this.setVisible(true);
     }
 

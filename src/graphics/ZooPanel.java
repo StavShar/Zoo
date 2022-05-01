@@ -1,7 +1,9 @@
 package graphics;
 
 import animals.*;
+import food.IEdible;
 import food.Meat;
+import mobility.Point;
 import plants.Cabbage;
 import plants.Lettuce;
 import plants.Plant;
@@ -15,14 +17,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
 
 public class ZooPanel extends JPanel {
+    private final Point midP;
     private ArrayList<Animal> animalList;
     private int listSize;
     private Plant plantFood;
     private Meat meatFood;
+    private boolean foodChange;
     private final String BackgroundPath = IDrawable.PICTURE_PATH + "savanna.png";
     private BufferedImage image = null;
     private boolean BackgroundImage;
@@ -72,6 +78,7 @@ public class ZooPanel extends JPanel {
                 listSize = 0;
                 plantFood = null;
                 meatFood = null;
+                setFoodChange(true);
                 JOptionPane.showMessageDialog(null, "All animals and food has been deleted");
             } else if (e.getActionCommand().equals("Food")) {
                 if((meatFood == null) && (plantFood == null)) {
@@ -79,16 +86,20 @@ public class ZooPanel extends JPanel {
                     String temp = ((FoodDialog) fd).showDialog();
                     switch (temp) {
                         case "Lettuce":
-                            plantFood = new Lettuce();
+                            plantFood = new Lettuce(midP);
+                            setFoodChange(true);
                             break;
                         case "Cabbage":
-                            plantFood = new Cabbage();
+                            plantFood = new Cabbage(midP);
+                            setFoodChange(true);
                             break;
                         case "Meat":
-                            meatFood = new Meat();
+                            meatFood = new Meat(midP);
+                            setFoodChange(true);
                             break;
-
                     }
+                    if(getFoodChange())
+                        System.out.println("Food has been added successfully");
                 }
                 else
                     JOptionPane.showMessageDialog(null, "You can't add more food until the food will be eaten");
@@ -104,7 +115,9 @@ public class ZooPanel extends JPanel {
         plantFood = null;
         listSize = 0;
         animalList = new ArrayList<>();
+        foodChange = false;
         BackgroundImage = false;
+        this.setSize(800,600);
         this.setLayout(new BorderLayout());
         try {
             image = ImageIO.read(new File(BackgroundPath));
@@ -112,6 +125,7 @@ public class ZooPanel extends JPanel {
             System.out.println("Cannot load image");
         }
         this.add(new ZooPanelButtons(), BorderLayout.SOUTH);
+        midP = new Point(this.getWidth()/2 ,this.getHeight()/2);
         setVisible(true);
     }
 
@@ -142,20 +156,71 @@ public class ZooPanel extends JPanel {
         }
     }
 
+    public void setFoodChange(boolean b){
+        foodChange = b;
+    }
+
+    public boolean getFoodChange(){
+        return foodChange;
+    }
+
     public boolean isChange() {
-        boolean flag = listSize == 0;
+        boolean flag = false;
         for (int i = 0; i < listSize; i++)
             if (animalList.get(i).getChanges()) {
                 animalList.get(i).setChanges(false);
                 flag = true;
             }
+        if(getFoodChange()){
+            setFoodChange(false);
+            flag = true;
+        }
         return flag;
     }
 
     public void manageZoo() {
         //while (true) {
+
+        // checking if animal moved or food has been added
         if (isChange())
             repaint();
+
+        //checking if animal eats the food
+        if(plantFood != null){
+            for (int i = 0; i < animalList.size(); i++) {
+                // if distance on X axis < 10  and  distance on Y axis < 10
+                if( abs(animalList.get(i).getLocation().getX() - plantFood.getLocation().getX())<10 && abs(animalList.get(i).getLocation().getY() - plantFood.getLocation().getY()) < 10){
+                    //eat food
+                    if(animalList.get(i).eat(plantFood)){
+                        animalList.get(i).eatInc();
+                        plantFood = null;
+                        repaint();
+                        System.out.println("Food has been eaten successfully by " + animalList.get(i));
+                        break;
+                        //totalEatCounter++?
+                    }
+
+                }
+            }
+        }
+        //checking if animal eats the food
+        else if(meatFood != null){
+            for (int i = 0; i < animalList.size(); i++) {
+                // if distance on X axis < 10  and  distance on Y axis < 10
+                if( abs(animalList.get(i).getLocation().getX() - meatFood.getLocation().getX())<10 && abs(animalList.get(i).getLocation().getY() - meatFood.getLocation().getY()) < 10){
+                    //eat food
+                    if(animalList.get(i).eat(meatFood)){
+                        animalList.get(i).eatInc();
+                        meatFood = null;
+                        repaint();
+                        System.out.println("Food has been eaten successfully by " + animalList.get(i));
+                        break;
+                        //totalEatCounter++?
+                    }
+
+                }
+            }
+        }
 
         // need to check if some animal can eat another animal according to their locations
         //}

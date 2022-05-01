@@ -21,8 +21,9 @@ public class Meat implements IEdible, Ilocatable, IDrawable {
     private int size = 70;
 
 
-    public Meat() {
+    public Meat(Point p) {
         loadImages("meat");
+        setLocation(p);
     }
 
     /*
@@ -79,8 +80,6 @@ public class Meat implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public void drawObject(Graphics g) {
-        if(!setLocation(new Point(pan.getWidth()/2, pan.getHeight()/2)))
-            System.out.println("Meat location failed");
         g.drawImage(img, location.getX(), location.getY(), size, size, pan);
     }
 

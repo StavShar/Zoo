@@ -1,5 +1,6 @@
 package plants;
 
+import mobility.Point;
 import utilities.MessageUtility;
 
 /**
@@ -7,8 +8,8 @@ import utilities.MessageUtility;
  *
  */
 public class Lettuce extends Plant {
-    public Lettuce() {
-        super("lettuce");
+    public Lettuce(Point p) {
+        super("lettuce", p);
         //MessageUtility.logConstractor("Lettuce", "Lettuce");
     }
 }

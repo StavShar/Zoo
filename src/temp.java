@@ -2,18 +2,15 @@ public class temp {
 
 
 /*
-
-    # ZooPanelButtons.actionPerformed - has a big comment /\/\/\/\/\/\/\/\
-
-    # (String name, int size, int horSpeed, int verSpeed, String col, IDiet diet) the constructor parameters of the animals for hw2
-
     # animal's weight calculating by their size... whats gonna be when they are eat? how it will affect their weight/size/both?
 
     # need to delete zoo.ZooAction.main()
 
+    # totalEatCounter on Zoopanel.manageZoo() - need to be updated when animal eats food ?
+
+    # maybe can i remove setPan from paintComponent cuz i send specific location so i dont need to calculate where to paint food
     $   $   $   $   $   $   $
 
-    # I added img var to plant
 */
 
 
