@@ -4,16 +4,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
-
 import food.EFoodType;
 import food.IEdible;
 import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Ilocatable;
 import mobility.Point;
-import utilities.MessageUtility;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -40,11 +36,15 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     private ZooPanel pan;
     private int size = 70;
 
+    /**
+     * Plant constructor, with picture name and spawn location
+     * @param nm picture name
+     * @param p Point object representing spawn location
+     */
     public Plant(String nm, Point p) {
         loadImages(nm);
         if(!setLocation(p))
             System.out.println("Plant setLocation failed");
-        //MessageUtility.logConstractor("Plant", "Plant");
     }
 
     /*
@@ -54,7 +54,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public EFoodType getFoodtype() {
-        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.VEGETABLE);
         return EFoodType.VEGETABLE;
     }
 
@@ -62,7 +61,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      * @return
      */
     public double getHeight() {
-        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getHeight", this.height);
         return this.height;
     }
 
@@ -73,7 +71,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public Point getLocation() {
-        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getLocation", this.location);
         return this.location;
     }
 
@@ -81,7 +78,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
      * @return
      */
     public double getWeight() {
-        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getWeight", this.weight);
         return weight;
     }
 
@@ -97,7 +93,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         } else {
             this.height = 0;
         }
-        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setHeight", height, isSuccess);
         return isSuccess;
     }
 
@@ -112,7 +107,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         if (isSuccess) {
             this.location = newLocation;
         }
-        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setLocation", newLocation, isSuccess);
         return isSuccess;
     }
 
@@ -127,7 +121,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         } else {
             this.weight = 0;
         }
-        //MessageUtility.logSetter(this.getClass().getSimpleName(), "setWeight", weight, isSuccess);
 
         return isSuccess;
     }
@@ -152,10 +145,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     @Override
     public void drawObject(Graphics g) {
         g.drawImage(img, location.getX(), location.getY(), size, size, pan);
-    }
-
-    public void setPan(ZooPanel pan) {
-        this.pan = pan;
     }
 
     /*

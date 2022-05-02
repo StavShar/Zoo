@@ -1,13 +1,11 @@
 package graphics;
 
 import animals.*;
-import food.IEdible;
 import food.Meat;
 import mobility.Point;
 import plants.Cabbage;
 import plants.Lettuce;
 import plants.Plant;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +15,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
-
+/**
+ * Main panel of the zoo, where animals will be drawn
+ *
+ * @version 1.0 1 May 2022
+ * @author Stav Sharabi
+ * */
 public class ZooPanel extends JPanel {
     private final Point midP;
     private ArrayList<Animal> animalList;
@@ -33,8 +35,17 @@ public class ZooPanel extends JPanel {
     private BufferedImage image = null;
     private boolean BackgroundImage;
 
-
+    /**
+     * Buttons panel of the zoo panel
+     *
+     * @version 1.0 1 May 2022
+     * @author Stav Sharabi
+     * */
     private class ZooPanelButtons extends JPanel implements ActionListener {
+
+        /**
+         * Zoo buttons panel constructor
+         */
         private ZooPanelButtons() {
             JButton btAddAnimal = new JButton("Add Animal");
             btAddAnimal.addActionListener(this);
@@ -59,6 +70,11 @@ public class ZooPanel extends JPanel {
         }
 
         @Override
+        /*
+         * (non-Javadoc)
+         *
+         * @see java.awt.event.ActionListener
+         */
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add Animal")) {
                 if (animalList.size() < 10) {
@@ -111,10 +127,20 @@ public class ZooPanel extends JPanel {
         }
     }
 
+    /**
+     * adding 1 to total eat counter
+     */
     public void totalEatCounterInc(){totalEatCounter++;}
 
+    /**
+     * return total eat counter
+     * @return totalEatCounter
+     */
     public int getTotalEatCounter(){return totalEatCounter;}
 
+    /**
+     * zoo's main panel constructor
+     */
     public ZooPanel() {
         plantFood = null;
         totalEatCounter = 0;
@@ -133,6 +159,10 @@ public class ZooPanel extends JPanel {
         setVisible(true);
     }
 
+    /**
+     * get all the data of the animals organized in a matrix
+     * @return all data organized in matrix
+     */
     public Object[][] getData() {
         Object data[][] = new String[animalList.size() + 1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
@@ -151,6 +181,10 @@ public class ZooPanel extends JPanel {
         return data;
     }
 
+    /**
+     * Adding animal to the animal list
+     * @param a animal
+     */
     public void addAnimal(Animal a) {
         if (a != null) {
             animalList.add(a);
@@ -158,14 +192,26 @@ public class ZooPanel extends JPanel {
         }
     }
 
+    /**
+     * Set true if food has been added/eaten
+     * @param b true/false
+     */
     public void setFoodChange(boolean b){
         foodChange = b;
     }
 
+    /**
+     * Check if food has been added/eaten
+     * @return
+     */
     public boolean getFoodChange(){
         return foodChange;
     }
 
+    /**
+     * Checking if there was any change on the main panel
+     * @return true/false
+     */
     public boolean isChange() {
         boolean flag = false;
         for (int i = 0; i < animalList.size(); i++)
@@ -180,6 +226,9 @@ public class ZooPanel extends JPanel {
         return flag;
     }
 
+    /**
+     *  Looking  for changes, if there is any change it will repaint the updated panel
+     */
     public void manageZoo() {
         // checking if animal moved or food has been added
         if (isChange())
@@ -207,7 +256,7 @@ public class ZooPanel extends JPanel {
         else if(meatFood != null){
             for (int i = 0; i < animalList.size(); i++) {
                 // if distance on X axis < 10  and  distance on Y axis < 10
-                if( abs(animalList.get(i).getLocation().getX() - meatFood.getLocation().getX())<10 && abs(animalList.get(i).getLocation().getY() - meatFood.getLocation().getY()) < 10){
+                if( abs(animalList.get(i).getLocation().getX() - meatFood.getLocation().getX()) < animalList.get(i).getEAT_DISTANCE() && abs(animalList.get(i).getLocation().getY() - meatFood.getLocation().getY()) < animalList.get(i).getEAT_DISTANCE()){
                     //eat food
                     if(animalList.get(i).eat(meatFood)){
                         animalList.get(i).eatInc();
@@ -240,11 +289,20 @@ public class ZooPanel extends JPanel {
         } while(flag);
     }
 
+    /**
+     * set background
+     * @param b  true/false
+     */
     public void setBackgroundImage(boolean b) {
         this.BackgroundImage = b;
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see   javax.swing.JComponent
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (BackgroundImage)
@@ -252,11 +310,9 @@ public class ZooPanel extends JPanel {
         for (int i = 0; i < animalList.size(); i++)
             animalList.get(i).drawObject(g);
         if (plantFood != null) {
-            plantFood.setPan(this);
             plantFood.drawObject(g);
         }
         else if (meatFood != null) {
-            meatFood.setPan(this);
             meatFood.drawObject(g);
         }
     }

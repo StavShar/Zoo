@@ -8,15 +8,11 @@ import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
-import utilities.MessageUtility;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import static java.lang.Math.round;
 
 /**
  * Abstract class who representing an Animal
@@ -54,7 +50,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public Animal(String name, Point p){
         super(p);
-        //MessageUtility.logConstractor("Animal", name);
         boolean flag;
         flag = setName(name);
         if(!flag)
@@ -72,7 +67,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public Animal(String name, Point p, int size, int horSpeed, int verSpeed, String col, double weight, IDiet diet){
         super(p);
-        //MessageUtility.logConstractor("Animal", name);
         boolean flag = setName(name);
         setChanges(true);
         eatCount = 0;
@@ -106,7 +100,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setName(String name) {
         this.name = name;
         boolean flag = this.name.equals(name);
-        //MessageUtility.logSetter(name, "setName", name, flag);
         return flag;
     }
 
@@ -115,7 +108,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return name
      */
     public String getName() {
-        //MessageUtility.logGetter(name,"getName",name);
         return name;
     }
 
@@ -127,7 +119,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setSize(int size) {
         this.size = size;
         boolean flag = this.size == size;
-        //MessageUtility.logSetter(name, "setSize", size, flag);
         return flag;
     }
 
@@ -150,7 +141,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setColor(String col) {
         this.col = col;
         boolean flag = this.col.equals(col);
-        //MessageUtility.logSetter(name, "setColor", col, flag);
         return flag;
     }
 
@@ -159,7 +149,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return color
      */
     public String getColor(){
-        //MessageUtility.logGetter(name,"getColor", col);
         return this.col;
     }
 
@@ -183,7 +172,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setVerSpeed(int verSpeed) {
         this.verSpeed = verSpeed;
         boolean flag = this.verSpeed == verSpeed;
-        //MessageUtility.logSetter(name, "setVerSpeed", verSpeed, flag);
         return flag;
     }
 
@@ -192,7 +180,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return vertical speed
      */
     public int getVerSpeed(){
-        //MessageUtility.logGetter(name,"getVerSpeed", verSpeed);
         return verSpeed;
     }
 
@@ -208,6 +195,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     }
 
     /**
+     * returning the maximum distance for eating
+     * @return EAT_DISTANCE
+     */
+    public int getEAT_DISTANCE() {
+        return EAT_DISTANCE;
+    }
+
+    /**
      * horizontal speed setter
      * @param horSpeed - the horizontal speed you want to set
      * @return true if it succeeds
@@ -215,7 +210,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setHorSpeed(int horSpeed) {
         this.horSpeed = horSpeed;
         boolean flag = this.horSpeed == horSpeed;
-        //MessageUtility.logSetter(name, "setHorSpeed", horSpeed, flag);
         return flag;
     }
 
@@ -224,7 +218,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return horizontal speed
      */
     public int gethorSpeed(){
-        //MessageUtility.logGetter(name,"setHorSpeed", horSpeed);
         return horSpeed;
     }
 
@@ -244,7 +237,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return weight
      */
     public double getWeight(){
-        //MessageUtility.logGetter(name,"getWeight", weight);
         return weight;
     }
 
@@ -258,7 +250,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             this.weight = weight;
         }
         boolean flag = this.weight == weight;
-        //MessageUtility.logSetter(name, "setWeight", weight, flag);
         return flag;
     }
 
@@ -270,7 +261,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public boolean setDiet(IDiet diet) {
         this.diet = diet;
         boolean flag =  this.diet == diet;
-        //MessageUtility.logSetter(name, "setDiet", "[" + diet.getClass().getSimpleName() + "]", flag);
         return flag;
     }
 
@@ -388,7 +378,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @see food.IEdible.getFoodType()
      */
     public EFoodType getFoodtype() {
-        //MessageUtility.logGetter(name,"getFoodtype",EFoodType.MEAT);
         return EFoodType.MEAT;
     }
 

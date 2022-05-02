@@ -11,7 +11,6 @@ import animals.Animal;
  * @author Stav Sharabi
  * */
 public class Carnivore implements IDiet{
-
     private final double WEIGHT_GROW = 1.1; //10%
 
     @Override

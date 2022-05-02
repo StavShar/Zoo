@@ -1,5 +1,8 @@
 package graphics;
 
+/**
+ * interface of animal behavior
+ */
 public interface IAnimalBehavior {
 
     /**

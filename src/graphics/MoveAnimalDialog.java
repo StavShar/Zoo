@@ -2,17 +2,27 @@ package graphics;
 
 import animals.Animal;
 import mobility.Point;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Dialog to move animal
+ *
+ * @version 1.0 1 May 2022
+ * @author Stav Sharabi
+ * */
 public class MoveAnimalDialog extends JDialog implements ActionListener {
     private final JComboBox<String> comboAnimals;
     private final ArrayList<Animal> list;
     private JTextField jtX, jtY;
+
+    /**
+     * Move animal dialog constructor
+     * @param animalList list of the animals
+     */
     public MoveAnimalDialog(ArrayList<Animal> animalList){
         setModal(true);
         this.setTitle("Creating new animal");
@@ -37,6 +47,11 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * moving animal method
+     * @param a the animal you trying to move
+     * @param p the new location of the animal
+     */
     public void moveAnimal(Animal a, mobility.Point p){
         boolean flag = zoo.ZooActions.move(a, p);
         if(flag) {
@@ -48,6 +63,11 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.awt.event.ActionListener
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Move animal"))
         {

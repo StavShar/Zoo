@@ -1,13 +1,18 @@
 package graphics;
 
 import animals.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static animals.Animal.*;
 
+/**
+ * Dialog to add animals
+ *
+ * @version 1.0 1 May 2022
+ * @author Stav Sharabi
+ * */
 public class AddAnimalDialog extends JDialog implements ActionListener {
     private static int count = 1;
     private final String[] animals = {"Lion", "Bear", "Elephant", "Giraffe", "Turtle"};
@@ -17,6 +22,15 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     private final JComboBox<String> comboAnimals;
     private final JComboBox<String> comboColors;
 
+    /**
+     * creating animal if all the parameters are legal
+     * @param col color of the animal
+     * @param type type of the animal
+     * @param size size of the animal
+     * @param verSpeed vertical speed of the animal
+     * @param horSpeed horizontal speed of the animal
+     * @return the animal as an Animal object
+     */
     public Animal createAnimal(String col, String type, int size, int verSpeed, int horSpeed){
         Animal a = null;
         String name = type + Integer.toString(count);
@@ -47,6 +61,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         return a;//returning animal reference only if all the parameters are legal
     }
 
+    /**
+     * dialog constructor
+     */
     public AddAnimalDialog(){
         this.setTitle("Creating new animal");
         setModal(true);
@@ -77,12 +94,21 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * show dialog method so the dialog can return the animal
+     * @return animal
+     */
     public Animal showDialog(){
         this.setVisible(true);
         return animal;
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.awt.event.ActionListener
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Add animal"))
         {

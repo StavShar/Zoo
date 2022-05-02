@@ -4,23 +4,28 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
-
 import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Ilocatable;
 import mobility.Point;
-
 import javax.imageio.ImageIO;
 
-
+/**
+ * Representing piece of meat
+ *
+ * @version 1.0 1 May 2022
+ * @author Stav Sharabi
+ * */
 public class Meat implements IEdible, Ilocatable, IDrawable {
     private Point location;
     private BufferedImage img;
     private ZooPanel pan;
     private int size = 70;
 
-
+    /**
+     * meat constructor with spawn location
+     * @param p - Point object, representing spawn location
+     */
     public Meat(Point p) {
         loadImages("meat");
         setLocation(p);
@@ -33,7 +38,6 @@ public class Meat implements IEdible, Ilocatable, IDrawable {
      */
     @Override
     public EFoodType getFoodtype() {
-        //MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.VEGETABLE);
         return EFoodType.MEAT;
     }
 
@@ -81,10 +85,6 @@ public class Meat implements IEdible, Ilocatable, IDrawable {
     @Override
     public void drawObject(Graphics g) {
         g.drawImage(img, location.getX(), location.getY(), size, size, pan);
-    }
-
-    public void setPan(ZooPanel pan) {
-        this.pan = pan;
     }
 
     /*

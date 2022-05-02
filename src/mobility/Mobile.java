@@ -1,7 +1,5 @@
 package mobility;
 
-import utilities.MessageUtility;
-
 import java.lang.Math;
 import static mobility.Point.checkBounderies;
 

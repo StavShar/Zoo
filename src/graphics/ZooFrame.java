@@ -55,6 +55,11 @@ public class ZooFrame extends JFrame {
 
 
         @Override
+        /*
+         * (non-Javadoc)
+         *
+         * @see java.awt.event.ActionListener
+         */
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Exit"))
                 exit(1);
@@ -92,7 +97,10 @@ public class ZooFrame extends JFrame {
         this.setVisible(true);
     }
 
-
+    /**
+     * main func, creating main fraim and starting the program
+     * @param args
+     */
     public static void main(String[] args) {
         ZooFrame window = new ZooFrame();
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
