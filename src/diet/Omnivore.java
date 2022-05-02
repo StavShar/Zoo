@@ -11,6 +11,8 @@ import animals.Animal;
  * @author Stav Sharabi
  * */
 public class Omnivore implements IDiet{
+    IDiet car = new Carnivore();
+    IDiet herb = new Herbivore();
 
     @Override
     /*
@@ -19,8 +21,6 @@ public class Omnivore implements IDiet{
      * @see diet.IDiet.canEat()
      */
     public boolean canEat(EFoodType food) {
-        IDiet car = new Carnivore();
-        IDiet herb = new Herbivore();
         return car.canEat(food) || herb.canEat(food);
     }
 

@@ -25,7 +25,6 @@ import static java.lang.System.exit;
 public class ZooPanel extends JPanel {
     private final Point midP;
     private ArrayList<Animal> animalList;
-    private int listSize;
     private int totalEatCounter;
     private Plant plantFood;
     private Meat meatFood;
@@ -62,7 +61,7 @@ public class ZooPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add Animal")) {
-                if (listSize < 10) {
+                if (animalList.size() < 10) {
                     Dialog d = new AddAnimalDialog();
                     Animal a = ((AddAnimalDialog) d).showDialog();
                     if (a != null)
@@ -70,13 +69,13 @@ public class ZooPanel extends JPanel {
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
             } else if (e.getActionCommand().equals("Move Animal")) {
-                if (listSize > 0) {
+                if (animalList.size() > 0) {
                     new MoveAnimalDialog(animalList);
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             } else if (e.getActionCommand().equals("Clear")) {
                 animalList = new ArrayList<>();
-                listSize = 0;
+                totalEatCounter = 0;
                 plantFood = null;
                 meatFood = null;
                 setFoodChange(true);
@@ -118,7 +117,6 @@ public class ZooPanel extends JPanel {
 
     public ZooPanel() {
         plantFood = null;
-        listSize = 0;
         totalEatCounter = 0;
         animalList = new ArrayList<>();
         foodChange = false;
@@ -136,9 +134,9 @@ public class ZooPanel extends JPanel {
     }
 
     public Object[][] getData() {
-        Object data[][] = new String[listSize + 1][InfoDialog.getColumnNumber()];
+        Object data[][] = new String[animalList.size() + 1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
-        for (int i = 0; i < listSize; i++) {
+        for (int i = 0; i < animalList.size(); i++) {
             data[i][0] = animalList.get(i).getAnimalName();
             data[i][1] = animalList.get(i).getColor();
             double w = animalList.get(i).getWeight();
@@ -148,16 +146,15 @@ public class ZooPanel extends JPanel {
             data[i][4] = String.valueOf(animalList.get(i).getVerSpeed());
             data[i][5] = String.valueOf(animalList.get(i).getEatCount());
         }
-        data[listSize][0] = "Total";
-        data[listSize][5] = String.valueOf(getTotalEatCounter());
+        data[animalList.size()][0] = "Total";
+        data[animalList.size()][5] = String.valueOf(getTotalEatCounter());
         return data;
     }
 
     public void addAnimal(Animal a) {
         if (a != null) {
             animalList.add(a);
-            listSize++;
-            System.out.println(animalList.get(listSize - 1).getName() + " has been added");
+            System.out.println(animalList.get(animalList.size() - 1).getName() + " has been added");
         }
     }
 
@@ -171,7 +168,7 @@ public class ZooPanel extends JPanel {
 
     public boolean isChange() {
         boolean flag = false;
-        for (int i = 0; i < listSize; i++)
+        for (int i = 0; i < animalList.size(); i++)
             if (animalList.get(i).getChanges()) {
                 animalList.get(i).setChanges(false);
                 flag = true;
@@ -201,7 +198,6 @@ public class ZooPanel extends JPanel {
                         repaint();
                         System.out.println("Food has been eaten successfully by " + animalList.get(i));
                         break;
-                        //totalEatCounter++?
                     }
 
                 }
@@ -220,16 +216,28 @@ public class ZooPanel extends JPanel {
                         repaint();
                         System.out.println("Food has been eaten successfully by " + animalList.get(i));
                         break;
-                        //totalEatCounter++?
                     }
 
                 }
             }
         }
-
-        // need to check if some animal can eat another animal according to their locations
-
-
+        // checking if animal eats an animal
+        boolean flag;
+        do {
+            flag = false;
+            for (int i = 0; i < animalList.size(); i++)
+                for (int j = 0; j < animalList.size(); j++)
+                    if (animalList.get(i).calcDistance(animalList.get(j).getLocation()) < animalList.get(j).getSize())
+                        if (animalList.get(i).getWeight() >= 2 * animalList.get(j).getWeight())
+                            if (animalList.get(i).eat(animalList.get(j))) {
+                                animalList.get(i).eatInc();
+                                totalEatCounterInc();
+                                System.out.println(animalList.get(i) + " ate " + animalList.get(j));
+                                animalList.remove(j);
+                                flag = true;
+                                break;
+                            }
+        } while(flag);
     }
 
     public void setBackgroundImage(boolean b) {
@@ -241,7 +249,7 @@ public class ZooPanel extends JPanel {
         super.paintComponent(g);
         if (BackgroundImage)
             g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        for (int i = 0; i < listSize; i++)
+        for (int i = 0; i < animalList.size(); i++)
             animalList.get(i).drawObject(g);
         if (plantFood != null) {
             plantFood.setPan(this);

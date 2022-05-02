@@ -28,7 +28,7 @@ public class ZooActions {
      * main function
      * @param args
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int x, y, size = 0;
         boolean flag;
         Scanner sc = new Scanner(System.in);
@@ -74,7 +74,7 @@ public class ZooActions {
             else
                 System.out.println("animal eat failed.");
         }
-    }
+    }*/
 
     /**
      * creating one of the animals from the zoo
