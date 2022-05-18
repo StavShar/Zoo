@@ -24,7 +24,7 @@ import static java.lang.System.exit;
  * @version 1.0 1 May 2022
  * @author Stav Sharabi
  * */
-public class ZooPanel extends JPanel {
+public class ZooPanel extends JPanel implements Runnable{
     public static ZooPanel instance = null;
     private final Point midP;
     private ArrayList<Animal> animalList;
@@ -35,6 +35,7 @@ public class ZooPanel extends JPanel {
     private final String BackgroundPath = IDrawable.PICTURE_PATH + "savanna.png";
     private BufferedImage image = null;
     private boolean BackgroundImage;
+    private Thread controller;
 
     /**
      * Buttons panel of the zoo panel
@@ -157,6 +158,7 @@ public class ZooPanel extends JPanel {
         totalEatCounter = 0;
         animalList = new ArrayList<>();
         foodChange = false;
+        controller = new Thread(this);
         BackgroundImage = false;
         this.setSize(800,600);
         this.setLayout(new BorderLayout());
@@ -167,7 +169,20 @@ public class ZooPanel extends JPanel {
         }
         this.add(new ZooPanelButtons(), BorderLayout.SOUTH);
         midP = new Point(this.getWidth()/2 ,this.getHeight()/2);
+        controller.start();
         setVisible(true);
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            manageZoo();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

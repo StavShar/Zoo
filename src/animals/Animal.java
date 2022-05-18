@@ -20,7 +20,7 @@ import java.io.IOException;
  * @version 1.0 1 apr 2022
  * @author Stav Sharabi
  * */
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable {
     private static final String[] ValidColors = {"Red", "Natural", "Blue"};
     private static final int MIN_SIZE = 50;
     private static final int MAX_SIZE = 300;
@@ -40,6 +40,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int x_dir = 1;
     private int y_dir = 1;
     private int eatCount;
+    protected Thread thread;
+    protected boolean threadSuspended;
     private ZooPanel pan;
     private BufferedImage img1, img2;
 
@@ -90,6 +92,45 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         flag = setDiet(diet);
         if(!flag)
             System.out.println("setDiet failed");
+        pan = ZooPanel.getInstance();
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    @Override
+    public void run() {
+        Point p;
+        int newX, newY;
+        while (true) {
+            p = getLocation();
+            newX = p.getX() + horSpeed * x_dir;
+            newY = p.getY() + verSpeed * y_dir;
+            if (Point.checkBounderies(new Point(newX, newY)))
+                setLocation(new Point(newX, newY));
+            else {
+                if (Point.getXMax() < newX) {//turn left
+                    newX = Point.getXMax();
+                    x_dir = -1;
+                } else if (Point.getXMin() > newX) {//turn right
+                    newX = Point.getXMin();
+                    x_dir = 1;
+                }
+                if (Point.getYMax() < newY) {//turn down
+                    newY = Point.getYMax();
+                    y_dir = -1;
+                } else if (Point.getYMin() > newY) {//turn up
+                    newY = Point.getYMin();
+                    y_dir = 1;
+                }
+                setLocation(new Point(newX, newY));
+            }
+            setChanges(true);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -369,6 +410,27 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public void eatInc() {
         eatCount++;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.setSuspended()
+     */
+    public void setSuspended(){
+        threadSuspended =  true;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see graphics.IAnimalBehavior.setResumed()
+     */
+    public void setResumed(){
+        threadSuspended =  false;
+        notify();
     }
 
     @Override
