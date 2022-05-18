@@ -102,32 +102,36 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         Point p;
         int newX, newY;
         while (true) {
-            p = getLocation();
-            newX = p.getX() + horSpeed * x_dir;
-            newY = p.getY() + verSpeed * y_dir;
-            if (Point.checkBounderies(new Point(newX, newY)))
-                setLocation(new Point(newX, newY));
-            else {
-                if (Point.getXMax() < newX) {//turn left
-                    newX = Point.getXMax();
-                    x_dir = -1;
-                } else if (Point.getXMin() > newX) {//turn right
-                    newX = Point.getXMin();
-                    x_dir = 1;
-                }
-                if (Point.getYMax() < newY) {//turn down
-                    newY = Point.getYMax();
-                    y_dir = -1;
-                } else if (Point.getYMin() > newY) {//turn up
-                    newY = Point.getYMin();
-                    y_dir = 1;
-                }
-                setLocation(new Point(newX, newY));
-            }
-            setChanges(true);
             try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
+                synchronized (this) {
+                    if(this.threadSuspended == true)
+                        wait();
+                }
+                p = getLocation();
+                newX = p.getX() + horSpeed * x_dir;
+                newY = p.getY() + verSpeed * y_dir;
+                if (Point.checkBounderies(new Point(newX, newY)))
+                    setLocation(new Point(newX, newY));
+                else {
+                    if (Point.getXMax() < newX) {//turn left
+                        newX = Point.getXMax();
+                        x_dir = -1;
+                    } else if (Point.getXMin() > newX) {//turn right
+                        newX = Point.getXMin();
+                        x_dir = 1;
+                    }
+                    if (Point.getYMax() < newY) {//turn down
+                        newY = Point.getYMax();
+                        y_dir = -1;
+                    } else if (Point.getYMin() > newY) {//turn up
+                        newY = Point.getYMin();
+                        y_dir = 1;
+                    }
+                    setLocation(new Point(newX, newY));
+                }
+                setChanges(true);
+                Thread.sleep(50);
+            }catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -428,7 +432,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      *
      * @see graphics.IAnimalBehavior.setResumed()
      */
-    public void setResumed(){
+    public synchronized void setResumed(){
         threadSuspended =  false;
         notify();
     }

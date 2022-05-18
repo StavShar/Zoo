@@ -51,8 +51,10 @@ public class ZooPanel extends JPanel implements Runnable{
         private ZooPanelButtons() {
             JButton btAddAnimal = new JButton("Add Animal");
             btAddAnimal.addActionListener(this);
-            JButton btMoveAnimal = new JButton("Move Animal");
-            btMoveAnimal.addActionListener(this);
+            JButton btSleep = new JButton("Sleep");
+            btSleep.addActionListener(this);
+            JButton btWakeUp = new JButton("Wake Up");
+            btWakeUp.addActionListener(this);
             JButton btClear = new JButton("Clear");
             btClear.addActionListener(this);
             JButton btFood = new JButton("Food");
@@ -64,7 +66,8 @@ public class ZooPanel extends JPanel implements Runnable{
             this.setLayout(new FlowLayout());
             this.setBackground(new Color(16, 146, 229));
             this.add(btAddAnimal);
-            this.add(btMoveAnimal);
+            this.add(btSleep);
+            this.add(btWakeUp);
             this.add(btClear);
             this.add(btFood);
             this.add(btInfo);
@@ -86,19 +89,30 @@ public class ZooPanel extends JPanel implements Runnable{
                         addAnimal(a);
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
-            } else if (e.getActionCommand().equals("Move Animal")) {
+            }
+            else if (e.getActionCommand().equals("Sleep")) {
                 if (animalList.size() > 0) {
-                    new MoveAnimalDialog(animalList);
+                    for (Animal a : animalList)
+                        a.setSuspended();
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
-            } else if (e.getActionCommand().equals("Clear")) {
+            }
+            else if (e.getActionCommand().equals("Wake Up")) {
+                if (animalList.size() > 0) {
+                    for (Animal a : animalList)
+                        a.setResumed();
+                } else
+                    JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
+            }
+            else if (e.getActionCommand().equals("Clear")) {
                 animalList = new ArrayList<>();
                 totalEatCounter = 0;
                 plantFood = null;
                 meatFood = null;
                 setFoodChange(true);
                 JOptionPane.showMessageDialog(null, "All animals and food has been deleted");
-            } else if (e.getActionCommand().equals("Food")) {
+            }
+            else if (e.getActionCommand().equals("Food")) {
                 if((meatFood == null) && (plantFood == null)) {
                     Dialog fd = new FoodDialog();
                     String temp = ((FoodDialog) fd).showDialog();
@@ -121,11 +135,12 @@ public class ZooPanel extends JPanel implements Runnable{
                 }
                 else
                     JOptionPane.showMessageDialog(null, "You can't add more food until the food will be eaten");
-            } else if (e.getActionCommand().equals("Info")) {
+            }
+            else if (e.getActionCommand().equals("Info")) {
                 new InfoDialog(getData());
-            } else if (e.getActionCommand().equals("Exit"))
+            }
+            else if (e.getActionCommand().equals("Exit"))
                 exit(1);
-            manageZoo();
         }
     }
 
