@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Abstract class who representing an Animal
  *
- * @version 1.0 1 apr 2022
+ * @version 3.0 18 May 2022
  * @author Stav Sharabi
  * */
 public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable {
@@ -134,6 +134,22 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             }catch (InterruptedException e) {
             }
         }
+    }
+
+    /**
+     * set new direction on X axis
+     * @param x_dir x direction
+     */
+    public void setX_dir(int x_dir) {
+        this.x_dir = x_dir;
+    }
+
+    /**
+     * set new direction on Y axis
+     * @param y_dir y direction
+     */
+    public void setY_dir(int y_dir) {
+        this.y_dir = y_dir;
     }
 
     /**
@@ -421,7 +437,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      *
      * @see graphics.IAnimalBehavior.setSuspended()
      */
-    public void setSuspended(){
+    public synchronized void setSuspended(){
         threadSuspended =  true;
     }
 

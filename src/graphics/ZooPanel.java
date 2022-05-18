@@ -21,7 +21,7 @@ import static java.lang.System.exit;
 /**
  * Main panel of the zoo, where animals will be drawn
  *
- * @version 1.0 1 May 2022
+ * @version 3.0 18 May 2022
  * @author Stav Sharabi
  * */
 public class ZooPanel extends JPanel implements Runnable{
@@ -135,7 +135,7 @@ public class ZooPanel extends JPanel implements Runnable{
                             break;
                     }
                     if(getFoodChange())
-                        System.out.println("Food has been added successfully");
+                        System.out.println("Food has been added");
                 }
                 else
                     JOptionPane.showMessageDialog(null, "You can't add more food until the food will be eaten");
@@ -199,7 +199,7 @@ public class ZooPanel extends JPanel implements Runnable{
         while (true){
             manageZoo();
             try {
-                Thread.sleep(10);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
 
             }
@@ -285,6 +285,33 @@ public class ZooPanel extends JPanel implements Runnable{
      *  Looking  for changes, if there is any change it will repaint the updated panel
      */
     public void manageZoo() {
+        if(meatFood != null){
+            for(Animal a:animalList)
+                if(a.getDiet().canEat(meatFood.getFoodtype())) {
+                    if (a.getLocation().getX() < midP.getX())
+                        a.setX_dir(1);
+                    else if(a.getLocation().getX() > midP.getX())
+                        a.setX_dir(-1);
+                    if (a.getLocation().getY() < midP.getY())
+                        a.setY_dir(1);
+                    else if(a.getLocation().getY() > midP.getY())
+                        a.setY_dir(-1);
+                }
+        }
+        else if(plantFood != null){
+            for(Animal a:animalList)
+                if(a.getDiet().canEat(plantFood.getFoodtype())) {
+                    if (a.getLocation().getX() < midP.getX())
+                        a.setX_dir(1);
+                    else if(a.getLocation().getX() > midP.getX())
+                        a.setX_dir(-1);
+                    if (a.getLocation().getY() < midP.getY())
+                        a.setY_dir(1);
+                    else if(a.getLocation().getY() > midP.getY())
+                        a.setY_dir(-1);
+                }
+        }
+
         // checking if animal moved or food has been added
         if (isChange())
             repaint();

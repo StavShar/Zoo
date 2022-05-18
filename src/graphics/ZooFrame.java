@@ -12,7 +12,7 @@ import static java.lang.System.exit;
 /**
  * representing the zoo main frame
  *
- * @version 1.0 14 apr 2022
+ * @version 3.0 18 May 2022
  * @author Stav Sharabi
  * */
 public class ZooFrame extends JFrame {
