@@ -25,6 +25,7 @@ import static java.lang.System.exit;
  * @author Stav Sharabi
  * */
 public class ZooPanel extends JPanel {
+    public static ZooPanel instance = null;
     private final Point midP;
     private ArrayList<Animal> animalList;
     private int totalEatCounter;
@@ -139,9 +140,19 @@ public class ZooPanel extends JPanel {
     public int getTotalEatCounter(){return totalEatCounter;}
 
     /**
+     * ensuring that Zoopanel is a singletone
+     * @return the instance of the Zoopanel
+     */
+    public static ZooPanel getInstance() {
+        if(instance == null)
+            instance = new ZooPanel();
+        return instance;
+    }
+
+    /**
      * zoo's main panel constructor
      */
-    public ZooPanel() {
+    private ZooPanel() {
         plantFood = null;
         totalEatCounter = 0;
         animalList = new ArrayList<>();

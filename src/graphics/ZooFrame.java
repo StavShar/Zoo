@@ -17,6 +17,7 @@ import static java.lang.System.exit;
  * */
 public class ZooFrame extends JFrame {
     private final ZooPanel panel;
+    public static ZooFrame instance = null;
 
     /**
      * representing the top menu bar of the frame
@@ -84,14 +85,23 @@ public class ZooFrame extends JFrame {
     }
 
     /**
+     * ensuring that ZooFrame is a singletone
+     * @return the instance of the ZooFrame
+     */
+    public static ZooFrame getInstance() {
+        if(instance == null)
+            instance = new ZooFrame();
+        return instance;
+    }
+
+    /**
      * zoo's main frame constructor, creating the main frame of the zoo and adding the menubar and the zoo panel
      */
-    public ZooFrame() {
+    private ZooFrame() {
         super("Zoo");
         this.setLocation(350,200);
         this.setSize(1000, 800);
-        panel = new ZooPanel();
-        ZooFrame frame = this;
+        panel = ZooPanel.getInstance();
         setJMenuBar(new menuBar());
         this.add(panel);
         this.setVisible(true);
@@ -102,7 +112,7 @@ public class ZooFrame extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        ZooFrame window = new ZooFrame();
+        ZooFrame window = ZooFrame.getInstance();
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
