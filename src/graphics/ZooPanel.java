@@ -145,8 +145,7 @@ public class ZooPanel extends JPanel implements Runnable{
             }
             else if (e.getActionCommand().equals("Exit")) {
                 ZooPanel.getInstance().stopAllThreads();
-                ZooFrame.getInstance().dispose();
-
+                exit(0);
             }
         }
     }
@@ -207,6 +206,9 @@ public class ZooPanel extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * stopping all the threads in the panel
+     */
     public void stopAllThreads(){
         for (Animal a : animalList)
             a.thread.interrupt(); //kill the thread
@@ -298,7 +300,7 @@ public class ZooPanel extends JPanel implements Runnable{
                         totalEatCounterInc();
                         plantFood = null;
                         repaint();
-                        System.out.println("Food has been eaten successfully by " + animalList.get(i));
+                        System.out.println("Food has been eaten by " + animalList.get(i));
                         break;
                     }
 
@@ -316,7 +318,7 @@ public class ZooPanel extends JPanel implements Runnable{
                         totalEatCounterInc();
                         meatFood = null;
                         repaint();
-                        System.out.println("Food has been eaten successfully by " + animalList.get(i));
+                        System.out.println("Food has been eaten by " + animalList.get(i));
                         break;
                     }
 
@@ -335,6 +337,7 @@ public class ZooPanel extends JPanel implements Runnable{
                                 animalList.get(i).eatInc();
                                 totalEatCounterInc();
                                 System.out.println(animalList.get(i) + " ate " + animalList.get(j));
+                                animalList.get(j).thread.interrupt();
                                 animalList.remove(j);
                                 flag = true;
                                 break;

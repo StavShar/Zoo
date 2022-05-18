@@ -64,7 +64,7 @@ public class ZooFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Exit")){
                 panel.stopAllThreads();
-                instance.dispose();
+                exit(0);
             }
             if((e.getActionCommand().equals("Image")) || (e.getActionCommand().equals("Green")) || (e.getActionCommand().equals("None"))) {
                 if (e.getActionCommand().equals("Image")) {
