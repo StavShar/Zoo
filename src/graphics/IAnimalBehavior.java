@@ -40,4 +40,14 @@ public interface IAnimalBehavior {
      * @param state true if there is a change
      */
     public void setChanges (boolean state);
+
+    /**
+     * the animal enter to waiting mode
+     */
+    public void setSuspended();
+
+    /**
+     * the animal is exit the waiting mode
+     */
+    public void setResumed();
 }
