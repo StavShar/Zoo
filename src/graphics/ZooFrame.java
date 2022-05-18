@@ -62,8 +62,10 @@ public class ZooFrame extends JFrame {
          * @see java.awt.event.ActionListener
          */
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals("Exit"))
-                exit(1);
+            if(e.getActionCommand().equals("Exit")){
+                panel.stopAllThreads();
+                instance.dispose();
+            }
             if((e.getActionCommand().equals("Image")) || (e.getActionCommand().equals("Green")) || (e.getActionCommand().equals("None"))) {
                 if (e.getActionCommand().equals("Image")) {
                     panel.setBackgroundImage(true);

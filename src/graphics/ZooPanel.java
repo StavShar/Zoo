@@ -105,6 +105,10 @@ public class ZooPanel extends JPanel implements Runnable{
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
             else if (e.getActionCommand().equals("Clear")) {
+                if (animalList.size() > 0) {
+                    for (Animal a : animalList)
+                        a.thread.interrupt(); //kill the thread
+                }
                 animalList = new ArrayList<>();
                 totalEatCounter = 0;
                 plantFood = null;
@@ -139,8 +143,11 @@ public class ZooPanel extends JPanel implements Runnable{
             else if (e.getActionCommand().equals("Info")) {
                 new InfoDialog(getData());
             }
-            else if (e.getActionCommand().equals("Exit"))
-                exit(1);
+            else if (e.getActionCommand().equals("Exit")) {
+                ZooPanel.getInstance().stopAllThreads();
+                ZooFrame.getInstance().dispose();
+
+            }
         }
     }
 
@@ -195,11 +202,16 @@ public class ZooPanel extends JPanel implements Runnable{
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+
             }
         }
     }
 
+    public void stopAllThreads(){
+        for (Animal a : animalList)
+            a.thread.interrupt(); //kill the thread
+        controller.interrupt();
+    }
     /**
      * get all the data of the animals organized in a matrix
      * @return all data organized in matrix

@@ -40,7 +40,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int x_dir = 1;
     private int y_dir = 1;
     private int eatCount;
-    protected Thread thread;
+    public Thread thread;
     protected boolean threadSuspended;
     private ZooPanel pan;
     private BufferedImage img1, img2;
@@ -132,7 +132,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 setChanges(true);
                 Thread.sleep(50);
             }catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
