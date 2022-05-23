@@ -120,22 +120,24 @@ public class ZooPanel extends JPanel implements Runnable{
                 if((meatFood == null) && (plantFood == null)) {
                     Dialog fd = new FoodDialog();
                     String temp = ((FoodDialog) fd).showDialog();
-                    switch (temp) {
-                        case "Lettuce":
-                            plantFood = new Lettuce(midP);
-                            setFoodChange(true);
-                            break;
-                        case "Cabbage":
-                            plantFood = new Cabbage(midP);
-                            setFoodChange(true);
-                            break;
-                        case "Meat":
-                            meatFood = new Meat(midP);
-                            setFoodChange(true);
-                            break;
+                    if (temp != null) {
+                        switch (temp) {
+                            case "Lettuce":
+                                plantFood = new Lettuce(midP);
+                                setFoodChange(true);
+                                break;
+                            case "Cabbage":
+                                plantFood = new Cabbage(midP);
+                                setFoodChange(true);
+                                break;
+                            case "Meat":
+                                meatFood = new Meat(midP);
+                                setFoodChange(true);
+                                break;
+                        }
+                        if (getFoodChange())
+                            System.out.println("Food has been added");
                     }
-                    if(getFoodChange())
-                        System.out.println("Food has been added");
                 }
                 else
                     JOptionPane.showMessageDialog(null, "You can't add more food until the food will be eaten");
