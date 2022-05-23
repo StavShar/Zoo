@@ -358,17 +358,18 @@ public class ZooPanel extends JPanel implements Runnable{
             flag = false;
             for (int i = 0; i < animalList.size(); i++)
                 for (int j = 0; j < animalList.size(); j++)
-                    if (animalList.get(i).calcDistance(animalList.get(j).getLocation()) < animalList.get(j).getSize())
+                    if(animalList.get(i).getDiet().canEat(animalList.get(j).getFoodtype()))
                         if (animalList.get(i).getWeight() >= 2 * animalList.get(j).getWeight())
-                            if (animalList.get(i).eat(animalList.get(j))) {
-                                animalList.get(i).eatInc();
-                                totalEatCounterInc();
-                                System.out.println(animalList.get(i) + " ate " + animalList.get(j));
-                                animalList.get(j).thread.interrupt();
-                                animalList.remove(j);
-                                flag = true;
-                                break;
-                            }
+                            if (animalList.get(i).calcDistance(animalList.get(j).getLocation()) < animalList.get(j).getSize())
+                                if (animalList.get(i).eat(animalList.get(j))) {
+                                    animalList.get(i).eatInc();
+                                    totalEatCounterInc();
+                                    System.out.println(animalList.get(i) + " ate " + animalList.get(j));
+                                    animalList.get(j).thread.interrupt();
+                                    animalList.remove(j);
+                                    flag = true;
+                                    break;
+                                }
         } while(flag);
     }
 

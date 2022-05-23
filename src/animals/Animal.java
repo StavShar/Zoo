@@ -8,6 +8,7 @@ import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
+import zoo.ZooActions;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -111,7 +112,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 newX = p.getX() + horSpeed * x_dir;
                 newY = p.getY() + verSpeed * y_dir;
                 if (Point.checkBounderies(new Point(newX, newY)))
-                    setLocation(new Point(newX, newY));
+                    ZooActions.move(this, new Point(newX, newY));
                 else {
                     if (Point.getXMax() < newX) {//turn left
                         newX = Point.getXMax();
@@ -127,7 +128,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                         newY = Point.getYMin();
                         y_dir = 1;
                     }
-                    setLocation(new Point(newX, newY));
+                    ZooActions.move(this, new Point(newX, newY));
                 }
                 setChanges(true);
                 Thread.sleep(50);
