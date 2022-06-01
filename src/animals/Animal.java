@@ -8,7 +8,6 @@ import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
-import zoo.ZooActions;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -44,6 +43,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public Thread thread;
     protected boolean threadSuspended;
     private ZooPanel pan;
+    private boolean alive;
     private BufferedImage img1, img2;
 
     /**
@@ -54,6 +54,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public Animal(String name, Point p){
         super(p);
         boolean flag;
+        alive = true;
         flag = setName(name);
         if(!flag)
             System.out.println("setName failed");
@@ -72,6 +73,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         super(p);
         boolean flag = setName(name);
         setChanges(true);
+        alive = true;
         eatCount = 0;
         if(!flag)
             System.out.println("setName failed");
@@ -102,7 +104,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public void run() {
         Point p;
         int newX, newY;
-        while (true) {
+        while (alive) {
             try {
                 synchronized (this) {
                     if(this.threadSuspended == true)
@@ -133,8 +135,16 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 setChanges(true);
                 Thread.sleep(50);
             }catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * this thread will end his job
+     */
+    public void kill(){
+        alive = false;
     }
 
     /**

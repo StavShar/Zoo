@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
 import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
@@ -26,6 +27,8 @@ import static java.lang.System.exit;
  * */
 public class ZooPanel extends JPanel implements Runnable{
     public static ZooPanel instance = null;
+    private final int MAX_THREADS = 10;
+    private final int MAX_POOL_SIZE = 5;
     private final Point midP;
     private ArrayList<Animal> animalList;
     private int totalEatCounter;
@@ -36,7 +39,7 @@ public class ZooPanel extends JPanel implements Runnable{
     private BufferedImage image = null;
     private boolean BackgroundImage;
     private Thread controller;
-
+    private boolean alive;
     /**
      * Buttons panel of the zoo panel
      *
@@ -107,7 +110,7 @@ public class ZooPanel extends JPanel implements Runnable{
             else if (e.getActionCommand().equals("Clear")) {
                 if (animalList.size() > 0) {
                     for (Animal a : animalList)
-                        a.thread.interrupt(); //kill the thread
+                        a.kill(); //kill the thread
                 }
                 animalList = new ArrayList<>();
                 totalEatCounter = 0;
@@ -181,6 +184,7 @@ public class ZooPanel extends JPanel implements Runnable{
         totalEatCounter = 0;
         animalList = new ArrayList<>();
         foodChange = false;
+        alive = true;
         controller = new Thread(this);
         BackgroundImage = false;
         this.setSize(800,600);
@@ -198,14 +202,21 @@ public class ZooPanel extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (alive){
             manageZoo();
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
-
+                e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * this thread will end his job
+     */
+    public void kill(){
+        alive = false;
     }
 
     /**
@@ -213,8 +224,8 @@ public class ZooPanel extends JPanel implements Runnable{
      */
     public void stopAllThreads(){
         for (Animal a : animalList)
-            a.thread.interrupt(); //kill the thread
-        controller.interrupt();
+            a.kill(); //kill the thread
+        this.kill();
     }
     /**
      * get all the data of the animals organized in a matrix
@@ -367,7 +378,7 @@ public class ZooPanel extends JPanel implements Runnable{
                                     animalList.get(i).eatInc();
                                     totalEatCounterInc();
                                     System.out.println(animalList.get(i) + " ate " + animalList.get(j));
-                                    animalList.get(j).thread.interrupt();
+                                    animalList.get(j).kill();
                                     animalList.remove(j);
                                     flag = true;
                                     break;
