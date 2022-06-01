@@ -112,7 +112,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 newX = p.getX() + horSpeed * x_dir;
                 newY = p.getY() + verSpeed * y_dir;
                 if (Point.checkBounderies(new Point(newX, newY)))
-                    ZooActions.move(this, new Point(newX, newY));
+                    move(new Point(newX, newY));
                 else {
                     if (Point.getXMax() < newX) {//turn left
                         newX = Point.getXMax();
@@ -128,7 +128,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                         newY = Point.getYMin();
                         y_dir = 1;
                     }
-                    ZooActions.move(this, new Point(newX, newY));
+                    move(new Point(newX, newY));
                 }
                 setChanges(true);
                 Thread.sleep(50);
@@ -343,6 +343,20 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         if(weight_change!=0)
             makeSound();
         return weight_change != 0; //return false if weight_change = 0
+    }
+
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see mobility.Mobile.move()
+     */
+    public double move(Point p) {
+        double distance = super.move(p);
+        if(Point.checkBounderies(p))
+            setWeight(getWeight() - (distance * getWeight() * 0.00025));
+        return distance;
     }
 
     @Override

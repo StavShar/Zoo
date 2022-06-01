@@ -34,9 +34,9 @@ public class Omnivore implements IDiet{
         if(canEat(food.getFoodtype())){
             IDiet diet = null;
             if(food.getFoodtype().equals(EFoodType.MEAT))
-                diet = new Carnivore();
+                diet = car;
             else if(food.getFoodtype().equals(EFoodType.VEGETABLE))
-                diet = new Herbivore();
+                diet = herb;
             if(diet != null)
                 return diet.eat(animal, food);
         }
