@@ -1,7 +1,5 @@
 package graphics;
 
-import animals.Animal;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

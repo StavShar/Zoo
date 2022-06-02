@@ -1,6 +1,8 @@
 package graphics;
 
 import animals.*;
+import factories.AnimalFactory;
+import factories.FactoryProducer;
 import food.Meat;
 import mobility.Point;
 import plants.Cabbage;
@@ -86,8 +88,9 @@ public class ZooPanel extends JPanel implements Runnable{
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add Animal")) {
                 if (animalList.size() < 10) {
-                    Dialog d = new AddAnimalDialog();
-                    Animal a = ((AddAnimalDialog) d).showDialog();
+                    FactoryProducer factoryProducer = new FactoryProducer();
+                    AnimalFactory factory = factoryProducer.showDialog();
+                    Animal a = factory.produceAnimal();
                     if (a != null)
                         addAnimal(a);
                 } else

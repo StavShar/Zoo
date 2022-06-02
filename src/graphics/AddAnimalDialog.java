@@ -8,66 +8,28 @@ import java.awt.event.ActionListener;
 import static animals.Animal.*;
 
 /**
- * Dialog to add animals
+ * Dialog to get data about the new animal
  *
- * @version 1.0 1 May 2022
+ * @version 2.0 2 June 2022
  * @author Stav Sharabi
  * */
 public class AddAnimalDialog extends JDialog implements ActionListener {
     private static int count = 1;
-    private final String[] animals = {"Lion", "Bear", "Elephant", "Giraffe", "Turtle"};
+    private String[] animals;
     private final String colors[] = {"Natural", "Blue", "Red"};
-    private Animal animal;
+    private String[] data;
     private JTextField jtSize, jtVerSpeed, jtHorSpeed;
     private final JComboBox<String> comboAnimals;
     private final JComboBox<String> comboColors;
 
     /**
-     * creating animal if all the parameters are legal
-     * @param col color of the animal
-     * @param type type of the animal
-     * @param size size of the animal
-     * @param verSpeed vertical speed of the animal
-     * @param horSpeed horizontal speed of the animal
-     * @return the animal as an Animal object
-     */
-    public Animal createAnimal(String col, String type, int size, int verSpeed, int horSpeed){
-        Animal a = null;
-        String name = type + Integer.toString(count);
-        count++;
-        boolean flag = false;
-        for (int i = 0; i < animals.length; i++)
-            if (animals[i].equals(type)) {
-                flag = true;
-                break;
-            }
-        if(!validColor(col))
-            flag = false;
-        if(!validSize(size))
-            flag = false;
-        if(!validVerSpeed(verSpeed))
-            flag = false;
-        if(!validHorSpeed(horSpeed))
-            flag = false;
-        if(flag){
-            switch (type){
-                case "Lion": a = new Lion(name, size, horSpeed, verSpeed, col); break;
-                case "Bear": a = new Bear(name, size, horSpeed, verSpeed, col); break;
-                case "Elephant": a = new Elephant(name, size, horSpeed, verSpeed, col); break;
-                case "Giraffe": a = new Giraffe(name, size, horSpeed, verSpeed, col); break;
-                case "Turtle": a = new Turtle(name, size, horSpeed, verSpeed, col); break;
-            }
-        }
-        return a;//returning animal reference only if all the parameters are legal
-    }
-
-    /**
      * dialog constructor
      */
-    public AddAnimalDialog(){
+    public AddAnimalDialog(String[] animals){
         this.setTitle("Creating new animal");
         setModal(true);
-        animal = null;
+        data = null;
+        this.animals = animals;
         this.setLayout(new GridLayout(6, 2));
         this.add(new JLabel(" Animal: "));
         this.add(comboAnimals = new JComboBox<>());
@@ -92,15 +54,16 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         this.add(bt);
         this.setSize(250,150);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
-     * show dialog method so the dialog can return the animal
-     * @return animal
+     * showing this dialog and returning the inserted data of the animal
+     * @return data of the animal
      */
-    public Animal showDialog(){
+    public String[] showDialog(){
         this.setVisible(true);
-        return animal;
+        return data;
     }
 
     @Override
@@ -114,15 +77,13 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         {
             String col = comboColors.getItemAt(comboColors.getSelectedIndex());
             String type = comboAnimals.getItemAt(comboAnimals.getSelectedIndex());
-            int size, hs, vs;
             try {
-                size = Integer.parseInt(jtSize.getText());
-                hs = Integer.parseInt(jtHorSpeed.getText());
-                vs = Integer.parseInt(jtVerSpeed.getText());
-                if (Animal.validSize(size)) {
-                    if (Animal.validVerSpeed(vs)) {
-                        if (Animal.validHorSpeed(hs)) {
-                            animal = createAnimal(col, type, size, hs, vs);
+                if (Animal.validSize(Integer.parseInt(jtSize.getText()))) {
+                    if (Animal.validVerSpeed(Integer.parseInt(jtVerSpeed.getText()))) {
+                        if (Animal.validHorSpeed(Integer.parseInt(jtHorSpeed.getText()))) {
+                            String name = type + count;
+                            count++;
+                            data = new String[]{name, col, type, jtSize.getText(), jtHorSpeed.getText(), jtVerSpeed.getText()};
                             dispose();
                         }
                         else

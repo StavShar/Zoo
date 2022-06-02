@@ -71,6 +71,7 @@ private String food;
         this.add(new ButtonsPanel(), BorderLayout.SOUTH);
         this.setSize(300,150);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
