@@ -37,12 +37,13 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
     private int size = 70;
 
     /**
-     * Plant constructor, with picture name and spawn location
+     * Plant constructor, with picture name
      * @param nm picture name
-     * @param p Point object representing spawn location
      */
-    public Plant(String nm, Point p) {
+    protected Plant(String nm) {
         loadImages(nm);
+        pan = ZooPanel.getInstance();
+        Point p = pan.getMidP();
         if(!setLocation(p))
             System.out.println("Plant setLocation failed");
     }

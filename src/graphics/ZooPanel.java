@@ -126,15 +126,15 @@ public class ZooPanel extends JPanel implements Runnable{
                     if (temp != null) {
                         switch (temp) {
                             case "Lettuce":
-                                plantFood = new Lettuce(midP);
+                                plantFood = Lettuce.getInstance();
                                 setFoodChange(true);
                                 break;
                             case "Cabbage":
-                                plantFood = new Cabbage(midP);
+                                plantFood = Cabbage.getInstance();
                                 setFoodChange(true);
                                 break;
                             case "Meat":
-                                meatFood = new Meat(midP);
+                                meatFood = Meat.getInstance();
                                 setFoodChange(true);
                                 break;
                         }
@@ -210,6 +210,14 @@ public class ZooPanel extends JPanel implements Runnable{
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * return the middle point of the panel (the point where food will be placed)
+     * @return midP
+     */
+    public Point getMidP() {
+        return midP;
     }
 
     /**

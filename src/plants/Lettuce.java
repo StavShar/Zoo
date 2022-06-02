@@ -1,5 +1,7 @@
 package plants;
 
+import food.Meat;
+import graphics.ZooPanel;
 import mobility.Point;
 
 /**
@@ -7,7 +9,24 @@ import mobility.Point;
  *
  */
 public class Lettuce extends Plant {
-    public Lettuce(Point p) {
-        super("lettuce", p);
+    private static Lettuce instance = null;
+
+    /**
+     * Lettuce constructor
+     */
+    private Lettuce() {
+        super("lettuce");
     }
+
+
+    /**
+     * ensuring that Lettuce is a singletone
+     * @return the instance of Lettuce
+     */
+    public static Lettuce getInstance() {
+        if(instance == null)
+            instance = new Lettuce();
+        return instance;
+    }
+
 }

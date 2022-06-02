@@ -1,5 +1,6 @@
 package plants;
 
+import food.Meat;
 import mobility.Point;
 
 /**
@@ -7,8 +8,24 @@ import mobility.Point;
  *
  */
 public class Cabbage extends Plant {
-    public Cabbage(Point p) {
-        super("cabbage", p);
+    private static Cabbage instance = null;
+
+    /**
+     * Cabbage constructor
+     */
+    private Cabbage() {
+        super("cabbage");
+    }
+
+
+    /**
+     * ensuring that Cabbage is a singletone
+     * @return the instance of Cabbage
+     */
+    public static Cabbage getInstance() {
+        if(instance == null)
+            instance = new Cabbage();
+        return instance;
     }
 
 }

@@ -21,14 +21,27 @@ public class Meat implements IEdible, Ilocatable, IDrawable {
     private BufferedImage img;
     private ZooPanel pan;
     private int size = 70;
+    private static Meat instance = null;
 
     /**
      * meat constructor with spawn location
-     * @param p - Point object, representing spawn location
      */
-    public Meat(Point p) {
+    private Meat() {
         loadImages("meat");
-        setLocation(p);
+        pan = ZooPanel.getInstance();
+        Point p = pan.getMidP();
+        if(!setLocation(p));
+            System.out.println("Meat setLocation failed");
+    }
+
+    /**
+     * ensuring that Meat is a singletone
+     * @return the instance of Meat
+     */
+    public static Meat getInstance() {
+        if(instance == null)
+            instance = new Meat();
+        return instance;
     }
 
     /*
