@@ -1,6 +1,7 @@
 package graphics;
 
 import animals.*;
+import decoration.ChangeColorDialog;
 import factories.AnimalFactory;
 import factories.FactoryProducer;
 import food.Meat;
@@ -56,6 +57,8 @@ public class ZooPanel extends JPanel implements Runnable{
         private ZooPanelButtons() {
             JButton btAddAnimal = new JButton("Add Animal");
             btAddAnimal.addActionListener(this);
+            JButton btChangeColor = new JButton("Change Color");
+            btChangeColor.addActionListener(this);
             JButton btSleep = new JButton("Sleep");
             btSleep.addActionListener(this);
             JButton btWakeUp = new JButton("Wake Up");
@@ -71,6 +74,7 @@ public class ZooPanel extends JPanel implements Runnable{
             this.setLayout(new FlowLayout());
             this.setBackground(new Color(16, 146, 229));
             this.add(btAddAnimal);
+            this.add(btChangeColor);
             this.add(btSleep);
             this.add(btWakeUp);
             this.add(btClear);
@@ -97,6 +101,13 @@ public class ZooPanel extends JPanel implements Runnable{
                     }
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
+            }
+            else if (e.getActionCommand().equals("Change Color")) {
+                if (animalList.size() > 0) {
+                    if (animalList.size() > 0)
+                        new ChangeColorDialog(animalList);
+                } else
+                    JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
             else if (e.getActionCommand().equals("Sleep")) {
                 if (animalList.size() > 0) {
