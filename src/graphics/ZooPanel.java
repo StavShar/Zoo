@@ -90,9 +90,11 @@ public class ZooPanel extends JPanel implements Runnable{
                 if (animalList.size() < 10) {
                     FactoryProducer factoryProducer = new FactoryProducer();
                     AnimalFactory factory = factoryProducer.showDialog();
-                    Animal a = factory.produceAnimal();
-                    if (a != null)
-                        addAnimal(a);
+                    if(factory != null) {
+                        Animal a = factory.produceAnimal();
+                        if (a != null)
+                            addAnimal(a);
+                    }
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
             }

@@ -31,12 +31,14 @@ public class HerbivoreFactory implements AnimalFactory{
     public Animal produceAnimal() {
         AddAnimalDialog d = new AddAnimalDialog(herbivores);
         animalData = d.showDialog();
-        if (animalData[2].equalsIgnoreCase("Elephant"))
-            animal = new Elephant(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
-        else if (animalData[2].equalsIgnoreCase("Giraffe"))
-            animal = new Giraffe(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
-        else if (animalData[2].equalsIgnoreCase("Turtle"))
-            animal = new Turtle(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
+        if(animalData != null) {
+            if (animalData[2].equalsIgnoreCase("Elephant"))
+                animal = new Elephant(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
+            else if (animalData[2].equalsIgnoreCase("Giraffe"))
+                animal = new Giraffe(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
+            else if (animalData[2].equalsIgnoreCase("Turtle"))
+                animal = new Turtle(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
+        }
         return animal;
     }
 }

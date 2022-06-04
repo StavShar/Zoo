@@ -32,8 +32,9 @@ public class OmnivoreFactory implements AnimalFactory {
     public Animal produceAnimal() {
         AddAnimalDialog d = new AddAnimalDialog(omnivors);
         animalData = d.showDialog();
-        if (animalData[2].equalsIgnoreCase("Bear"))
-            animal = new Bear(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
+        if(animalData != null)
+            if (animalData[2].equalsIgnoreCase("Bear"))
+                animal = new Bear(animalData[0], Integer.parseInt(animalData[3]), Integer.parseInt(animalData[4]), Integer.parseInt(animalData[5]), animalData[1]);
         return animal;
     }
 }
