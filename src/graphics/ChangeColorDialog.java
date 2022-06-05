@@ -1,7 +1,8 @@
-package decoration;
+package graphics;
 
 import animals.Animal;
-import mobility.Point;
+import decoration.ColoredAnimal;
+import decoration.ColoredAnimalDecor;
 
 import javax.swing.*;
 import java.awt.*;

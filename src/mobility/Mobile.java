@@ -9,7 +9,7 @@ import static mobility.Point.checkBounderies;
  * @version 1.0 1 apr 2022
  * @author Stav Sharabi
  * */
-public abstract class Mobile implements Ilocatable{
+public abstract class Mobile implements Ilocatable, Cloneable{
     private Point location;
     private double totalDistance; //>0
 
@@ -54,7 +54,27 @@ public abstract class Mobile implements Ilocatable{
         return distance;
     }
 
-   @Override
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object.Clone()
+     */
+    protected Object clone()   {
+        Mobile clone = null;
+        try
+        {
+            clone =(Mobile) super.clone();
+            clone.totalDistance = 0;
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return clone;
+    }
+
+    @Override
    /*
     * (non-Javadoc)
     *

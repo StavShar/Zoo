@@ -124,12 +124,27 @@ public class Elephant extends Chewing{
         return flag;
     }
 
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object.Clone()
+     */
+    public Object clone()  {
+        Elephant clone = null;
+        clone = (Elephant) super.clone();
+        clone.setWeight(clone.getSize()*10);
+        clone.setLocation(new Point(STARTING_X, STARTING_Y));
+        clone.setChanges(true);
+        return clone;
+    }
+
+    @Override
     /*
      * (non-Javadoc)
      *
      * @see animals.getAnimalName()
      */
-    @Override
     public String getAnimalName(){
         return "Elephant";
     }

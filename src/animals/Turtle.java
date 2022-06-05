@@ -125,12 +125,27 @@ public class Turtle extends Chewing{
         return flag;
     }
 
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object.Clone()
+     */
+    public Object clone()  {
+        Turtle clone = null;
+        clone = (Turtle) super.clone();
+        clone.setWeight(clone.getSize()*0.5);
+        clone.setLocation(new Point(STARTING_X, STARTING_Y));
+        clone.setChanges(true);
+        return clone;
+    }
+
+    @Override
     /*
      * (non-Javadoc)
      *
      * @see animals.getAnimalName()
      */
-    @Override
     public String getAnimalName(){
         return "Turtle";
     }

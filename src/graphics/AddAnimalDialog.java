@@ -66,6 +66,14 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         return data;
     }
 
+    /**
+     * returning the counter to identify cloned animals
+     * @return animal number
+     */
+    public static int getAnimalCounter(){
+        return count++;
+    }
+
     @Override
     /*
      * (non-Javadoc)

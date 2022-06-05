@@ -1,7 +1,6 @@
 package graphics;
 
 import animals.*;
-import decoration.ChangeColorDialog;
 import factories.AnimalFactory;
 import factories.FactoryProducer;
 import food.Meat;
@@ -18,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
@@ -59,6 +57,8 @@ public class ZooPanel extends JPanel implements Runnable{
             btAddAnimal.addActionListener(this);
             JButton btChangeColor = new JButton("Change Color");
             btChangeColor.addActionListener(this);
+            JButton btDuplicate = new JButton("Duplicate");
+            btDuplicate.addActionListener(this);
             JButton btSleep = new JButton("Sleep");
             btSleep.addActionListener(this);
             JButton btWakeUp = new JButton("Wake Up");
@@ -74,6 +74,7 @@ public class ZooPanel extends JPanel implements Runnable{
             this.setLayout(new FlowLayout());
             this.setBackground(new Color(16, 146, 229));
             this.add(btAddAnimal);
+            this.add(btDuplicate);
             this.add(btChangeColor);
             this.add(btSleep);
             this.add(btWakeUp);
@@ -104,8 +105,14 @@ public class ZooPanel extends JPanel implements Runnable{
             }
             else if (e.getActionCommand().equals("Change Color")) {
                 if (animalList.size() > 0) {
+                    new ChangeColorDialog(animalList);
+                } else
+                    JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
+            }
+            else if (e.getActionCommand().equals("Duplicate")) {
+                if (animalList.size() > 0) {
                     if (animalList.size() > 0)
-                        new ChangeColorDialog(animalList);
+                        new DuplicateAnimalDialog(animalList);
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
@@ -259,7 +266,7 @@ public class ZooPanel extends JPanel implements Runnable{
         Object data[][] = new String[animalList.size() + 1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
         for (int i = 0; i < animalList.size(); i++) {
-            data[i][0] = animalList.get(i).getAnimalName();
+            data[i][0] = animalList.get(i).getName();
             data[i][1] = animalList.get(i).getColor();
             double w = animalList.get(i).getWeight();
             w = (int) (w * 100) / 100.0;

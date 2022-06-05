@@ -79,12 +79,27 @@ public class Lion extends Roaring{
         return scarCount;
     }
 
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object.Clone()
+     */
+    public Object clone()  {
+        Lion clone = null;
+        clone = (Lion) super.clone();
+        clone.setWeight(clone.getSize()*0.8);
+        clone.setLocation(new Point(STARTING_X, STARTING_Y));
+        clone.setChanges(true);
+        return clone;
+    }
+
+    @Override
     /*
      * (non-Javadoc)
      *
      * @see animals.getAnimalName()
      */
-    @Override
     public String getAnimalName(){
         return "Lion";
     }

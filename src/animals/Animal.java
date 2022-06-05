@@ -3,6 +3,7 @@ package animals;
 import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
+import graphics.AddAnimalDialog;
 import graphics.IAnimalBehavior;
 import graphics.IDrawable;
 import graphics.ZooPanel;
@@ -20,7 +21,7 @@ import java.io.IOException;
  * @version 3.0 18 May 2022
  * @author Stav Sharabi
  * */
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable, Cloneable {
     private static final String[] ValidColors = {"Red", "Natural", "Blue"};
     private static final int MIN_SIZE = 50;
     private static final int MAX_SIZE = 300;
@@ -355,6 +356,21 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return weight_change != 0; //return false if weight_change = 0
     }
 
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object.Clone()
+     */
+    public Object clone()  {
+        Animal clone = null;
+            clone =(Animal) super.clone();
+            clone.eatCount = 0;
+            clone.name = clone.getClass().getSimpleName() + AddAnimalDialog.getAnimalCounter();
+            thread = new Thread(clone);
+            thread.start();
+        return clone;
+    }
 
     @Override
     /*
