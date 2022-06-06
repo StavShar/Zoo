@@ -9,6 +9,7 @@ import food.IEdible;
 import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Ilocatable;
+import mobility.Mobile;
 import mobility.Point;
 import javax.imageio.ImageIO;
 
@@ -65,16 +66,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         return this.height;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see mobility.ILocatable#getLocation()
-     */
-    @Override
-    public Point getLocation() {
-        return this.location;
-    }
-
     /**
      * @return
      */
@@ -97,20 +88,6 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
         return isSuccess;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see mobility.ILocatable#setLocation(mobility.Point)
-     */
-    @Override
-    public boolean setLocation(Point newLocation) {
-        boolean isSuccess = Point.checkBounderies(newLocation);
-        if (isSuccess) {
-            this.location = newLocation;
-        }
-        return isSuccess;
-    }
-
     /**
      * @param weight
      * @return
@@ -123,6 +100,30 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
             this.weight = 0;
         }
 
+        return isSuccess;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see mobility.ILocatable#getLocation()
+     */
+    public Point getLocation() {
+        return this.location;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see mobility.ILocatable#setLocation(mobility.Point)
+     */
+    public boolean setLocation(Point newLocation) {
+        boolean isSuccess = Point.checkBounderies(newLocation);
+        if (isSuccess) {
+            this.location = newLocation;
+        }
         return isSuccess;
     }
 

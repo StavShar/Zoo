@@ -3,7 +3,9 @@ package graphics;
 import animals.*;
 import factories.AnimalFactory;
 import factories.FactoryProducer;
+import food.IEdible;
 import food.Meat;
+import memento.Memento;
 import mobility.Point;
 import plants.Cabbage;
 import plants.Lettuce;
@@ -69,6 +71,10 @@ public class ZooPanel extends JPanel implements Runnable{
             btFood.addActionListener(this);
             JButton btInfo = new JButton("Info");
             btInfo.addActionListener(this);
+            JButton btSaveState = new JButton("Save State");
+            btSaveState.addActionListener(this);
+            JButton btRestoreState = new JButton("Restore State");
+            btRestoreState.addActionListener(this);
             JButton btExit = new JButton("Exit");
             btExit.addActionListener(this);
             this.setLayout(new FlowLayout());
@@ -81,6 +87,8 @@ public class ZooPanel extends JPanel implements Runnable{
             this.add(btClear);
             this.add(btFood);
             this.add(btInfo);
+            this.add(btSaveState);
+            this.add(btRestoreState);
             this.add(btExit);
         }
 
@@ -171,11 +179,56 @@ public class ZooPanel extends JPanel implements Runnable{
             else if (e.getActionCommand().equals("Info")) {
                 new InfoDialog(getData());
             }
+            else if (e.getActionCommand().equals("Save State")) {
+                IEdible food = null;
+                if(meatFood != null)
+                    food = Meat.getInstance();
+                else if(plantFood != null)
+                    if(plantFood instanceof Cabbage)
+                        food = Cabbage.getInstance();
+                    else
+                        food = Lettuce.getInstance();
+
+                if(Memento.getInstance().save(animalList, totalEatCounter, food))
+                    JOptionPane.showMessageDialog(null, "State has been saved successfully");
+                else
+                    JOptionPane.showMessageDialog(null, "Error!\nMax saves has been reached");
+            }
+            else if (e.getActionCommand().equals("Restore State")) {
+                if(Memento.getInstance().restore()){
+                    repaint();
+                    JOptionPane.showMessageDialog(null, "State has been load successfully");
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Error!\nthere are no any saved state");
+            }
             else if (e.getActionCommand().equals("Exit")) {
                 ZooPanel.getInstance().stopAllThreads();
                 exit(0);
             }
         }
+    }
+
+    /**
+     * loading state when state is being restored
+     * @param animalList - list of animals
+     * @param totalEatCounter - counter for total eating
+     * @param food - food on screen
+     */
+    public void loadState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
+        this.animalList = new ArrayList<>();
+        for(Animal animal : animalList) {
+            animal.setResumed();
+            this.animalList.add((Animal) animal.clone());
+        }
+        this.totalEatCounter = totalEatCounter;
+        meatFood = null;
+        plantFood = null;
+        if(food instanceof Meat)
+            meatFood = (Meat) food;
+        else if(food instanceof Plant)
+            plantFood = (Plant) food;
+        repaint();
     }
 
     /**

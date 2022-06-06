@@ -83,15 +83,20 @@ public class Lion extends Roaring{
     /*
      * (non-Javadoc)
      *
-     * @see java.lang.Object.Clone()
+     * @see animals.Animal.getStartingWeight()
      */
-    public Object clone()  {
-        Lion clone = null;
-        clone = (Lion) super.clone();
-        clone.setWeight(clone.getSize()*0.8);
-        clone.setLocation(new Point(STARTING_X, STARTING_Y));
-        clone.setChanges(true);
-        return clone;
+    public double getStartingWeight() {
+        return getSize()*0.8;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Animal.getStartingPoint()
+     */
+    public Point getStartingPoint(){
+        return new Point(STARTING_X, STARTING_Y);
     }
 
     @Override

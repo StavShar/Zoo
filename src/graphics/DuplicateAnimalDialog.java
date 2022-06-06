@@ -1,15 +1,18 @@
 package graphics;
 
     import animals.Animal;
-    import decoration.ColoredAnimal;
-    import decoration.ColoredAnimalDecor;
-
     import javax.swing.*;
     import java.awt.*;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     import java.util.ArrayList;
 
+/**
+ * Dialog to duplicate an animal
+ *
+ * @version 2.0 4 June 2022
+ * @author Stav Sharabi
+ * */
 public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
     private final JComboBox<String> comboAnimals;
     private final ArrayList<Animal> list;
@@ -37,10 +40,20 @@ public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.awt.event.ActionListener
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Duplicate")){
             Animal animal = list.get(comboAnimals.getSelectedIndex());
             Animal a =(Animal) animal.clone();
+            a.setName(a.getClass().getSimpleName() + AddAnimalDialog.getAnimalCounter());
+            a.setLocation(a.getStartingPoint());
+            a.setWeight(a.getStartingWeight());
+            a.setX_dir(1);
+            a.setY_dir(1);
             list.add(a);
             dispose();
         }

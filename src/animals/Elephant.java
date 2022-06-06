@@ -128,15 +128,20 @@ public class Elephant extends Chewing{
     /*
      * (non-Javadoc)
      *
-     * @see java.lang.Object.Clone()
+     * @see animals.Animal.getStartingWeight()
      */
-    public Object clone()  {
-        Elephant clone = null;
-        clone = (Elephant) super.clone();
-        clone.setWeight(clone.getSize()*10);
-        clone.setLocation(new Point(STARTING_X, STARTING_Y));
-        clone.setChanges(true);
-        return clone;
+    public double getStartingWeight() {
+        return getSize()*10;
+    }
+
+    @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see animals.Animal.getStartingPoint()
+     */
+    public Point getStartingPoint(){
+        return new Point(STARTING_X, STARTING_Y);
     }
 
     @Override

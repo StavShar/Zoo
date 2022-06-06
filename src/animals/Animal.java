@@ -366,7 +366,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         Animal clone = null;
             clone =(Animal) super.clone();
             clone.eatCount = 0;
-            clone.name = clone.getClass().getSimpleName() + AddAnimalDialog.getAnimalCounter();
+            clone.setLocation(new Point(getLocation().getX(), getLocation().getY()));
             thread = new Thread(clone);
             thread.start();
         return clone;
@@ -517,4 +517,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * making the sound of a specific animal
      */
     public abstract void makeSound();
+
+    /**
+     * returning the starting weight of an animal
+     */
+    public abstract double getStartingWeight();
+
+    /**
+     * returning starting point of an animal
+     */
+    public abstract Point getStartingPoint();
 }

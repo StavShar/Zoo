@@ -3,13 +3,18 @@ package graphics;
 import animals.Animal;
 import decoration.ColoredAnimal;
 import decoration.ColoredAnimalDecor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Dialog to change color of an animal
+ *
+ * @version 2.0 3 June 2022
+ * @author Stav Sharabi
+ * */
 public class ChangeColorDialog  extends JDialog implements ActionListener {
     private final String colors[] = {"Natural", "Blue", "Red"};
     private final JComboBox<String> comboAnimals;
@@ -43,6 +48,11 @@ public class ChangeColorDialog  extends JDialog implements ActionListener {
     }
 
     @Override
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.awt.event.ActionListener
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Change color")){
             String color = comboColors.getItemAt(comboColors.getSelectedIndex());

@@ -125,17 +125,22 @@ public class Bear extends Roaring{
 
     @Override
     /*
+    * (non-Javadoc)
+    *
+    * @see animals.Animal.getStartingWeight()
+    */
+    public double getStartingWeight() {
+        return getSize()*1.5;
+    }
+
+    @Override
+    /*
      * (non-Javadoc)
      *
-     * @see java.lang.Object.Clone()
+     * @see animals.Animal.getStartingPoint()
      */
-    public Object clone()  {
-        Bear clone = null;
-        clone = (Bear) super.clone();
-        clone.setWeight(clone.getSize()*1.5);
-        clone.setLocation(new Point(STARTING_X, STARTING_Y));
-        clone.setChanges(true);
-        return clone;
+    public Point getStartingPoint(){
+        return new Point(STARTING_X, STARTING_Y);
     }
 
     @Override
