@@ -58,14 +58,13 @@ public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Duplicate")){
-            Animal animal = list.get(comboAnimals.getSelectedIndex());
-            Animal a =(Animal) animal.clone();
-            a.setName(a.getClass().getSimpleName() + AddAnimalDialog.getAnimalCounter());
-            a.setLocation(a.getStartingPoint());
-            a.setWeight(a.getStartingWeight());
-            a.setX_dir(1);
-            a.setY_dir(1);
-            list.add(a);
+            animal = list.get(comboAnimals.getSelectedIndex());
+            animal = (Animal) animal.clone();
+            animal.setName(animal.getClass().getSimpleName() + AddAnimalDialog.getAnimalCounter());
+            animal.setLocation(animal.getStartingPoint());
+            animal.setWeight(animal.getStartingWeight());
+            animal.setX_dir(1);
+            animal.setY_dir(1);
             dispose();
         }
     }

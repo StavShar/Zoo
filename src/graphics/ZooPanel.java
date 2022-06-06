@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -224,9 +225,15 @@ public class ZooPanel extends JPanel implements Runnable{
      * @param food - food on screen
      */
     public void loadState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
+        for(Animal animal : this.animalList)
+            animal.kill();
         this.animalList = new ArrayList<>();
+        Animal a;
         for(Animal animal : animalList) {
-            this.animalList.add((Animal) animal.clone());
+            a = (Animal) animal.clone();
+            Future<?> task = ((ExecutorService)threadPool).submit(a);
+            a.setFuture(task);
+            this.animalList.add(a);
         }
         this.totalEatCounter = totalEatCounter;
         meatFood = null;
@@ -348,6 +355,8 @@ public class ZooPanel extends JPanel implements Runnable{
     public void addAnimal(Animal a) {
         if (a != null) {
             animalList.add(a);
+            Future<?> task = ((ExecutorService)threadPool).submit(a);
+            a.setFuture(task);
             System.out.println(animalList.get(animalList.size() - 1).getName() + " has been added");
         }
     }

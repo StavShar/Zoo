@@ -3,7 +3,6 @@ package animals;
 import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
-import graphics.AddAnimalDialog;
 import graphics.IAnimalBehavior;
 import graphics.IDrawable;
 import graphics.ZooPanel;
@@ -14,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Future;
 
 /**
  * Abstract class who representing an Animal
@@ -41,11 +41,11 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int x_dir = 1;
     private int y_dir = 1;
     private int eatCount;
-    public Thread thread;
     protected boolean threadSuspended;
     private ZooPanel pan;
     private boolean alive;
     private BufferedImage img1, img2;
+    private Future task;
 
     /**
      * constructor of Animal with 2 parameters
@@ -97,8 +97,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         if(!flag)
             System.out.println("setDiet failed");
         pan = ZooPanel.getInstance();
-        thread = new Thread(this);
-        thread.start();
     }
 
     @Override
@@ -136,7 +134,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 setChanges(true);
                 Thread.sleep(50);
             }catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -146,6 +143,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public void kill(){
         alive = false;
+        if(task != null)
+            task.cancel(true);
     }
 
     /**
@@ -364,6 +363,11 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return threadSuspended;
     }
 
+    public void setFuture(Future t)
+    {
+        this.task = t;
+    }
+
     @Override
     /*
      * (non-Javadoc)
@@ -375,8 +379,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             clone =(Animal) super.clone();
             clone.eatCount = 0;
             clone.setLocation(new Point(getLocation().getX(), getLocation().getY()));
-            thread = new Thread(clone);
-            thread.start();
+            task = null;
         return clone;
     }
 
