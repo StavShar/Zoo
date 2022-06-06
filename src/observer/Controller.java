@@ -44,4 +44,9 @@ public class Controller extends Thread implements Observer {
     public synchronized void update(Observable o, Object arg){
         notify();
     }
+
+
+    public synchronized void ping(){
+        notify();
+    }
 }

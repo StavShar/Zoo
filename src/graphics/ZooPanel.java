@@ -109,7 +109,7 @@ public class ZooPanel extends JPanel implements Runnable{
          */
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add Animal")) {
-                if (animalList.size() < 10) {
+                if (animalList.size() < MAX_THREADS+MAX_POOL_SIZE) {
                     FactoryProducer factoryProducer = new FactoryProducer();
                     AnimalFactory factory = factoryProducer.showDialog();
                     if(factory != null) {
@@ -118,7 +118,7 @@ public class ZooPanel extends JPanel implements Runnable{
                             addAnimal(a);
                     }
                 } else
-                    JOptionPane.showMessageDialog(null, "Error!\nyou can't add more than 10 animals");
+                    JOptionPane.showMessageDialog(null, "Error!\nQueue is full");
             }
             else if (e.getActionCommand().equals("Change Color")) {
                 if (animalList.size() > 0) {
@@ -128,23 +128,33 @@ public class ZooPanel extends JPanel implements Runnable{
             }
             else if (e.getActionCommand().equals("Duplicate")) {
                 if (animalList.size() > 0) {
-                    DuplicateAnimalDialog d = new DuplicateAnimalDialog(animalList);
-                    Animal a = d.showDialog();
-                    addAnimal(a);
+                    if (animalList.size() < MAX_THREADS+MAX_POOL_SIZE) {
+                        DuplicateAnimalDialog d = new DuplicateAnimalDialog(animalList);
+                        Animal a = d.showDialog();
+                        addAnimal(a);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Error!\nQueue is full");
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
             else if (e.getActionCommand().equals("Sleep")) {
                 if (animalList.size() > 0) {
-                    for (Animal a : animalList)
-                        a.setSuspended();
+                    for(int i = 0; i< animalList.size(); i++) {
+                        if (i == MAX_THREADS)
+                            break;
+                        animalList.get(i).setSuspended();
+                    }
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
             else if (e.getActionCommand().equals("Wake Up")) {
                 if (animalList.size() > 0) {
-                    for (Animal a : animalList)
-                        a.setResumed();
+                    for(int i = 0; i< animalList.size(); i++) {
+                        if (i == MAX_THREADS)
+                            break;
+                        animalList.get(i).setResumed();
+                    }
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
@@ -158,6 +168,8 @@ public class ZooPanel extends JPanel implements Runnable{
                 plantFood = null;
                 meatFood = null;
                 setFoodChange(true);
+                controller.ping();
+                repaint();
                 JOptionPane.showMessageDialog(null, "All animals and food has been deleted");
             }
             else if (e.getActionCommand().equals("Food")) {
@@ -179,8 +191,10 @@ public class ZooPanel extends JPanel implements Runnable{
                                 setFoodChange(true);
                                 break;
                         }
-                        if (getFoodChange())
+                        if (getFoodChange()) {
                             System.out.println("Food has been added");
+                            controller.ping();
+                        }
                     }
                 }
                 else
@@ -335,6 +349,8 @@ public class ZooPanel extends JPanel implements Runnable{
         Object data[][] = new String[animalList.size() + 1][InfoDialog.getColumnNumber()];
         int totalEatCounter = 0;
         for (int i = 0; i < animalList.size(); i++) {
+            if(i < MAX_THREADS)
+                data[i][0] = "waiting";
             data[i][0] = animalList.get(i).getName();
             data[i][1] = animalList.get(i).getColor();
             double w = animalList.get(i).getWeight();
@@ -359,7 +375,6 @@ public class ZooPanel extends JPanel implements Runnable{
             Future<?> task = ((ExecutorService)threadPool).submit(a);
             a.setFuture(task);
             a.addObserver(controller);
-            System.out.println(animalList.get(animalList.size() - 1).getName() + " has been added");
         }
     }
 
@@ -507,8 +522,11 @@ public class ZooPanel extends JPanel implements Runnable{
         super.paintComponent(g);
         if (BackgroundImage)
             g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        for (int i = 0; i < animalList.size(); i++)
+        for (int i = 0; i < animalList.size(); i++) {
+            if(i == MAX_THREADS)
+                break;
             animalList.get(i).drawObject(g);
+        }
         if (plantFood != null) {
             plantFood.drawObject(g);
         }
