@@ -20,24 +20,27 @@ public class Memento {
     /**
      * inner class, representing the state we are looking to save/restore
      *
-     * @version 2.0 5 June 2022
+     * @version 3.0 6 June 2022
      * @author Stav Sharabi
      * */
     private class MementoState{
         private ArrayList<Animal> animalList;
         private int totalEatCounter;
         private IEdible food;
+        private boolean bg;
 
         /**
          * state constructor
          * @param animalList - list of animals
          * @param totalEatCounter - counter of total eating
          * @param food - food on screen
+         * @param bg - boolean if background image is set
          */
-        public MementoState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
+        public MementoState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food, boolean bg){
             if (stackMemento.size() < MAX_SAVES) {
                 this.totalEatCounter = totalEatCounter;
                 this.food = food;
+                this.bg = bg;
                 this.animalList = new ArrayList<>();
                 boolean flag = true;
                 Animal a;
@@ -76,11 +79,12 @@ public class Memento {
      * @param animalList - list of animals
      * @param totalEatCounter - counter of total eating
      * @param food - food on screen
+     * @param bg - boolean if background image is set
      * @return true if saving succeed
      */
-    public boolean save(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
+    public boolean save(ArrayList<Animal> animalList, int totalEatCounter, IEdible food, boolean bg){
         if(stackMemento.size() < MAX_SAVES) {
-            MementoState ms = new MementoState(animalList, totalEatCounter, food);
+            MementoState ms = new MementoState(animalList, totalEatCounter, food, bg);
             stackMemento.push(ms);
             return true;
         }
@@ -94,7 +98,7 @@ public class Memento {
     public boolean restore(){
         if(!stackMemento.empty()){
             MementoState ms = stackMemento.pop();
-            ZooPanel.getInstance().loadState(ms.animalList, ms.totalEatCounter, ms.food);
+            ZooPanel.getInstance().loadState(ms.animalList, ms.totalEatCounter, ms.food, ms.bg);
             return true;
         }
         return false;

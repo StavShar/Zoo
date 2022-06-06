@@ -212,8 +212,8 @@ public class ZooPanel extends JPanel implements Runnable{
                         food = Cabbage.getInstance();
                     else
                         food = Lettuce.getInstance();
-
-                if(Memento.getInstance().save(animalList, totalEatCounter, food))
+                boolean bg = isBackgroundSet();
+                if(Memento.getInstance().save(animalList, totalEatCounter, food, bg))
                     JOptionPane.showMessageDialog(null, "State has been saved successfully");
                 else
                     JOptionPane.showMessageDialog(null, "Error!\nMax saves has been reached");
@@ -238,8 +238,9 @@ public class ZooPanel extends JPanel implements Runnable{
      * @param animalList - list of animals
      * @param totalEatCounter - counter for total eating
      * @param food - food on screen
+     * @param bg - boolean if background image is set
      */
-    public void loadState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
+    public void loadState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food, boolean bg){
         for(Animal animal : this.animalList)
             animal.kill();
         this.animalList = new ArrayList<>();
@@ -250,6 +251,7 @@ public class ZooPanel extends JPanel implements Runnable{
             a.setFuture(task);
             this.animalList.add(a);
         }
+        this.setBackgroundImage(bg);
         this.totalEatCounter = totalEatCounter;
         meatFood = null;
         plantFood = null;
