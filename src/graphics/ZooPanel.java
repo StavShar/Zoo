@@ -7,6 +7,7 @@ import food.IEdible;
 import food.Meat;
 import memento.Memento;
 import mobility.Point;
+import observer.Controller;
 import plants.Cabbage;
 import plants.Lettuce;
 import plants.Plant;
@@ -46,7 +47,7 @@ public class ZooPanel extends JPanel implements Runnable{
     private final String BackgroundPath = IDrawable.PICTURE_PATH + "savanna.png";
     private BufferedImage image = null;
     private boolean BackgroundImage;
-    private Thread controller;
+    private Controller controller;
     private boolean alive;
     private Executor threadPool;
     private Future<?> task;
@@ -275,7 +276,7 @@ public class ZooPanel extends JPanel implements Runnable{
         animalList = new ArrayList<>();
         foodChange = false;
         alive = true;
-        controller = new Thread(this);
+        controller = new Controller();
         BackgroundImage = false;
         threadPool = Executors.newFixedThreadPool(MAX_THREADS);
         this.setSize(800,600);
@@ -357,6 +358,7 @@ public class ZooPanel extends JPanel implements Runnable{
             animalList.add(a);
             Future<?> task = ((ExecutorService)threadPool).submit(a);
             a.setFuture(task);
+            a.addObserver(controller);
             System.out.println(animalList.get(animalList.size() - 1).getName() + " has been added");
         }
     }

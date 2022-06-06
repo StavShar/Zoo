@@ -1,15 +1,17 @@
 package mobility;
 
 import java.lang.Math;
+import java.util.Observable;
+
 import static mobility.Point.checkBounderies;
 
 /**
  * Abstract class, representing movement in my zoo
  *
- * @version 1.0 1 apr 2022
+ * @version 2.0 6 apr 2022
  * @author Stav Sharabi
  * */
-public abstract class Mobile implements Ilocatable, Cloneable{
+public abstract class Mobile extends Observable implements Ilocatable, Cloneable{
     private Point location;
     private double totalDistance; //>0
 

@@ -132,6 +132,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                     move(new Point(newX, newY));
                 }
                 setChanges(true);
+                setChanged();
+                this.notifyObservers();
                 Thread.sleep(50);
             }catch (InterruptedException e) {
             }
