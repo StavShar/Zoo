@@ -19,6 +19,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
@@ -43,6 +47,9 @@ public class ZooPanel extends JPanel implements Runnable{
     private boolean BackgroundImage;
     private Thread controller;
     private boolean alive;
+    private Executor threadPool;
+    private Future<?> task;
+
     /**
      * Buttons panel of the zoo panel
      *
@@ -119,8 +126,9 @@ public class ZooPanel extends JPanel implements Runnable{
             }
             else if (e.getActionCommand().equals("Duplicate")) {
                 if (animalList.size() > 0) {
-                    if (animalList.size() > 0)
-                        new DuplicateAnimalDialog(animalList);
+                    DuplicateAnimalDialog d = new DuplicateAnimalDialog(animalList);
+                    Animal a = d.showDialog();
+                    addAnimal(a);
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
@@ -262,6 +270,7 @@ public class ZooPanel extends JPanel implements Runnable{
         alive = true;
         controller = new Thread(this);
         BackgroundImage = false;
+        threadPool = Executors.newFixedThreadPool(MAX_THREADS);
         this.setSize(800,600);
         this.setLayout(new BorderLayout());
         try {

@@ -16,6 +16,7 @@ package graphics;
 public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
     private final JComboBox<String> comboAnimals;
     private final ArrayList<Animal> list;
+    private Animal animal;
 
     /**
      * dialog constructor
@@ -24,6 +25,7 @@ public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
         this.setTitle("Duplicate animal");
         setModal(true);
         list = animalList;
+        animal = null;
         this.setLayout(new GridLayout(2, 2));
         this.add(new JLabel(" Animal: "));
         this.add(comboAnimals = new JComboBox<>());
@@ -35,9 +37,18 @@ public class DuplicateAnimalDialog  extends JDialog implements ActionListener {
         this.add(bt);
         this.setSize(250,80);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
+
+    /**
+     * showing dialog and return the duplicated animal
+     * @return duplicated animal
+     */
+    public Animal showDialog(){
+        this.setVisible(true);
+        return animal;
+    }
+
 
     @Override
     /*
