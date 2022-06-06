@@ -39,10 +39,15 @@ public class Memento {
                 this.totalEatCounter = totalEatCounter;
                 this.food = food;
                 this.animalList = new ArrayList<>();
+                boolean flag = true;
+                Animal a;
                 for(Animal animal : animalList) {
+                    flag = animal.isSuspended();
                     animal.setSuspended();
-                    this.animalList.add((Animal) animal.clone());
-                    animal.setResumed();
+                    a = (Animal) animal.clone();
+                    this.animalList.add(a);
+                    if(!flag)
+                        animal.setResumed();
                 }
             }
         }

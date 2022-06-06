@@ -356,6 +356,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return weight_change != 0; //return false if weight_change = 0
     }
 
+    /**
+     * returning if animal is suspended
+     * @return true if animal is suspended
+     */
+    public boolean isSuspended() {
+        return threadSuspended;
+    }
+
     @Override
     /*
      * (non-Javadoc)
@@ -527,4 +535,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * returning starting point of an animal
      */
     public abstract Point getStartingPoint();
+
+
 }

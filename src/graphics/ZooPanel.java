@@ -218,7 +218,6 @@ public class ZooPanel extends JPanel implements Runnable{
     public void loadState(ArrayList<Animal> animalList, int totalEatCounter, IEdible food){
         this.animalList = new ArrayList<>();
         for(Animal animal : animalList) {
-            animal.setResumed();
             this.animalList.add((Animal) animal.clone());
         }
         this.totalEatCounter = totalEatCounter;
