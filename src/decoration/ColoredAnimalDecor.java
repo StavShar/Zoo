@@ -1,6 +1,7 @@
 package decoration;
 
 import animals.Animal;
+import observer.Controller;
 
 public class ColoredAnimalDecor implements ColoredAnimal{
     private Animal animal;

@@ -123,6 +123,7 @@ public class ZooPanel extends JPanel implements Runnable{
             else if (e.getActionCommand().equals("Change Color")) {
                 if (animalList.size() > 0) {
                     new ChangeColorDialog(animalList);
+                    manageZoo();
                 } else
                     JOptionPane.showMessageDialog(null, "Error!\nthere are no animals");
             }
@@ -446,8 +447,10 @@ public class ZooPanel extends JPanel implements Runnable{
         }
 
         // checking if animal moved or food has been added
-        if (isChange())
+        if (isChange()) {
+            controller.ping();
             repaint();
+        }
 
         //checking if animal eats the food
         if(plantFood != null){
