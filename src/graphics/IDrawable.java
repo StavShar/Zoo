@@ -10,7 +10,7 @@ public interface IDrawable {
     /**
      * path of the image
      */
-    public final static String PICTURE_PATH = "C:\\Git Project\\Zoo\\src\\graphics\\pictures\\";
+    public final static String PICTURE_PATH = "src\\graphics\\pictures\\";
 
     /**
      * loading images for both directions in the correct color and animal type
